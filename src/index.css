@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primaryFontColor: #262626;
+  --secondaryFontColor: #767676;
+  --thirdFontCOlor: #6d6d6d;
+  --secondaryBgColor: #6d6d6d;
+  --primaryBgColor: #ffffff;
+  --DMsans: "DM Sans", sans-serif;
+}
+
+@layer base {
+  @import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
+
+  body {
+    background-color: #fff;
+  }
+
+  * {
+    @apply m-0 p-0 outline-none box-border;
+  }
+  a {
+    @apply no-underline;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  div,
+  img,
+  a,
+  li,
+  ol,
+  ul {
+    @apply p-0 m-0;
+  }
+  li,
+  ol,
+  ul {
+    @apply list-none;
+  }
+  img {
+    @apply align-middle;
+  }
+}
+
+.slick-dots .slick-active {
+  opacity: 1;
+}
+
+.slick-dots ul li {
+  font-family: var(--DMsans);
+  opacity: 0;
+}
