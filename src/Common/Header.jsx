@@ -3,28 +3,54 @@ import logo from "../assets/logo.png";
 import { Link, NavLink } from "react-router-dom";
 import { HiBars2 } from "react-icons/hi2";
 import { IoMdArrowDropdown } from "react-icons/io";
+import { MdArrowDropUp } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
-import { FaShoppingCart } from "react-icons/fa";
+import { FaShoppingCart, FaCartArrowDown } from "react-icons/fa";
 import { FaBars } from "react-icons/fa";
 import { RxCross2 } from "react-icons/rx";
-
+import { HiLogout } from "react-icons/hi";
 import Search from "../Common/Search";
 
 const Header = () => {
   // ======== all state =========
   const [opencategory, setopencategory] = useState(false);
   const [openNav, setopenNav] = useState(false);
+  const [openUser, setopenUser] = useState(false);
+  const [openCart, setopenCart] = useState(false);
+  // ============================
 
   // handleNav
   const handleNav = () => {
     setopenNav(!openNav);
+    setopencategory(false);
+    setopenUser(false);
+    setopenCart(false);
   };
 
   // handleCategory
   const handleCategory = () => {
     setopencategory(!opencategory);
+    setopenNav(false);
+    setopenUser(false);
+    setopenCart(false);
   };
-  // ============================
+
+  // HandleUser
+  const HandleUser = () => {
+    setopenUser(!openUser);
+    setopenNav(false);
+    setopencategory(false);
+    setopenCart(false);
+  };
+
+  // HandleCart
+  const HandleCart = () => {
+    setopenCart(!openCart);
+    setopenUser(false);
+    setopenNav(false);
+    setopencategory(false);
+  };
+
   return (
     <>
       <div className="bg-white">
@@ -40,6 +66,7 @@ const Header = () => {
               >
                 <li>
                   <NavLink
+                    to={"/"}
                     className={
                       "text-sm font-DMsans font-normal text-secondaryFontColor hover:text-primaryFontColor hover:font-bold transition-all"
                     }
@@ -58,6 +85,7 @@ const Header = () => {
                 </li>
                 <li>
                   <NavLink
+                    to={"/shop"}
                     className={
                       "text-sm font-DMsans font-normal text-secondaryFontColor hover:text-primaryFontColor hover:font-bold transition-all"
                     }
@@ -91,12 +119,12 @@ const Header = () => {
             >
               <span>{openNav ? <RxCross2 /> : <FaBars />}</span>
             </div>
-            {/* =============================== */}
+            {/* =========== Mobile view menu ==================== */}
             <div
-              className={`sm:hidden absolute top-0 pt-7 bg-white z-[999] w-1/2 h-screen shadow-lg ${
+              className={`sm:hidden fixed top-0 pt-7 bg-white z-[999] w-1/2 h-screen shadow-lg ${
                 openNav
-                  ? "left-0 transition-all duration-[0.8s]"
-                  : "left-[-190px] transition-all duration-[0.8s]"
+                  ? "left-0 transition-all duration-[0.5s]"
+                  : "left-[-184px] transition-all duration-[0.5s]"
               }`}
             >
               <ul
@@ -123,6 +151,7 @@ const Header = () => {
                 </li>
                 <li>
                   <NavLink
+                    to={"/shop"}
                     className={
                       "text-sm font-DMsans font-normal text-secondaryFontColor hover:text-primaryFontColor hover:font-bold transition-all"
                     }
@@ -215,21 +244,92 @@ const Header = () => {
               <Search />
             </div>
             <div className="flex items-center gap-x-3 md:gap-x-10">
-              <div>
-                <div className="flex items-center gap-x-1 md:gap-x-2 cursor-pointer">
+              <div className="relative">
+                <div
+                  className="flex items-center gap-x-1 md:gap-x-2 cursor-pointer"
+                  onClick={HandleUser}
+                >
                   <span>
                     <FaUser className="text-lg" />
                   </span>
                   <span>
-                    <IoMdArrowDropdown className="text-base sm:text-lg" />
+                    {openUser ? (
+                      <MdArrowDropUp className="text-base sm:text-xl" />
+                    ) : (
+                      <IoMdArrowDropdown className="text-base sm:text-xl" />
+                    )}
                   </span>
                 </div>
+                {openUser ? (
+                  <div className="bg-white absolute top-[54px] left-[-121px] z-30">
+                    <ul className="flex flex-col items-center">
+                      <li className="py-3 sm:py-4 px-10 sm:px-14 bg-primaryFontColor cursor-pointer hover:bg-[#333]">
+                        <Link className="whitespace-nowrap text-xs sm:text-sm font-DMsans font-bold text-white">
+                          My Account
+                        </Link>
+                      </li>
+                      <li className="py-3 sm:py-4 px-10 sm:px-14 cursor-pointer flex items-center gap-x-2">
+                        <Link className="text-xs sm:text-sm font-DMsans font-normal text-primaryFontColor bg-white">
+                          Log Out
+                        </Link>
+                        <span>
+                          <HiLogout className="text-lg sm:text-xl" />
+                        </span>
+                      </li>
+                    </ul>
+                  </div>
+                ) : null}
               </div>
 
-              <div className="cursor-pointer">
-                <span>
-                  <FaShoppingCart className="text-lg sm:text-xl" />
+              <div className="relative">
+                <span className="cursor-pointer" onClick={HandleCart}>
+                  {openCart ? (
+                    <FaCartArrowDown className="text-lg sm:text-xl" />
+                  ) : (
+                    <FaShoppingCart className="text-lg sm:text-xl" />
+                  )}
                 </span>
+                {openCart && (
+                  <div className="bg-white shadow-md w-[320px] sm:w-[360px] absolute top-[58px] right-0 z-50">
+                    <div className="bg-[#F5F5F3] flex items-center justify-between py-5 px-5">
+                      <div className="w-20 h-20 bg-[#979797]"></div>
+                      <div className="flex flex-col gap-y-3">
+                        <p className="font-DMsans font-bold text-sm text-primaryFontColor">
+                          Black Smart Watch
+                        </p>
+                        <p className="font-DMsans font-bold text-sm text-primaryFontColor">
+                          $44.00
+                        </p>
+                      </div>
+                      <div
+                        className="text-xl cursor-pointer"
+                        onClick={() => setopenCart(false)}
+                      >
+                        <span>
+                          <RxCross2 />
+                        </span>
+                      </div>
+                    </div>
+                    <div className="px-5 py-5">
+                      <div>
+                        <p className="text-base font-DMsans font-normal text-secondaryFontColor">
+                          Subtotal:{" "}
+                          <span className="font-bold text-primaryFontColor">
+                            $44.00
+                          </span>
+                        </p>
+                      </div>
+                      <div className="flex items-center justify-between pt-3">
+                        <button className="font-DMsans font-bold text-xs sm:text-sm text-primaryFontColor py-3 px-7 sm:px-10 border-2 border-primaryFontColor hover:bg-primaryFontColor hover:text-white transition-all">
+                          View Cart
+                        </button>
+                        <button className="font-DMsans font-bold text-xs sm:text-sm text-primaryFontColor py-3 px-7 sm:px-10 border-2 border-primaryFontColor hover:bg-primaryFontColor hover:text-white transition-all">
+                          Checkout
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>

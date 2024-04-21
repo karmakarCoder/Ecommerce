@@ -1,6 +1,7 @@
 import React from "react";
 // ======== All Pages ===========
 import Home from "./Pages/Home/Home";
+import Shop from "./Pages/Shop/Shop";
 // ==============================
 import RootLayout from "./Common/RootLayout/RootLayout";
 import {
@@ -14,6 +15,7 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route element={<RootLayout />}>
       <Route index element={<Home />}></Route>
+      <Route path="/shop" element={<Shop />}></Route>
     </Route>
   )
 );
