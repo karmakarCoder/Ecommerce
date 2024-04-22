@@ -16,7 +16,7 @@ const Shop = () => {
           </div>
 
           <div className="flex py-16">
-            <Shopleft className={"w-[25%] bg-red-700"} />
+            <Shopleft className={"w-[25%]"} />
 
             <ShopRight className={"w-[75%] bg-green-600"} />
           </div>

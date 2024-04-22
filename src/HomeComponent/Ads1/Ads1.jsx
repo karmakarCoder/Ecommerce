@@ -3,13 +3,14 @@ import saleImg from "../../assets/sale.png";
 import clockImg from "../../assets/clock.png";
 import furnitureImg from "../../assets/furniture.png";
 import AdsOverlay from "../../Common/AdsOverlay";
+import Flex from "../../Common/Flex";
 
 const Ads1 = () => {
   return (
     <>
       <div className="py-32 px-4 lg:px-0">
         <div className="container">
-          <div className="flex flex-col md:flex-row items-center gap-x-10 gap-y-10">
+          <Flex className="flex-col md:flex-row items-center gap-x-10 gap-y-10">
             <div className="relative">
               <img src={saleImg} alt={saleImg} />
               <AdsOverlay
@@ -39,7 +40,7 @@ const Ads1 = () => {
                 />
               </div>
             </div>
-          </div>
+          </Flex>
         </div>
       </div>
     </>

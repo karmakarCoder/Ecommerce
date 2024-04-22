@@ -4,8 +4,8 @@ import axios from "axios";
 const ShopRight = ({ className }) => {
   useEffect(() => {
     const Datafetcher = async () => {
-      const data = await axios.get("https://dummyjson.com/products");
-      console.log(data.data.products);
+      // const data = await axios.get("https://dummyjson.com/products");
+      // console.log(data.data.products);
     };
     Datafetcher();
   }, []);
