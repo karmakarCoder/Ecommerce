@@ -27,7 +27,7 @@ const BreadCrumb = () => {
                 {islast ? (
                   <Link
                     className={`text-xs font-DMsans font-normal text-secondaryFontColor capitalize ${
-                      islast ? "text-[#000] font-black" : null
+                      islast ? "text-red-500 font-extrabold" : null
                     }`}
                   >
                     {path}
