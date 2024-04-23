@@ -14,7 +14,7 @@ const Ads1 = () => {
             <div className="relative">
               <img src={saleImg} alt={saleImg} />
               <AdsOverlay
-                className={"left-8 sm:left-16 bottom-[20px] sm:bottom-16 "}
+                className={"left-8 sm:left-16 bottom-[20px] sm:bottom-24 "}
                 title={"Phones Sale"}
                 discount={"30%"}
                 tagline={"sale for all phones!"}
@@ -24,7 +24,7 @@ const Ads1 = () => {
               <div className="relative">
                 <img src={clockImg} alt={clockImg} />
                 <AdsOverlay
-                  className={"left-8 sm:left-16 bottom-3 sm:bottom-9"}
+                  className={"left-8 sm:left-16 bottom-3 sm:bottom-20"}
                   title={"Electronics Sale"}
                   discount={"70%"}
                   tagline={"sale for all electronics!"}
@@ -33,7 +33,7 @@ const Ads1 = () => {
               <div className="relative">
                 <img src={furnitureImg} alt={furnitureImg} />
                 <AdsOverlay
-                  className={"left-8 sm:left-16 bottom-4 sm:bottom-9"}
+                  className={"left-8 sm:left-16 bottom-4 sm:bottom-20"}
                   title={"Furniture Offer"}
                   discount={"50%"}
                   tagline={"sale for all furniture items!"}
