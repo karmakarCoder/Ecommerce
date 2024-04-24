@@ -102,7 +102,7 @@ const Intro = () => {
 
       <div className="border-b-2 border-[#cccccc6b]">
         <div className="container">
-          <div className="py-7 flex items-center justify-between px-4 sm:px-0">
+          <div className="py-7 flex items-center justify-between px-4 lg:px-0">
             <div className="flex items-center gap-x-[3px] sm:gap-x-4">
               <img src={twoImg} alt={twoImg} />
               <p className="text-[9px] sm:text-base font-DMsans font-normal text-thirdFontColor">

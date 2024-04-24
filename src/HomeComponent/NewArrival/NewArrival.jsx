@@ -29,6 +29,7 @@ const NewArrival = () => {
         settings: {
           slidesToShow: 3,
           slidesToScroll: 3,
+          arrows: false,
         },
       },
       {
@@ -42,15 +43,16 @@ const NewArrival = () => {
       {
         breakpoint: 414,
         settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          arrows: false,
         },
       },
       {
         breakpoint: 375,
         settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
+          slidesToShow: 2,
+          slidesToScroll: 2,
           arrows: false,
         },
       },
@@ -119,7 +121,7 @@ const NewArrival = () => {
   const [productData, setproductData] = useState(newProductData);
   return (
     <>
-      <div className="py-20 sm:py-32 px-4 lg:px-0">
+      <div className="py-20 md:py-32 px-4 lg:px-0">
         <div className="container">
           <div>
             <h1 className="pb-12 text-primaryFontColor font-DMsans font-bold text-[30px] sm:text-[38px]">
@@ -134,7 +136,11 @@ const NewArrival = () => {
                   key={item.id}
                   badge={
                     item.discount ? (
-                      <Button className={"py-[6px] px-5"}>
+                      <Button
+                        className={
+                          "py-[4px] px-3 sm:py-[6px] sm:px-5 text-xs sm:text-base"
+                        }
+                      >
                         {item.discountStatus
                           ? item.discountStatus
                           : "Stock out"}

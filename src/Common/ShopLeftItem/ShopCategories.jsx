@@ -53,7 +53,7 @@ const ShopCategories = ({ categoriesData, categoriesTitle }) => {
                       item.subcategories.map((subitem) => (
                         <h2
                           key={subitem.id}
-                          className="text-base font-DMsans font-normal text-secondaryFontColor py-2 cursor-pointer border-b-2 border-white hover:text-red-700"
+                          className=" pl-2 text-base font-DMsans font-normal text-secondaryFontColor py-2 cursor-pointer border-b-2 border-white hover:text-red-700"
                         >
                           {subitem.title}
                         </h2>
