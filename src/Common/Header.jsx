@@ -124,7 +124,7 @@ const Header = () => {
               className={`sm:hidden fixed top-0 pt-7 bg-white z-[999] w-1/2 h-screen shadow-lg ${
                 openNav
                   ? "left-0 transition-all duration-[0.5s]"
-                  : "left-[-184px] transition-all duration-[0.5s]"
+                  : "left-[-100%] transition-all duration-[0.5s]"
               }`}
             >
               <ul
@@ -186,9 +186,9 @@ const Header = () => {
         </div>
       </div>
       {/* ============== Bottom ============= */}
-      <div className="bg-[#F5F5F3]">
+      <div className="bg-[#F5F5F3] px-4">
         <div className="container">
-          <div className="flex items-center justify-between py-6 px-4 lg:px-0">
+          <div className="flex items-center justify-between py-6">
             <div className="relative">
               <div
                 className="flex items-center gap-x-2 cursor-pointer"
@@ -197,7 +197,7 @@ const Header = () => {
                 <span>
                   <HiBars2 className="text-2xl sm:xl" />
                 </span>
-                <p className="font-DMsans font-normal text-sm text-primaryFontColor hidden sm:block">
+                <p className="font-DMsans font-normal text-sm text-primaryFontColor hidden lg:block">
                   Shop by Category
                 </p>
               </div>
@@ -243,7 +243,7 @@ const Header = () => {
             <div>
               <Search />
             </div>
-            <div className="flex items-center gap-x-3 md:gap-x-10">
+            <div className="flex items-center gap-x-3 lg:gap-x-10">
               <div className="relative">
                 <div
                   className="flex items-center gap-x-1 md:gap-x-2 cursor-pointer"
