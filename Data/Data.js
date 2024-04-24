@@ -50,6 +50,14 @@ export const colorCategoriesData = [
   { id: 5, title: "Color 1", colorCode: "#15CBA5" },
 ];
 
+export const brand = [
+  { id: 1, title: "Brand 1" },
+  { id: 2, title: "Brand 1" },
+  { id: 3, title: "Brand 1" },
+  { id: 4, title: "Brand 1" },
+  { id: 5, title: "Brand 1" },
+];
+
 import product1 from "../src/assets/product1.png";
 import product2 from "../src/assets/product2.png";
 import product3 from "../src/assets/product3.png";
