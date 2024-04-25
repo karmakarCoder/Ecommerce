@@ -1,9 +1,15 @@
 import React from "react";
 import ShopCategories from "../Common/ShopLeftItem/ShopCategories";
-import { categories, colorCategoriesData } from "../../Data/Data.js";
+import {
+  categories,
+  colorCategoriesData,
+  brand,
+  Price,
+} from "../../Data/Data.js";
 import ColorCategories from "../Common/ShopLeftItem/ColorCategories.jsx";
 import ShopbyBrand from "../Common/ShopLeftItem/ShopbyBrand.jsx";
-import { brand } from "../../Data/Data.js";
+
+import ShopByPrice from "../Common/ShopLeftItem/ShopByPrice.jsx";
 
 const Shopleft = ({ className }) => {
   return (
@@ -13,7 +19,6 @@ const Shopleft = ({ className }) => {
           categoriesData={categories ? categories : []}
           categoriesTitle={"Shop by Category"}
         />
-
         <div>
           <ColorCategories
             className={"pt-12 pb-12"}
@@ -21,9 +26,11 @@ const Shopleft = ({ className }) => {
             title={"Shop by Color"}
           />
         </div>
-
         <div>
           <ShopbyBrand brandData={brand ? brand : []} />
+        </div>
+        <div>
+          <ShopByPrice Price={Price ? Price : []} />
         </div>
       </div>
     </>

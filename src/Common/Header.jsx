@@ -114,7 +114,7 @@ const Header = () => {
               </ul>
             </div>
             <div
-              className="block sm:hidden cursor-pointer text-xl"
+              className="block sm:hidden cursor-pointer text-xl z-50"
               onClick={handleNav}
             >
               <span>{openNav ? <RxCross2 /> : <FaBars />}</span>
@@ -182,6 +182,11 @@ const Header = () => {
                 <img src={logo} alt={logo} />
               </div>
             </div>
+            <div
+              className={`bg-[#00000031] h-screen w-screen top-0 left-0 z-20 fixed ${
+                openNav ? "block" : "hidden"
+              }`}
+            ></div>
           </div>
         </div>
       </div>

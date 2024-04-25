@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import axios from "axios";
+import ShopTop from "../Common/ShopRightitem/ShopTop";
 
 const ShopRight = ({ className }) => {
   useEffect(() => {
@@ -9,7 +10,15 @@ const ShopRight = ({ className }) => {
     };
     Datafetcher();
   }, []);
-  return <div className={className}>ShopRight</div>;
+  return (
+    <>
+      <div className={className}>
+        <div>
+          <ShopTop />
+        </div>
+      </div>
+    </>
+  );
 };
 
 export default ShopRight;
