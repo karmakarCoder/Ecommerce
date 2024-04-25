@@ -1,11 +1,17 @@
 import React, { useState } from "react";
 import { HiMiniSquares2X2 } from "react-icons/hi2";
-import { MdArrowDropDown } from "react-icons/md";
+import { MdArrowDropUp } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { Feature } from "../../../Data/Data";
 
 const ShopTop = () => {
   const [feature, setfeature] = useState(false);
+  const [featureItem, setfeatureItem] = useState(false);
+
+  const HandleItem = (event) => {
+    setfeatureItem(event.target.innerText);
+    setfeature(false);
+  };
 
   const HandleFeature = () => {
     setfeature(!feature);
@@ -21,22 +27,31 @@ const ShopTop = () => {
             <HiMiniSquares2X2 />
           </span>
         </div>
-        <div className="relative py-1 px-5 border-2 border-[#F0F0F0] ">
+        <div className="relative py-1 px-5 border-2 border-[#F0F0F0] w-[239px]">
           <div
             className="flex items-center justify-between cursor-pointer"
             onClick={HandleFeature}
           >
-            <p className="text-base font-DMsans font-normal text-secondaryFontColor mr-28">
-              Featured
+            <p className="text-base font-DMsans font-normal text-secondaryFontColor">
+              {featureItem ? featureItem : "Featured"}
             </p>
             <span>
-              <MdArrowDropDown className="text-2xl text-secondaryFontColor" />
+              <MdArrowDropUp
+                className={`text-2xl text-secondaryFontColor ${
+                  feature
+                    ? "rotate-[0] transition-all duration-300"
+                    : "rotate-[180deg] transition-all duration-300"
+                }`}
+              />
             </span>
           </div>
           {feature ? (
-            <div className="bg-[#F0F0F0] w-full shadow-md absolute top-[37px] left-0 flex flex-col gap-y-1 rounded">
+            <div className="bg-[#F0F0F0] border-2 border-[#0000001f] w-full shadow-md absolute top-[40px] left-0 flex flex-col gap-y-1 rounded">
               {Feature.map((item) => (
-                <div className="bg-white text-primaryFontColor text-md pl-2 font-DMsans font-medium py-2">
+                <div
+                  className="cursor-pointer active:bg-[#d3ac7138] hover:bg-white text-primaryFontColor text-md pl-2 font-DMsans font-medium py-2 "
+                  onClick={HandleItem}
+                >
                   <Link>{item.title}</Link>
                 </div>
               ))}
