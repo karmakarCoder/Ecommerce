@@ -58,6 +58,14 @@ export const brand = [
   { id: 5, title: "Brand 1" },
 ];
 
+export const Price = [
+  { id: 1, Price: "$0.00 - $9.99" },
+  { id: 2, Price: "$0.00 - $9.99" },
+  { id: 3, Price: "$0.00 - $9.99" },
+  { id: 4, Price: "$0.00 - $9.99" },
+  { id: 5, Price: "$0.00 - $9.99" },
+];
+
 import product1 from "../src/assets/product1.png";
 import product2 from "../src/assets/product2.png";
 import product3 from "../src/assets/product3.png";
@@ -187,5 +195,24 @@ export const specialOfferData = [
     discount: true,
     discountStatus: "New",
     colorVariant: false,
+  },
+];
+
+export const Feature = [
+  {
+    id: 1,
+    title: "Womens",
+  },
+  {
+    id: 2,
+    title: "Man",
+  },
+  {
+    id: 3,
+    title: "Children",
+  },
+  {
+    id: 4,
+    title: "Old",
   },
 ];
