@@ -19,13 +19,14 @@ const ShopTop = () => {
   return (
     <>
       <div className="pb-[60px] flex items-center justify-end gap-x-4">
+        <div><span className="cursor-pointer">
+            <HiMiniSquares2X2 />
+          </span></div>
         <div className="flex items-center gap-x-2">
           <p className="text-base font-DMsans font-normal text-secondaryFontColor">
             Sort by:
           </p>
-          <span className="cursor-pointer">
-            <HiMiniSquares2X2 />
-          </span>
+          
         </div>
         <div className="relative py-1 px-5 border-2 border-[#F0F0F0] w-[239px]">
           <div
