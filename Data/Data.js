@@ -216,3 +216,19 @@ export const Feature = [
     title: "Old",
   },
 ];
+
+
+export const pageShow = [
+  {
+    id: 1,
+    title: "12",
+  },
+  {
+    id: 2,
+    title: "09",
+  },
+  {
+    id: 3,
+    title: "1",
+  },
+];
