@@ -25,6 +25,7 @@ const ShopTop = () => {
 
   const HandleShowItem = (e) => {
     setShowitem(e.target.innerText)
+    setshow(false)
   };
   return (
     <>
@@ -69,10 +70,10 @@ const ShopTop = () => {
             </div>
           ) : null}
         </div>
-        <div>
+        <div className="flex items-center gap-x-2">
           <h4 className="text-base font-DMsans font-normal text-primaryFontColor">Show</h4>
           <div>
-          <div className="relative py-1 px-5 border-2 border-[#F0F0F0] w-[239px]">
+          <div className="relative py-1 px-5 border-2 border-[#F0F0F0] w-[140px]">
           <div
             className="flex items-center justify-between cursor-pointer"
             onClick={HandleShow}
@@ -90,7 +91,7 @@ const ShopTop = () => {
               />
             </span>
           </div>
-          {feature ? (
+          {show ? (
             <div className="bg-[#F0F0F0] border-2 border-[#0000001f] w-full shadow-md absolute top-[40px] left-0 flex flex-col gap-y-1 rounded">
               {pageShow.map((item) => (
                 <div
