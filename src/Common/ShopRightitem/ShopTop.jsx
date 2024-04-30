@@ -73,7 +73,7 @@ const ShopTop = () => {
         <div className="flex items-center gap-x-2">
           <h4 className="text-base font-DMsans font-normal text-primaryFontColor">Show</h4>
           <div>
-          <div className="relative py-1 px-5 border-2 border-[#F0F0F0] w-[140px]">
+          <div className="relative py-1 px-4 border-2 border-[#F0F0F0] w-[140px]">
           <div
             className="flex items-center justify-between cursor-pointer"
             onClick={HandleShow}
