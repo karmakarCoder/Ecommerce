@@ -6,7 +6,7 @@ import ShopRight from "../../ShopComponent/ShopRight";
 const Shop = () => {
   return (
     <>
-      <div>
+      <div className="px-4">
         <div className="container">
           <div className="py-32">
             <h1 className="text-5xl font-bold text-primaryFontColor pb-3">
@@ -15,7 +15,7 @@ const Shop = () => {
             <BreadCrumb />
           </div>
 
-          <div className="flex py-16">
+          <div className="flex py-16 gap-x-10">
             <Shopleft className={"w-[25%]"} />
             <ShopRight className={"w-[75%]"} />
           </div>
