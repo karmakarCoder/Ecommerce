@@ -53,7 +53,7 @@ const Header = () => {
 
   return (
     <>
-      <div className="bg-white">
+      <div className="bg-white px-4">
         <div className="container">
           <div className="relative flex items-center py-8 justify-between px-4 lg:px-0">
             <div>
