@@ -3,17 +3,26 @@ import productImg from "../assets/product2.png";
 import { FaHeart, FaShoppingCart } from "react-icons/fa";
 import { TbReload } from "react-icons/tb";
 
-const Card = ({ colorVariant, badge, img, productTitle, price }) => {
+const Card = ({
+  className,
+  colorVariant,
+  badge,
+  img,
+  productTitle,
+  price,
+  discountPrice,
+  rating,
+}) => {
   return (
     <>
-      <div className="cursor-pointer w-[93%]">
+      <div className={`cursor-pointer w-[93%] h-[368px] ${className}`}>
         <div className="group relative overflow-hidden">
           <div className="absolute top-5 left-5">{badge}</div>
 
           <img
             src={img ? img : productImg}
             alt={img}
-            className="h-[220px] sm:h-[220px] md:h-auto"
+            className="h-[220px] sm:h-[220px] md:h-full object-fill"
           />
 
           {/* =================Overlay================= */}
@@ -46,15 +55,24 @@ const Card = ({ colorVariant, badge, img, productTitle, price }) => {
           <h3 className="text-ellipsis whitespace-nowrap overflow-hidden text-primaryFontColor font-DMsans font-semibold text-sm sm:text-base md:text-xl">
             {productTitle ? productTitle : "Basic Crew Neck Tee"}
           </h3>
-          <p className="text-sm font-DMsans font-normal text-thirdFontColor sm:text-sm md:text-base">
-            {price ? price : "$44.00"}
-          </p>
+          <div className="flex items-center gap-x-2">
+            <p className="text-sm font-DMsans font-normal text-thirdFontColor sm:text-sm line-through md:text-">
+              {discountPrice ? discountPrice : null}
+            </p>
+            <p className="text-sm font-DMsans font-normal text-thirdFontColor sm:text-sm md:text-base">
+              {price ? price : "$44.00"}
+            </p>
+          </div>
         </div>
         {colorVariant && (
           <span className="text-thirdFontColor font-DMsans font-normal text-xs pt-3 sm:text-sm md:text-base">
             Black
           </span>
         )}
+
+        <span className="text-thirdFontColor font-DMsans font-normal text-xs pt-3 sm:text-sm md:text-base">
+          {rating ? rating : null}
+        </span>
       </div>
     </>
   );
