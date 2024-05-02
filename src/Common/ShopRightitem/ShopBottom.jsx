@@ -37,7 +37,7 @@ const ShopBottom = () => {
             img={productItem.thumbnail}
             badge={
               productItem.discountPercentage ? (
-                <Button className={"py-[7px] px-8"}>
+                <Button className={"py-[7px] px-6"}>
                   {productItem.stock === 0
                     ? "Stock out"
                     : "-" + " $ " + productItem.discountPercentage}
