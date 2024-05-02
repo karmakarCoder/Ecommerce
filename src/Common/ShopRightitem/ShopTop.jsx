@@ -17,10 +17,12 @@ const ShopTop = () => {
 
   const HandleFeature = () => {
     setfeature(!feature);
+    setshow(false);
   };
 
   const HandleShow = () => {
     setshow(!show);
+    setfeature(false);
   };
 
   const HandleShowItem = (e) => {
