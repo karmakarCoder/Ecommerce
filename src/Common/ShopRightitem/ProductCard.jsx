@@ -15,7 +15,7 @@ const Card = ({
 }) => {
   return (
     <>
-      <div className={`cursor-pointer w-[93%] h-[302px] ${className}`}>
+      <div className={`cursor-pointer w-[31%] h-[302px] ${className}`}>
         <div className="group relative overflow-hidden">
           <div className="absolute top-5 left-5">{badge}</div>
 
