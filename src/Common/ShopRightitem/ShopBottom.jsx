@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import ProductCard from "../ShopRightitem/ProductCard";
 import axios from "axios";
 import Flex from "../Flex";
 import Button from "../Button";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
+import { shopRightPageContext } from "../../ShopComponent/ShopRight";
 
 const ShopBottom = () => {
   const [allProducts, setallProducts] = useState([]);
   const [page, setpage] = useState(1);
+  const pageValue = useContext(shopRightPageContext);
+
   useEffect(() => {
     const Datafetcher = async () => {
       const allData = await axios.get("https://dummyjson.com/products");
@@ -20,7 +23,7 @@ const ShopBottom = () => {
   const HandlePagination = (pageNumber) => {
     if (
       pageNumber > 0 &&
-      pageNumber <= Math.floor(allProducts.length / 9) + 1
+      pageNumber <= Math.floor(allProducts.length / pageValue) + 1
     ) {
       setpage(pageNumber);
     }
@@ -29,26 +32,28 @@ const ShopBottom = () => {
   return (
     <>
       <Flex className={"gap-x-4 flex-wrap justify-between gap-y-8"}>
-        {allProducts?.slice(page * 9 - 9, page * 9).map((productItem) => (
-          <ProductCard
-            key={productItem.id}
-            className={"w-[285px]"}
-            productTitle={productItem.title}
-            img={productItem.thumbnail}
-            badge={
-              productItem.discountPercentage ? (
-                <Button className={"py-[7px] px-6"}>
-                  {productItem.stock === 0
-                    ? "Stock out"
-                    : "-" + " $ " + productItem.discountPercentage}
-                </Button>
-              ) : null
-            }
-            price={`$${productItem.price - productItem.discountPercentage}`}
-            rating={productItem.rating}
-            discountPrice={productItem.price}
-          />
-        ))}
+        {allProducts
+          ?.slice(page * pageValue - pageValue, page * pageValue)
+          .map((productItem) => (
+            <ProductCard
+              key={productItem.id}
+              className={"w-[285px]"}
+              productTitle={productItem.title}
+              img={productItem.thumbnail}
+              badge={
+                productItem.discountPercentage ? (
+                  <Button className={"py-[7px] px-6"}>
+                    {productItem.stock === 0
+                      ? "Stock out"
+                      : "-" + " $ " + productItem.discountPercentage}
+                  </Button>
+                ) : null
+              }
+              price={`$${productItem.price - productItem.discountPercentage}`}
+              rating={productItem.rating}
+              discountPrice={productItem.price}
+            />
+          ))}
       </Flex>
       <Flex className={"justify-between items-center pt-12"}>
         <ul className="flex items-center gap-x-3">
@@ -60,7 +65,7 @@ const ShopBottom = () => {
           >
             <FaAngleLeft />
           </li>
-          {[...new Array(Math.floor(allProducts.length / 9) + 1)].map(
+          {[...new Array(Math.floor(allProducts.length / pageValue) + 1)].map(
             (item, index) => (
               <li
                 key={index}
@@ -86,10 +91,14 @@ const ShopBottom = () => {
         </ul>
         <div>
           <p className="font-DMsans text-sm font-normal text-secondaryFontColor">
-            Products from {page == 1 ? page * 9 - 9 + 1 : page * 9 - 9} to{" "}
-            {page === Math.floor(allProducts.length / 9) + 1
+            Products from{" "}
+            {page == 1
+              ? page * pageValue - pageValue + 1
+              : page * pageValue - pageValue}{" "}
+            to{" "}
+            {page === Math.floor(allProducts.length / pageValue) + 1
               ? allProducts.length
-              : page * 9}{" "}
+              : page * pageValue}
             of {allProducts.length}
           </p>
         </div>
