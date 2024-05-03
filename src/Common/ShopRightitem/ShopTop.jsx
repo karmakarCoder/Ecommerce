@@ -4,7 +4,7 @@ import { MdArrowDropUp } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { Feature, pageShow } from "../../../Data/Data";
 
-const ShopTop = () => {
+const ShopTop = ({ pageValue }) => {
   const [feature, setfeature] = useState(false);
   const [show, setshow] = useState(false);
   const [featureItem, setfeatureItem] = useState(false);
@@ -25,10 +25,11 @@ const ShopTop = () => {
     setfeature(false);
   };
 
-  const HandleShowItem = (e) => {
-    setShowitem(e.target.innerText);
+  const HandleShowItem = (event) => {
+    setShowitem(event.target.innerText);
     setshow(false);
   };
+
   return (
     <>
       <div className="pb-[60px] flex items-center justify-between gap-x-4">
@@ -98,14 +99,17 @@ const ShopTop = () => {
                   </span>
                 </div>
                 {show ? (
-                  <div className="z-50 bg-[#F0F0F0] border-2 border-[#0000001f] w-full shadow-md absolute top-[40px] left-0 flex flex-col gap-y-1 rounded">
+                  <div
+                    onClick={pageValue}
+                    className="z-50 bg-[#F0F0F0] border-2 border-[#0000001f] w-full shadow-md absolute top-[40px] left-0 flex flex-col gap-y-1 rounded"
+                  >
                     {pageShow.map((item) => (
                       <div
                         key={item.id}
                         className="cursor-pointer active:bg-[#d3ac7138] hover:bg-white text-primaryFontColor text-md pl-2 font-DMsans font-medium py-2 "
                         onClick={HandleShowItem}
                       >
-                        <Link>{item.title}</Link>
+                        {item.title}
                       </div>
                     ))}
                   </div>
