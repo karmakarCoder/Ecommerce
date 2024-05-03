@@ -217,7 +217,6 @@ export const Feature = [
   },
 ];
 
-
 export const pageShow = [
   {
     id: 1,
@@ -229,6 +228,11 @@ export const pageShow = [
   },
   {
     id: 3,
-    title: "1",
+    title: "30",
+  },
+
+  {
+    id: 4,
+    title: "27",
   },
 ];
