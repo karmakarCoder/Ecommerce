@@ -3,7 +3,6 @@ import Card from "../../Common/Card";
 import { bestSellerData } from "../../../Data/Data";
 import Slider from "react-slick";
 import Button from "../../Common/Button";
-
 const BestSeller = () => {
   const settings = {
     dots: false,
@@ -58,6 +57,7 @@ const BestSeller = () => {
   };
 
   const [productData, setproductData] = useState(bestSellerData);
+
   return (
     <>
       <div className="py-20 md:py-32 px-4 lg:px-0">

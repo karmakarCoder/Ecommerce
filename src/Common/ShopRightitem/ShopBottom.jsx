@@ -5,16 +5,22 @@ import Flex from "../Flex";
 import Button from "../Button";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { shopRightPageContext } from "../../ShopComponent/ShopRight";
-
+import { useSelector, useDispatch } from "react-redux";
+import { setProduct } from "../../Redux/Slice/ProductSlice/ProductSlice";
 const ShopBottom = () => {
   const [allProducts, setallProducts] = useState([]);
   const [page, setpage] = useState(1);
   const pageValue = useContext(shopRightPageContext);
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
     const Datafetcher = async () => {
       const allData = await axios.get("https://dummyjson.com/products");
       setallProducts(allData.data.products);
+
+      // set data on redux
+      dispatch(setProduct(allData.data.products));
     };
 
     Datafetcher();
