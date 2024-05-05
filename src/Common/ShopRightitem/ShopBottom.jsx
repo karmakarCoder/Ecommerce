@@ -5,8 +5,9 @@ import Flex from "../Flex";
 import Button from "../Button";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { shopRightPageContext } from "../../ShopComponent/ShopRight";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setProduct } from "../../Redux/Slice/ProductSlice/ProductSlice";
+import { fetchData } from "../../Redux/Slice/ProductSlice/ProductSlice";
 const ShopBottom = () => {
   const [allProducts, setallProducts] = useState([]);
   const [page, setpage] = useState(1);
@@ -15,16 +16,30 @@ const ShopBottom = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const Datafetcher = async () => {
-      const allData = await axios.get("https://dummyjson.com/products");
-      setallProducts(allData.data.products);
-
-      // set data on redux
-      dispatch(setProduct(allData.data.products));
-    };
-
-    Datafetcher();
+    dispatch(fetchData());
   }, []);
+
+  const { data, status } = useSelector((state) => state.allProduct);
+
+  useEffect(() => {
+    if (status.payload === "IDLE") {
+      setallProducts(data.payload);
+    }
+  }, [status.payload, data.payload]);
+
+  console.log(allProducts);
+
+  // useEffect(() => {
+  //   const Datafetcher = async () => {
+  //     const allData = await axios.get("https://dummyjson.com/products");
+  //     setallProducts(allData.data.products);
+
+  //     // set data on redux
+  //     dispatch(setProduct(allData.data.products));
+  //   };
+
+  //   Datafetcher();
+  // }, []);
 
   const HandlePagination = (pageNumber) => {
     if (
@@ -38,6 +53,9 @@ const ShopBottom = () => {
   return (
     <>
       <Flex className={"gap-x-4 flex-wrap justify-between gap-y-8"}>
+        <h1 className="text-red-600 bg-black w-full py-3 px-4 font-bold font-DMsans text-4xl">
+          {status.payload}
+        </h1>
         {allProducts
           ?.slice(page * pageValue - pageValue, page * pageValue)
           .map((productItem) => (
