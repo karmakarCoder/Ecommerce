@@ -6,8 +6,11 @@ import Button from "../Button";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { shopRightPageContext } from "../../ShopComponent/ShopRight";
 import { useDispatch, useSelector } from "react-redux";
-import { setProduct } from "../../Redux/Slice/ProductSlice/ProductSlice";
-import { fetchData } from "../../Redux/Slice/ProductSlice/ProductSlice";
+import {
+  fetchData,
+  setProduct,
+} from "../../Redux/Slice/ProductSlice/ProductSlice";
+import ProductLoading from "../ProductLoading/ProductLoading";
 const ShopBottom = () => {
   const [allProducts, setallProducts] = useState([]);
   const [page, setpage] = useState(1);
