@@ -19,7 +19,10 @@ const Error = () => {
             placeholder={"Type to search"}
             className={"border-2 border-[#F0F0F0]"}
           />
-          <Link className={"mt-14 py-4 px-14 bg-primaryFontColor text-white"}>
+          <Link
+            to={"/"}
+            className={"mt-14 py-4 px-14 bg-primaryFontColor text-white"}
+          >
             Back to Home
           </Link>
         </div>

@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+import axios from "axios";
+import { json } from "react-router-dom";
 const apiStatus = {
   IDLE: "IDLE",
   LOADING: "LOADING",
@@ -32,12 +34,12 @@ export const fetchData = () => {
       dispatch(setStatus(apiStatus.LOADING));
       const response = await fetch("https://dummyjson.com/products");
       const data = await response.json();
-      const allProduct = await data.products;
+      const allProduct = data.products;
       dispatch(setProduct(allProduct));
       dispatch(setStatus(apiStatus.IDLE));
     } catch (error) {
-      dispatch(setStatus(apiStatus.ERROR));
       console.log(error);
+      dispatch(setStatus(apiStatus.ERROR));
     }
   };
 };

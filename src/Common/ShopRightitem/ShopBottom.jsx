@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
 import ProductCard from "../ShopRightitem/ProductCard";
-import axios from "axios";
 import Flex from "../Flex";
 import Button from "../Button";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
@@ -11,11 +10,12 @@ import {
   setProduct,
 } from "../../Redux/Slice/ProductSlice/ProductSlice";
 import ProductLoading from "../ProductLoading/ProductLoading";
+import Error from "../Error";
+
 const ShopBottom = () => {
   const [allProducts, setallProducts] = useState([]);
   const [page, setpage] = useState(1);
   const pageValue = useContext(shopRightPageContext);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -29,8 +29,6 @@ const ShopBottom = () => {
       setallProducts(data.payload);
     }
   }, [status.payload, data.payload]);
-
-  console.log(allProducts);
 
   // useEffect(() => {
   //   const Datafetcher = async () => {
@@ -56,33 +54,41 @@ const ShopBottom = () => {
   return (
     <>
       <Flex className={"gap-x-4 flex-wrap justify-between gap-y-8"}>
-        <h1 className="text-red-600 bg-black w-full py-3 px-4 font-bold font-DMsans text-4xl">
-          {status.payload}
-        </h1>
-        {allProducts
-          ?.slice(page * pageValue - pageValue, page * pageValue)
-          .map((productItem) => (
-            <ProductCard
-              key={productItem.id}
-              className={"w-[285px]"}
-              productTitle={productItem.title}
-              img={productItem.thumbnail}
-              badge={
-                productItem.discountPercentage ? (
-                  <Button className={"py-[7px] px-6"}>
-                    {productItem.stock === 0
-                      ? "Stock out"
-                      : "-" + " $ " + productItem.discountPercentage}
-                  </Button>
-                ) : null
-              }
-              price={`$${productItem.price - productItem.discountPercentage}`}
-              rating={productItem.rating}
-              discountPrice={productItem.price}
-            />
-          ))}
+        {status.payload === "LOADING" ? (
+          <ProductLoading />
+        ) : status.payload === "ERROR" ? (
+          <Error />
+        ) : (
+          allProducts
+            ?.slice(page * pageValue - pageValue, page * pageValue)
+            .map((productItem) => (
+              <ProductCard
+                key={productItem.id}
+                className={"w-[285px]"}
+                productTitle={productItem.title}
+                img={productItem.thumbnail}
+                badge={
+                  productItem.discountPercentage ? (
+                    <Button className={"py-[7px] px-6"}>
+                      {productItem.stock === 0
+                        ? "Stock out"
+                        : "-" + " $ " + productItem.discountPercentage}
+                    </Button>
+                  ) : null
+                }
+                price={`$${productItem.price - productItem.discountPercentage}`}
+                rating={productItem.rating}
+                discountPrice={productItem.price}
+              />
+            ))
+        )}
       </Flex>
-      <Flex className={"justify-between items-center pt-12"}>
+
+      <Flex
+        className={`"justify-between items-center" ${
+          status.payload == "ERROR" ? "hidden" : "flex justify-between pt-12"
+        }`}
+      >
         <ul className="flex items-center gap-x-3">
           <li
             className={
