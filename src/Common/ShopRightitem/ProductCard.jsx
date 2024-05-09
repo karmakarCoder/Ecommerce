@@ -2,6 +2,7 @@ import React from "react";
 import productImg from "../../assets/product8.png";
 import { FaHeart, FaShoppingCart } from "react-icons/fa";
 import { TbReload } from "react-icons/tb";
+import { FaStar } from "react-icons/fa";
 
 const Card = ({
   className,
@@ -12,22 +13,30 @@ const Card = ({
   price,
   discountPrice,
   rating,
+  productDes,
+  layout,
 }) => {
   return (
     <>
-      <div className={`cursor-pointer w-[31%] h-[302px] ${className}`}>
+      <div
+        className={`cursor-pointer h-[302px]  ${
+          layout ? "bg-[#f1f1f1] pr-3" : null
+        }  ${className}`}
+      >
         <div className="group relative overflow-hidden">
           <div className="absolute top-5 left-5">{badge}</div>
 
           <img
             src={img ? img : productImg}
             alt={img}
-            className="h-[220px] sm:h-[220px]  w-full"
+            className={`h-[220px] sm:h-[220px]   ${
+              layout ? "w-[330px]" : "w-full"
+            }`}
           />
 
           {/* =================Overlay================= */}
 
-          <div className="py-6 px-7 flex flex-col items-center md:items-end absolute -bottom-36 left-0 bg-white w-full gap-y-5 group-hover:bottom-0 transition-all">
+          <div className="py-6 px-7 flex flex-col items-center md:items-end absolute -bottom-40 left-0 bg-white w-full gap-y-5 group-hover:bottom-0 transition-all">
             <div className="flex items-center gap-x-2 sm:gap-x-4">
               <h5 className="text-[#767676] font-DMsans hover:text-[#262626] sm:hover:font-bold transition-all text-sm md:text-base">
                 Add to List
@@ -51,10 +60,22 @@ const Card = ({
           {/* =================Overlay================= */}
         </div>
 
-        <div className="flex justify-between items-center pt-6 sm:pt-3 md:pt-6 sm:flex-row sm:items-start lg:flex-row lg:items-center">
+        <div
+          className={`flex justify-between pt-6 sm:pt-3 sm:flex-row sm:items-start lg:flex-row  ${
+            layout
+              ? "lg:flex-col lg:items-start md:pt-0 gap-y-4"
+              : "lg:flex-row lg:items-center md:pt-6 gap-y-0"
+          }`}
+        >
           <h3 className="text-ellipsis whitespace-nowrap overflow-hidden text-primaryFontColor font-DMsans font-semibold text-sm sm:text-base md:text-xl">
             {productTitle ? productTitle : "Basic Crew Neck Tee"}
           </h3>
+          {layout ? (
+            <p className="w-[500px] text-ellipsis whitespace-wrap overflow-hidden">
+              {productDes}
+            </p>
+          ) : null}
+
           <div className="flex items-center gap-x-2">
             <p className="text-sm font-DMsans font-normal text-thirdFontColor sm:text-sm line-through md:text-">
               {discountPrice ? discountPrice : null}
@@ -70,7 +91,10 @@ const Card = ({
           </span>
         )}
 
-        <span className="text-thirdFontColor font-DMsans font-normal text-xs pt-3 sm:text-sm md:text-base">
+        <span className="text-thirdFontColor font-DMsans font-normal text-xs pt-3 sm:text-sm md:text-base items-center flex gap-x-1 md:leading-[0]">
+          <span>
+            <FaStar className="text-yellow-500" />
+          </span>
           {rating ? rating : null}
         </span>
       </div>
