@@ -15,8 +15,8 @@ const Shop = () => {
             <BreadCrumb />
           </div>
 
-          <div className="flex py-16 gap-x-10">
-            <Shopleft className={"w-[25%]"} />
+          <div className="flex py-16 gap-x-10 flex-col lg:flex-row">
+            <Shopleft className={"w-[100%] lg:w-[25%]"} />
             <ShopRight className={"w-[75%]"} />
           </div>
         </div>
