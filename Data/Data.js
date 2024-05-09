@@ -224,15 +224,10 @@ export const pageShow = [
   },
   {
     id: 2,
-    title: "09",
+    title: "06",
   },
   {
     id: 3,
-    title: "30",
-  },
-
-  {
-    id: 4,
     title: "27",
   },
 ];
