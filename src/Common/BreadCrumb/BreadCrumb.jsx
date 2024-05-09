@@ -20,6 +20,7 @@ const BreadCrumb = () => {
 
           {BreadCrumbpath.map((path, index) => {
             const islast = index === BreadCrumbpath.length - 1;
+
             BreadCrumbList += path;
 
             return (
