@@ -1,7 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import axios from "axios";
-import { json } from "react-router-dom";
 const apiStatus = {
   IDLE: "IDLE",
   LOADING: "LOADING",
