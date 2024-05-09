@@ -3,8 +3,9 @@ import { HiMiniSquares2X2 } from "react-icons/hi2";
 import { MdArrowDropUp } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { Feature, pageShow } from "../../../Data/Data";
+import { FaList } from "react-icons/fa6";
 
-const ShopTop = ({ pageValue }) => {
+const ShopTop = ({ pageValue, onChangeLayout, layoutValue }) => {
   const [feature, setfeature] = useState(false);
   const [show, setshow] = useState(false);
   const [featureItem, setfeatureItem] = useState(false);
@@ -34,8 +35,8 @@ const ShopTop = ({ pageValue }) => {
     <>
       <div className="pb-[60px] flex items-center justify-between gap-x-4">
         <div>
-          <span className="cursor-pointer text-xl">
-            <HiMiniSquares2X2 />
+          <span className="cursor-pointer text-xl" onClick={onChangeLayout}>
+            {layoutValue ? <HiMiniSquares2X2 /> : <FaList />}
           </span>
         </div>
         <div className="flex items-center gap-x-5">
