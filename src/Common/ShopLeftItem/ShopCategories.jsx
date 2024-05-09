@@ -20,7 +20,7 @@ const ShopCategories = ({ categoriesData, categoriesTitle }) => {
 
   return (
     <>
-      <div>
+      <div className="w-full">
         <div className="container">
           <div>
             <h2 className="text-xl font-DMsans font-bold text-primaryFontColor pb-9">
