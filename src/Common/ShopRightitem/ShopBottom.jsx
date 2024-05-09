@@ -5,18 +5,17 @@ import Button from "../Button";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { shopRightPageContext } from "../../ShopComponent/ShopRight";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  fetchData,
-  setProduct,
-} from "../../Redux/Slice/ProductSlice/ProductSlice";
+import { fetchData } from "../../Redux/Slice/ProductSlice/ProductSlice";
 import ProductLoading from "../ProductLoading/ProductLoading";
 import Error from "../Error";
+import { FaStar } from "react-icons/fa";
 
 const ShopBottom = () => {
   const [allProducts, setallProducts] = useState([]);
   const [page, setpage] = useState(1);
   const pageValue = useContext(shopRightPageContext);
   const dispatch = useDispatch();
+  const { showPage, gridLayout } = pageValue;
 
   useEffect(() => {
     dispatch(fetchData());
@@ -45,7 +44,7 @@ const ShopBottom = () => {
   const HandlePagination = (pageNumber) => {
     if (
       pageNumber > 0 &&
-      pageNumber <= Math.floor(allProducts.length / pageValue) + 1
+      pageNumber <= Math.floor(allProducts.length / showPage) + 1
     ) {
       setpage(pageNumber);
     }
@@ -60,12 +59,18 @@ const ShopBottom = () => {
           <Error />
         ) : (
           allProducts
-            ?.slice(page * pageValue - pageValue, page * pageValue)
+            ?.slice(page * showPage - showPage, page * showPage)
             .map((productItem) => (
               <ProductCard
                 key={productItem.id}
-                className={"w-[285px]"}
+                layout={gridLayout}
+                className={` ${
+                  gridLayout
+                    ? "w-[100%] flex flex-row h-full justify-between items-center"
+                    : "w-[285px]"
+                }`}
                 productTitle={productItem.title}
+                productDes={productItem.description}
                 img={productItem.thumbnail}
                 badge={
                   productItem.discountPercentage ? (
@@ -98,7 +103,7 @@ const ShopBottom = () => {
           >
             <FaAngleLeft />
           </li>
-          {[...new Array(Math.floor(allProducts.length / pageValue) + 1)].map(
+          {[...new Array(Math.floor(allProducts.length / showPage) + 1)].map(
             (item, index) => (
               <li
                 key={index}
@@ -126,12 +131,12 @@ const ShopBottom = () => {
           <p className="font-DMsans text-sm font-normal text-secondaryFontColor">
             Products from{" "}
             {page == 1
-              ? page * pageValue - pageValue + 1
-              : page * pageValue - pageValue}{" "}
+              ? page * showPage - showPage + 1
+              : page * showPage - showPage}{" "}
             to{" "}
-            {page === Math.floor(allProducts.length / pageValue) + 1
+            {page === Math.floor(allProducts.length / showPage) + 1
               ? allProducts.length
-              : page * pageValue}
+              : page * showPage}
             of {allProducts.length}
           </p>
         </div>
