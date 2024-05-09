@@ -5,18 +5,33 @@ export const shopRightPageContext = createContext();
 
 const ShopRight = ({ className }) => {
   const [showPage, setshowPage] = useState(9);
+  const [gridLayout, setgridLayout] = useState(false);
+  console.log(gridLayout);
+
+  const onChangeLayout = () => {
+    setgridLayout(!gridLayout);
+  };
 
   const HandlePagination = (event) => {
     setshowPage(event.target.innerText);
+  };
+
+  const shoprightBottomItem = {
+    showPage,
+    gridLayout,
   };
   return (
     <>
       <div className={className}>
         <div>
-          <ShopTop pageValue={HandlePagination} />
+          <ShopTop
+            pageValue={HandlePagination}
+            onChangeLayout={onChangeLayout}
+            layoutValue={gridLayout}
+          />
         </div>
 
-        <shopRightPageContext.Provider value={showPage}>
+        <shopRightPageContext.Provider value={shoprightBottomItem}>
           <ShopBottom />
         </shopRightPageContext.Provider>
       </div>
