@@ -6,7 +6,7 @@ const ShopByPrice = ({ Price }) => {
       <div className="pt-[53px]">
         <div className="container">
           <div>
-            <h2 className="font-DMsans font-bold text-primaryFontColor text-xl">
+            <h2 className="font-DMsans font-bold text-primaryFontColor text-lg md:text-xl">
               Shop by Price
             </h2>
           </div>
@@ -18,7 +18,7 @@ const ShopByPrice = ({ Price }) => {
               >
                 <h2
                   key={item.id}
-                  className="my-7 text-base font-DMsans font-normal text-secondaryFontColor"
+                  className="my-7 text-sm md:text-base font-DMsans font-normal text-secondaryFontColor"
                 >
                   {item.Price}
                 </h2>

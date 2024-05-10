@@ -52,7 +52,11 @@ const ShopBottom = () => {
 
   return (
     <>
-      <Flex className={"gap-x-4 flex-wrap justify-between gap-y-8"}>
+      <Flex
+        className={
+          "gap-x-4 flex-wrap justify-center sm:justify-between mx-auto items-center gap-y-8"
+        }
+      >
         {status.payload === "LOADING" ? (
           <ProductLoading />
         ) : status.payload === "ERROR" ? (
@@ -67,7 +71,7 @@ const ShopBottom = () => {
                 className={` ${
                   gridLayout
                     ? "w-[100%] flex flex-row h-full justify-between items-center"
-                    : "w-[285px]"
+                    : "w-[245px] sm:w-[285px]"
                 }`}
                 productTitle={productItem.title}
                 productDes={productItem.description}
@@ -90,7 +94,7 @@ const ShopBottom = () => {
       </Flex>
 
       <Flex
-        className={`"justify-between items-center" ${
+        className={`pl-8 sm:pl-0 justify-between flex-col gap-y-5 md:gap-y-0 sm:flex-row items-center ${
           status.payload == "ERROR" ? "hidden" : "flex justify-between pt-12"
         }`}
       >

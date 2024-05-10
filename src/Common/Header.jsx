@@ -266,7 +266,7 @@ const Header = () => {
                   </span>
                 </div>
                 {openUser ? (
-                  <div className="bg-white absolute top-[54px] left-[-121px] z-30">
+                  <div className="bg-[#e2e2e2] absolute top-[54px] left-[-121px] z-30">
                     <ul className="flex flex-col items-center">
                       <li className="py-3 sm:py-4 px-10 sm:px-14 bg-primaryFontColor cursor-pointer hover:bg-[#333]">
                         <Link className="whitespace-nowrap text-xs sm:text-sm font-DMsans font-bold text-white">
@@ -274,7 +274,7 @@ const Header = () => {
                         </Link>
                       </li>
                       <li className="py-3 sm:py-4 px-10 sm:px-14 cursor-pointer flex items-center gap-x-2">
-                        <Link className="text-xs sm:text-sm font-DMsans font-normal text-primaryFontColor bg-white">
+                        <Link className="text-xs sm:text-sm font-DMsans font-normal text-primaryFontColor">
                           Log Out
                         </Link>
                         <span>

@@ -23,7 +23,7 @@ const ShopCategories = ({ categoriesData, categoriesTitle }) => {
       <div className="w-full">
         <div className="container">
           <div>
-            <h2 className="text-xl font-DMsans font-bold text-primaryFontColor pb-9">
+            <h2 className="text-lg md:text-xl font-DMsans font-bold text-primaryFontColor pb-9">
               {categoriesTitle ? categoriesTitle : null}
             </h2>
           </div>
@@ -38,7 +38,7 @@ const ShopCategories = ({ categoriesData, categoriesTitle }) => {
                   >
                     <h4
                       key={item.id}
-                      className="text-base font-DMsans font-normal text-secondaryFontColor py-5"
+                      className="text-sm md:text-base font-DMsans font-normal text-secondaryFontColor py-5"
                     >
                       {item.title}
                     </h4>
@@ -53,7 +53,7 @@ const ShopCategories = ({ categoriesData, categoriesTitle }) => {
                       item.subcategories.map((subitem) => (
                         <h2
                           key={subitem.id}
-                          className=" pl-2 text-base font-DMsans font-normal text-secondaryFontColor py-2 cursor-pointer border-b-2 border-white hover:text-red-700"
+                          className=" pl-2 text-sm md:text-base font-DMsans font-normal text-secondaryFontColor py-2 cursor-pointer border-b-2 border-white hover:text-red-700"
                         >
                           {subitem.title}
                         </h2>

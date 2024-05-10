@@ -19,7 +19,7 @@ const Card = ({
   return (
     <>
       <div
-        className={`cursor-pointer h-[302px]  ${
+        className={`cursor-pointer h-[302px]   ${
           layout ? "bg-[#f1f1f1] pr-3" : null
         }  ${className}`}
       >
@@ -30,7 +30,7 @@ const Card = ({
             src={img ? img : productImg}
             alt={img}
             className={`h-[220px] sm:h-[220px]   ${
-              layout ? "w-[330px]" : "w-full"
+              layout ? "w-[255px] md:w-[330px]" : "w-full"
             }`}
           />
 
@@ -63,7 +63,7 @@ const Card = ({
         <div
           className={`flex justify-between pt-6 sm:pt-3 sm:flex-row sm:items-start lg:flex-row  ${
             layout
-              ? "lg:flex-col lg:items-start md:pt-0 gap-y-4"
+              ? "sm:flex-col lg:flex-col lg:items-start md:pt-0 gap-y-4"
               : "lg:flex-row lg:items-center md:pt-6 gap-y-0"
           }`}
         >
@@ -71,7 +71,7 @@ const Card = ({
             {productTitle ? productTitle : "Basic Crew Neck Tee"}
           </h3>
           {layout ? (
-            <p className="w-[500px] text-ellipsis whitespace-wrap overflow-hidden">
+            <p className="w-[300px] md:w-[500px] text-ellipsis whitespace-wrap overflow-hidden">
               {productDes}
             </p>
           ) : null}

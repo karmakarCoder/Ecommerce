@@ -17,7 +17,7 @@ const ColorCategories = ({ className, title, colorData }) => {
         <div className="container">
           <div onClick={HandleColor}>
             <FLex className="items-center justify-between cursor-pointer mb-8">
-              <h2 className="text-xl font-DMsans font-bold text-primaryFontColor">
+              <h2 className="text-lg md:text-xl font-DMsans font-bold text-primaryFontColor">
                 {title ? title : "!wrong"}
               </h2>
               <span className="text-xl">
@@ -42,7 +42,7 @@ const ColorCategories = ({ className, title, colorData }) => {
                       className="w-3 h-3 bg-black rounded-full "
                       style={{ background: `${item.colorCode}` }}
                     ></div>
-                    <h5 className="text-base font-DMsans font-normal text-secondaryFontColor">
+                    <h5 className="text-sm md:text-base font-DMsans font-normal text-secondaryFontColor">
                       {item.title}
                     </h5>
                   </Flex>
