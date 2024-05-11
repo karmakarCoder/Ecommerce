@@ -6,7 +6,10 @@ const ProductLoading = () => {
   return (
     <Flex className={"flex-wrap gap-x-4 gap-y-4"}>
       {loadingProductData.map((item) => (
-        <div className="relative w-[270px]" key={item.id}>
+        <div
+          className="relative w-[270px] md:w-[220px] lg:w-[270px]"
+          key={item.id}
+        >
           <div className="bg-[#bebebe] animate-pulse  h-[190px]">
             <div className="absolute top-4 left-4 w-16 h-5 rounded-2xl bg-[#dddcdc] "></div>
           </div>

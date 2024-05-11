@@ -24,13 +24,13 @@ const Card = ({
         }  ${className}`}
       >
         <div className="group relative overflow-hidden">
-          <div className="absolute top-5 left-5">{badge}</div>
+          <div className="absolute top-5 left-5 w-[400px]">{badge}</div>
 
           <img
             src={img ? img : productImg}
             alt={img}
             className={`h-[220px] sm:h-[220px]   ${
-              layout ? "w-[255px] md:w-[330px]" : "w-full"
+              layout ? "w-[255px] md:w-[200px] lg:w-[330px]" : "w-full"
             }`}
           />
 
@@ -60,43 +60,45 @@ const Card = ({
           {/* =================Overlay================= */}
         </div>
 
-        <div
-          className={`flex justify-between pt-6 sm:pt-3 sm:flex-row sm:items-start lg:flex-row  ${
-            layout
-              ? "sm:flex-col lg:flex-col lg:items-start md:pt-0 gap-y-4"
-              : "lg:flex-row lg:items-center md:pt-6 gap-y-0"
-          }`}
-        >
-          <h3 className="text-ellipsis whitespace-nowrap overflow-hidden text-primaryFontColor font-DMsans font-semibold text-sm sm:text-base md:text-xl">
-            {productTitle ? productTitle : "Basic Crew Neck Tee"}
-          </h3>
-          {layout ? (
-            <p className="w-[300px] md:w-[500px] text-ellipsis whitespace-wrap overflow-hidden">
-              {productDes}
-            </p>
-          ) : null}
+        <div>
+          <div
+            className={`flex justify-between pt-6 sm:pt-3 sm:flex-row sm:items-start lg:flex-row  ${
+              layout
+                ? "sm:flex-col lg:flex-col lg:items-start md:pt-0 gap-y-4"
+                : "lg:flex-row lg:items-center md:pt-6 gap-y-0"
+            }`}
+          >
+            <h3 className="text-ellipsis whitespace-nowrap overflow-hidden text-primaryFontColor font-DMsans font-semibold text-sm sm:text-base md:text-xl">
+              {productTitle ? productTitle : "Basic Crew Neck Tee"}
+            </h3>
+            {layout ? (
+              <p className="w-[300px] md:w-[237px] lg:w-[500px]  text-ellipsis whitespace-wrap overflow-hidden">
+                {productDes}
+              </p>
+            ) : null}
 
-          <div className="flex items-center gap-x-2">
-            <p className="text-sm font-DMsans font-normal text-thirdFontColor sm:text-sm line-through md:text-">
-              {discountPrice ? discountPrice : null}
-            </p>
-            <p className="text-sm font-DMsans font-normal text-thirdFontColor sm:text-sm md:text-base">
-              {price ? price : "$44.00"}
-            </p>
+            <div className="flex items-center gap-x-2">
+              <p className="text-sm font-DMsans font-normal text-thirdFontColor sm:text-sm line-through md:text-">
+                {discountPrice ? discountPrice : null}
+              </p>
+              <p className="text-sm font-DMsans font-normal text-thirdFontColor sm:text-sm md:text-base">
+                {price ? price : "$44.00"}
+              </p>
+            </div>
           </div>
+          <span className="text-thirdFontColor font-DMsans font-normal text-xs pt-3 sm:text-sm md:text-base items-center flex gap-x-1 md:leading-[0]">
+            <span>
+              <FaStar className="text-yellow-500" />
+            </span>
+            {rating ? rating : null}
+          </span>
         </div>
+
         {colorVariant && (
           <span className="text-thirdFontColor font-DMsans font-normal text-xs pt-3 sm:text-sm md:text-base">
             Black
           </span>
         )}
-
-        <span className="text-thirdFontColor font-DMsans font-normal text-xs pt-3 sm:text-sm md:text-base items-center flex gap-x-1 md:leading-[0]">
-          <span>
-            <FaStar className="text-yellow-500" />
-          </span>
-          {rating ? rating : null}
-        </span>
       </div>
     </>
   );

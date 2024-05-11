@@ -70,8 +70,8 @@ const ShopBottom = () => {
                 layout={gridLayout}
                 className={` ${
                   gridLayout
-                    ? "w-[100%] flex flex-row h-full justify-between items-center"
-                    : "w-[245px] sm:w-[285px]"
+                    ? "w-[100%] flex flex-row h-full gap-x-3 items-center"
+                    : "w-[245px] sm:w-[285px] md:w-[228px] lg:w-[285px]"
                 }`}
                 productTitle={productItem.title}
                 productDes={productItem.description}
