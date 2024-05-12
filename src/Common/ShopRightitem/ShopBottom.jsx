@@ -8,17 +8,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchData } from "../../Redux/Slice/ProductSlice/ProductSlice";
 import ProductLoading from "../ProductLoading/ProductLoading";
 import Error from "../Error";
-import { FaStar } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const ShopBottom = () => {
   const [allProducts, setallProducts] = useState([]);
+
   const [page, setpage] = useState(1);
   const pageValue = useContext(shopRightPageContext);
   const dispatch = useDispatch();
   const { showPage, gridLayout } = pageValue;
 
   useEffect(() => {
-    dispatch(fetchData());
+    dispatch(fetchData("https://dummyjson.com/products"));
   }, []);
 
   const { data, status } = useSelector((state) => state.allProduct);
@@ -65,30 +66,35 @@ const ShopBottom = () => {
           allProducts
             ?.slice(page * showPage - showPage, page * showPage)
             .map((productItem) => (
-              <ProductCard
+              <Link
                 key={productItem.id}
-                layout={gridLayout}
-                className={` ${
-                  gridLayout
-                    ? "w-[100%] flex flex-row h-full gap-x-3 items-center"
-                    : "w-[245px] sm:w-[285px] md:w-[228px] lg:w-[285px]"
-                }`}
-                productTitle={productItem.title}
-                productDes={productItem.description}
-                img={productItem.thumbnail}
-                badge={
-                  productItem.discountPercentage ? (
-                    <Button className={"py-[7px] px-6"}>
-                      {productItem.stock === 0
-                        ? "Stock out"
-                        : "-" + " $ " + productItem.discountPercentage}
-                    </Button>
-                  ) : null
-                }
-                price={`$${productItem.price - productItem.discountPercentage}`}
-                rating={productItem.rating}
-                discountPrice={productItem.price}
-              />
+                to={`/product-details/${productItem.id}`}
+              >
+                <ProductCard
+                  key={productItem.id}
+                  layout={gridLayout}
+                  className={` ${
+                    gridLayout
+                      ? "w-[100%] flex flex-row h-full gap-x-3 items-center"
+                      : "w-[245px] sm:w-[285px] md:w-[228px] lg:w-[285px]"
+                  }`}
+                  productTitle={productItem.title}
+                  productDes={productItem.description}
+                  img={productItem.thumbnail}
+                  badge={
+                    productItem.discountPercentage ? (
+                      <Button className={"py-[7px] px-6"}>
+                        {productItem.stock === 0
+                          ? "Stock out"
+                          : "-" + " $ " + productItem.discountPercentage}
+                      </Button>
+                    ) : null
+                  }
+                  price={`$${productItem.price - productItem.discountPercentage}`}
+                  rating={productItem.rating}
+                  discountPrice={productItem.price}
+                />
+              </Link>
             ))
         )}
       </Flex>

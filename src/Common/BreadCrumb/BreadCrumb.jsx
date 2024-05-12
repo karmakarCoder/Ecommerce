@@ -27,8 +27,8 @@ const BreadCrumb = () => {
               <li key={path}>
                 {islast ? (
                   <Link
-                    className={`text-xs font-DMsans font-normal text-secondaryFontColor capitalize ${
-                      islast ? "text-red-500 font-extrabold" : null
+                    className={`text-xs font-DMsans flex gap-x-2 items-center font-normal text-secondaryFontColor capitalize ${
+                      islast ? "text-green-800 font-extrabold" : null
                     }`}
                   >
                     {path}
@@ -36,11 +36,12 @@ const BreadCrumb = () => {
                 ) : (
                   <Link
                     to={`/${BreadCrumbList}`}
-                    className={`text-xs font-DMsans font-normal text-secondaryFontColor capitalize ${
+                    className={`text-xs font-DMsans flex items-center gap-x-1 font-normal text-secondaryFontColor capitalize ${
                       islast ? "text-[#000] font-extrabold" : null
                     }`}
                   >
                     {path}
+                    <MdOutlineArrowRight className="text-lg text-secondaryFontColor" />
                   </Link>
                 )}
               </li>

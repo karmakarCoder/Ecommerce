@@ -6,7 +6,6 @@ export const shopRightPageContext = createContext();
 const ShopRight = ({ className }) => {
   const [showPage, setshowPage] = useState(9);
   const [gridLayout, setgridLayout] = useState(false);
-  console.log(gridLayout);
 
   const onChangeLayout = () => {
     setgridLayout(!gridLayout);
