@@ -12,7 +12,6 @@ import { Link } from "react-router-dom";
 
 const ShopBottom = () => {
   const [allProducts, setallProducts] = useState([]);
-
   const [page, setpage] = useState(1);
   const pageValue = useContext(shopRightPageContext);
   const dispatch = useDispatch();
@@ -29,18 +28,6 @@ const ShopBottom = () => {
       setallProducts(data.payload);
     }
   }, [status.payload, data.payload]);
-
-  // useEffect(() => {
-  //   const Datafetcher = async () => {
-  //     const allData = await axios.get("https://dummyjson.com/products");
-  //     setallProducts(allData.data.products);
-
-  //     // set data on redux
-  //     dispatch(setProduct(allData.data.products));
-  //   };
-
-  //   Datafetcher();
-  // }, []);
 
   const HandlePagination = (pageNumber) => {
     if (
@@ -139,11 +126,11 @@ const ShopBottom = () => {
         </ul>
         <div>
           <p className="font-DMsans text-sm font-normal text-secondaryFontColor">
-            Products from{" "}
+            Products from
             {page == 1
               ? page * showPage - showPage + 1
-              : page * showPage - showPage}{" "}
-            to{" "}
+              : page * showPage - showPage}
+            to
             {page === Math.floor(allProducts.length / showPage) + 1
               ? allProducts.length
               : page * showPage}

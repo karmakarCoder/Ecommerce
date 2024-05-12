@@ -7,13 +7,12 @@ const Products = () => {
   const dispatch = useDispatch();
   const [EachProduct, setEachProduct] = useState();
 
-  console.log(EachProduct);
-
   useEffect(() => {
     dispatch(fetchData("https://dummyjson.com/products/1"));
   }, []);
 
   const { data, status } = useSelector((state) => state.allProduct);
+  console.log(data);
 
   useEffect(() => {
     if (status.payload === "IDLE") {

@@ -32,8 +32,8 @@ export const fetchData = (ApiData) => {
       dispatch(setStatus(apiStatus.LOADING));
       const response = await fetch(ApiData);
       const data = await response.json();
-      const allProduct = data.products;
-
+      const allProduct = await data;
+      console.log(allProduct);
       dispatch(setProduct(allProduct));
       dispatch(setStatus(apiStatus.IDLE));
     } catch (error) {
