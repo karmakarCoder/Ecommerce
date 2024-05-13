@@ -1,22 +1,23 @@
 import React, { useEffect, useState } from "react";
 import BreadCrumb from "../../Common/BreadCrumb/BreadCrumb";
-import { fetchData } from "../../Redux/Slice/ProductSlice/ProductSlice";
+import ProductImg from "../../ProductDetailsComponent/ProductImg";
 import { useSelector, useDispatch } from "react-redux";
+import { fetchData } from "../../Redux/Slice/ProductSlice/ProductSlice";
 
-const Products = () => {
+const ProductsDetails = () => {
+  const [product, setproduct] = useState();
+  console.log(product);
   const dispatch = useDispatch();
-  const [EachProduct, setEachProduct] = useState();
-
   useEffect(() => {
     dispatch(fetchData("https://dummyjson.com/products/1"));
   }, []);
 
   const { data, status } = useSelector((state) => state.allProduct);
-  console.log(data);
+  console.log(status);
 
   useEffect(() => {
     if (status.payload === "IDLE") {
-      setEachProduct(data.payload);
+      setproduct(data.payload);
     }
   }, [status.payload, data.payload]);
 
@@ -29,9 +30,7 @@ const Products = () => {
           </div>
 
           <div>
-            <picture>
-              <img src="" alt="" />
-            </picture>
+            <ProductImg data={product.images && product.images} />
           </div>
         </div>
       </div>
@@ -39,4 +38,4 @@ const Products = () => {
   );
 };
 
-export default Products;
+export default ProductsDetails;

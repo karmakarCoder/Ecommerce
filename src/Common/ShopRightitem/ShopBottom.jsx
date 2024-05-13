@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 
 const ShopBottom = () => {
   const [allProducts, setallProducts] = useState([]);
+
   const [page, setpage] = useState(1);
   const pageValue = useContext(shopRightPageContext);
   const dispatch = useDispatch();
@@ -25,7 +26,7 @@ const ShopBottom = () => {
 
   useEffect(() => {
     if (status.payload === "IDLE") {
-      setallProducts(data.payload);
+      setallProducts(data.payload.products);
     }
   }, [status.payload, data.payload]);
 

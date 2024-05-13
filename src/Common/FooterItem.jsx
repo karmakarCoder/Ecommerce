@@ -8,7 +8,10 @@ const FooterItem = ({ allitem = ["1", "2", "3"], title }) => {
           {title}
         </p>
         {allitem.map((item) => (
-          <li className="text-[#6D6D6D] font-DMsans font-normal text-sm pb-[6px] hover:underline">
+          <li
+            key={item.id}
+            className="text-[#6D6D6D] font-DMsans font-normal text-sm pb-[6px] hover:underline"
+          >
             <a href="#">{item}</a>
           </li>
         ))}
