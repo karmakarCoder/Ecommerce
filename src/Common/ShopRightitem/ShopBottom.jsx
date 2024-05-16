@@ -12,23 +12,23 @@ import { Link } from "react-router-dom";
 
 const ShopBottom = () => {
   const [allProducts, setallProducts] = useState([]);
-
   const [page, setpage] = useState(1);
   const pageValue = useContext(shopRightPageContext);
+
   const dispatch = useDispatch();
   const { showPage, gridLayout } = pageValue;
+
+  const { data, status } = useSelector((state) => state.allProduct);
 
   useEffect(() => {
     dispatch(fetchData("https://dummyjson.com/products"));
   }, []);
 
-  const { data, status } = useSelector((state) => state.allProduct);
-
   useEffect(() => {
     if (status.payload === "IDLE") {
       setallProducts(data.payload.products);
     }
-  }, [status.payload, data.payload]);
+  }, [status, data]);
 
   const HandlePagination = (pageNumber) => {
     if (

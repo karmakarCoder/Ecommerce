@@ -1,25 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import BreadCrumb from "../../Common/BreadCrumb/BreadCrumb";
 import ProductImg from "../../ProductDetailsComponent/ProductImg";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchData } from "../../Redux/Slice/ProductSlice/ProductSlice";
-
+export const imgContext = createContext();
 const ProductsDetails = () => {
-  const [product, setproduct] = useState();
-  console.log(product);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchData("https://dummyjson.com/products/1"));
-  }, []);
-
+  const [EachProduct, setEachProduct] = useState({});
+  const dispath = useDispatch();
   const { data, status } = useSelector((state) => state.allProduct);
-  console.log(status);
-
+  console.log(data);
   useEffect(() => {
     if (status.payload === "IDLE") {
-      setproduct(data.payload);
+      setEachProduct(data.payload);
     }
-  }, [status.payload, data.payload]);
+  }, [status, data]);
+  useEffect(() => {
+    dispath(fetchData("https://dummyjson.com/products/1"));
+  }, []);
 
   return (
     <>
@@ -30,7 +27,9 @@ const ProductsDetails = () => {
           </div>
 
           <div>
-            <ProductImg data={product.images && product.images} />
+            <imgContext.Provider value={EachProduct}>
+              <ProductImg />
+            </imgContext.Provider>
           </div>
         </div>
       </div>
