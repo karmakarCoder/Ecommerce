@@ -1,6 +1,5 @@
 import React from "react";
 import { FaSearch } from "react-icons/fa";
-
 const Search = ({ className, placeholder }) => {
   return (
     <>

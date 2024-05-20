@@ -4,32 +4,29 @@ import Flex from "../Flex";
 import Button from "../Button";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { shopRightPageContext } from "../../ShopComponent/ShopRight";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchData } from "../../Redux/Slice/ProductSlice/ProductSlice";
+import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+
 import ProductLoading from "../ProductLoading/ProductLoading";
 import Error from "../Error";
-import { Link } from "react-router-dom";
-
 const ShopBottom = () => {
   const [allProducts, setallProducts] = useState([]);
   const [page, setpage] = useState(1);
   const pageValue = useContext(shopRightPageContext);
-
-  const dispatch = useDispatch();
   const { showPage, gridLayout } = pageValue;
+  const dispatch = useDispatch();
 
-  const { data, status } = useSelector((state) => state.allProduct);
+  // Data fetching
+  // useEffect(() => {
+  //   const dataFetch = async () => {
+  //     const response = await axios.get("https://dummyjson.com/products");
+  //     const data = await response.data.products;
+  //     setallProducts(data);
+  //   };
+  //   dataFetch();
+  // }, []);
 
-  useEffect(() => {
-    dispatch(fetchData("https://dummyjson.com/products"));
-  }, []);
-
-  useEffect(() => {
-    if (status.payload === "IDLE") {
-      setallProducts(data.payload.products);
-    }
-  }, [status, data]);
-
+  // pagination functionality
   const HandlePagination = (pageNumber) => {
     if (
       pageNumber > 0 &&
@@ -41,56 +38,59 @@ const ShopBottom = () => {
 
   return (
     <>
-      <Flex
-        className={
-          "gap-x-4 flex-wrap justify-center sm:justify-between mx-auto items-center gap-y-8"
-        }
-      >
-        {status.payload === "LOADING" ? (
-          <ProductLoading />
-        ) : status.payload === "ERROR" ? (
-          <Error />
-        ) : (
-          allProducts
-            ?.slice(page * showPage - showPage, page * showPage)
-            .map((productItem) => (
-              <Link
-                key={productItem.id}
-                to={`/product-details/${productItem.id}`}
-              >
-                <ProductCard
-                  key={productItem.id}
-                  layout={gridLayout}
-                  className={` ${
-                    gridLayout
-                      ? "w-[100%] flex flex-row h-full gap-x-3 items-center"
-                      : "w-[245px] sm:w-[285px] md:w-[228px] lg:w-[285px]"
-                  }`}
-                  productTitle={productItem.title}
-                  productDes={productItem.description}
-                  img={productItem.thumbnail}
-                  badge={
-                    productItem.discountPercentage ? (
-                      <Button className={"py-[7px] px-6"}>
-                        {productItem.stock === 0
-                          ? "Stock out"
-                          : "-" + " $ " + productItem.discountPercentage}
-                      </Button>
-                    ) : null
-                  }
-                  price={`$${productItem.price - productItem.discountPercentage}`}
-                  rating={productItem.rating}
-                  discountPrice={productItem.price}
-                />
-              </Link>
-            ))
-        )}
-      </Flex>
+      {status.payload == "LOADING" ? (
+        <ProductLoading />
+      ) : status.payload == "ERROR" ? (
+        <Error />
+      ) : (
+        allProducts && (
+          <div>
+            <Flex
+              className={
+                "gap-x-4 flex-wrap justify-center sm:justify-between mx-auto items-center gap-y-8"
+              }
+            >
+              {allProducts
+                ?.slice(page * showPage - showPage, page * showPage)
+                .map((productItem) => (
+                  <Link
+                    key={productItem.id}
+                    to={`/product-details/${productItem.id}`}
+                  >
+                    <ProductCard
+                      key={productItem.id}
+                      layout={gridLayout}
+                      className={` ${
+                        gridLayout
+                          ? "w-[100%] flex flex-row h-full gap-x-3 items-center"
+                          : "w-[245px] sm:w-[285px] md:w-[228px] lg:w-[285px]"
+                      }`}
+                      productTitle={productItem.title}
+                      productDes={productItem.description}
+                      img={productItem.thumbnail}
+                      badge={
+                        productItem.discountPercentage ? (
+                          <Button className={"py-[7px] px-6"}>
+                            {productItem.stock === 0
+                              ? "Stock out"
+                              : "-" + " $ " + productItem.discountPercentage}
+                          </Button>
+                        ) : null
+                      }
+                      price={`$${productItem.price - productItem.discountPercentage}`}
+                      rating={productItem.rating}
+                      discountPrice={productItem.price}
+                    />
+                  </Link>
+                ))}
+            </Flex>
+          </div>
+        )
+      )}
 
       <Flex
-        className={`pl-8 sm:pl-0 justify-between flex-col gap-y-5 md:gap-y-0 sm:flex-row items-center ${
-          status.payload == "ERROR" ? "hidden" : "flex justify-between pt-12"
-        }`}
+        className={`pl-8 sm:pl-0 justify-between flex-col gap-y-5 md:gap-y-0 sm:flex-row items-center flex pt-12
+        `}
       >
         <ul className="flex items-center gap-x-3">
           <li
@@ -128,7 +128,7 @@ const ShopBottom = () => {
         <div>
           <p className="font-DMsans text-sm font-normal text-secondaryFontColor">
             Products from
-            {page == 1
+            {page === 1
               ? page * showPage - showPage + 1
               : page * showPage - showPage}
             to

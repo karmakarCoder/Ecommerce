@@ -2,7 +2,7 @@ import React from "react";
 // ======== All Pages ===========
 import Home from "./Pages/Home/Home";
 import Shop from "./Pages/Shop/Shop";
-import ProductsDetails from "./Pages/ProductDetails/ProductsDetails";
+import ProductDetails from "./Pages/ProductDetails/ProductDetails";
 
 // ==============================
 import RootLayout from "./Common/RootLayout/RootLayout";
@@ -19,8 +19,8 @@ const router = createBrowserRouter(
       <Route index element={<Home />}></Route>
       <Route path="/shop" element={<Shop />}></Route>
       <Route
-        path="/product-details/:product"
-        element={<ProductsDetails />}
+        path="/product-details/:productID"
+        element={<ProductDetails />}
       ></Route>
     </Route>
   )
