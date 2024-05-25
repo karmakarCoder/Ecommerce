@@ -1,16 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import BreadCrumb from "../../Common/BreadCrumb/BreadCrumb";
 import Shopleft from "../../ShopComponent/Shopleft";
 import ShopRight from "../../ShopComponent/ShopRight";
-import { fetchUserById } from "../../Redux/Slice";
-import { useDispatch } from "react-redux";
 
 const Shop = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchUserById());
-  });
   return (
     <>
       <div className="px-4">

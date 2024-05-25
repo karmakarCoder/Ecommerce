@@ -1,3 +1,6 @@
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
+
 const apiStatus = {
   IDLE: "IDLE",
   LOADING: "LOADING",
@@ -9,36 +12,33 @@ const initialState = {
   status: apiStatus.IDLE,
 };
 
-export const Slice = createSlice({
-  name: "Slice",
+// First, create the thunk
+export const fetchProduct = createAsyncThunk(
+  "allProductsData",
+  async (apiUrl) => {
+    const response = await axios.get(apiUrl);
+    return response.data;
+  }
+);
+
+const productSlice = createSlice({
+  name: "product",
   initialState,
-  reducers: {
-    setProducts: (state, payload) => {
-      state.data = payload;
-    },
-    setStatus: (state, payload) => {
-      state.status = payload;
-    },
+  reducers: {},
+  extraReducers: (builder) => {
+    // Add reducers for additional action types here, and handle loading state as needed
+    builder.addCase(fetchProduct.pending, (state, action) => {
+      // Add user to the state array
+      state.status = apiStatus.LOADING;
+    });
+    builder.addCase(fetchProduct.fulfilled, (state, action) => {
+      state.data = action.payload;
+      state.status = apiStatus.IDLE;
+    });
+    builder.addCase(fetchProduct.rejected, (state, action) => {
+      state.status = apiStatus.ERROR;
+    });
   },
 });
 
-// thunk function
-
-export const fetcherData = (api) => {
-  return async function getData(dispath, getState) {
-    try {
-      dispath(setStatus(apiStatus.LOADING));
-      const response = await fetch(api);
-      const data = await response.json();
-      dispath(setProducts(data));
-      dispath(setStatus(apiStatus.IDLE));
-    } catch (error) {
-      console.log(error);
-      dispath(setStatus(apiStatus.ERROR));
-    }
-  };
-};
-
-// Action creators are generated for each case reducer function
-export const { setProducts, setStatus } = Slice.actions;
-export default Slice.reducer;
+export default productSlice.reducer;
