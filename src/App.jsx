@@ -1,9 +1,12 @@
-import React from "react";
+// Toastify
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 // ======== All Pages ===========
 import Home from "./Pages/Home/Home";
 import Shop from "./Pages/Shop/Shop";
 import ProductDetails from "./Pages/ProductDetails/ProductDetails";
-
+import Registration from "./Pages/Registration/Registration";
+import Cart from "./Pages/Cart/Cart";
 // ==============================
 import RootLayout from "./Common/RootLayout/RootLayout";
 import {
@@ -22,15 +25,20 @@ const router = createBrowserRouter(
         path="/product-details/:productID"
         element={<ProductDetails />}
       ></Route>
+      <Route path="/registration" element={<Registration />}></Route>
+      <Route path="/cart" element={<Cart />}></Route>
     </Route>
   )
 );
 
 function App() {
   return (
-    <RouterProvider router={router}>
-      <Home />
-    </RouterProvider>
+    <>
+      <ToastContainer />
+      <RouterProvider router={router}>
+        <Home />
+      </RouterProvider>
+    </>
   );
 }
 

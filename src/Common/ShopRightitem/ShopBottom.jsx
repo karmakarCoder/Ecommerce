@@ -9,6 +9,7 @@ import ProductLoading from "../ProductLoading/ProductLoading";
 import Error from "../Error";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProduct } from "../../Redux/Slice";
+import axios from "axios";
 const ShopBottom = () => {
   const [allProducts, setallProducts] = useState([]);
   const [page, setpage] = useState(1);
@@ -18,16 +19,20 @@ const ShopBottom = () => {
 
   useEffect(() => {
     dispatch(fetchProduct("https://dummyjson.com/product"));
+    const getData = async () => {
+      const data = await axios.get("https://dummyjson.com/product");
+      setallProducts(data.data.products);
+    };
+    getData();
   }, []);
 
   const { data, status } = useSelector((state) => state.product);
-  console.log(status);
 
-  useEffect(() => {
-    if (status === "IDLE") {
-      setallProducts(data.products);
-    }
-  }, [data.products, status]);
+  // useEffect(() => {
+  //   if (status === "IDLE") {
+  //     // setallProducts(data.products);
+  //   }
+  // }, [data.products, status]);
 
   const HandlePagination = (pageNumber) => {
     if (
@@ -128,19 +133,21 @@ const ShopBottom = () => {
               <FaAngleRight />
             </li>
           </ul>
-          <div>
-            <p className="font-DMsans text-sm font-normal text-secondaryFontColor">
-              Products from
-              {page === 1
-                ? page * showPage - showPage + 1
-                : page * showPage - showPage}
-              to
-              {page === Math.floor(allProducts.length / showPage) + 1
-                ? allProducts.length
-                : page * showPage}
-              of {allProducts.length}
-            </p>
-          </div>
+          {status === "IDLE" && (
+            <div>
+              <p className="font-DMsans text-sm font-normal text-secondaryFontColor">
+                Products from
+                {page === 1
+                  ? page * showPage - showPage + 1
+                  : page * showPage - showPage}
+                to
+                {page === Math.floor(allProducts.length / showPage) + 1
+                  ? allProducts.length
+                  : page * showPage}
+                of {allProducts.length}
+              </p>
+            </div>
+          )}
         </Flex>
       </div>
     </>

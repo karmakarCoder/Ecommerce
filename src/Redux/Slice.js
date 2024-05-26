@@ -8,7 +8,7 @@ const apiStatus = {
 };
 
 const initialState = {
-  data: {},
+  data: [],
   status: apiStatus.IDLE,
 };
 
