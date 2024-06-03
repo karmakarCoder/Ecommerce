@@ -3,7 +3,6 @@ import Review from "./Review";
 import Description from "./Description";
 
 const Review_Description = ({ data }) => {
-  console.log(data.reviews);
   const [review, setreview] = useState(true);
   const [description, setdescription] = useState(false);
 
@@ -17,18 +16,18 @@ const Review_Description = ({ data }) => {
   };
   return (
     <>
-      <div className="py-28">
+      <div className="py-12 md:py-28">
         <div className="container">
           <div>
             <div className="flex items-center gap-x-16">
               <span
-                className={`text-xl font-DMsans  cursor-pointer ${description ? "text-primaryFontColor font-bold" : "text-secondaryFontColor font-normal"}`}
+                className={`text-sm md:text-xl font-DMsans  cursor-pointer ${description ? "text-primaryFontColor font-bold" : "text-secondaryFontColor font-normal"}`}
                 onClick={HandleDescription}
               >
                 Description
               </span>
               <span
-                className={`text-xl font-DMsans  cursor-pointer ${review ? "font-bold text-primaryFontColor" : "text-secondaryFontColor font-normal"}`}
+                className={`text-sm md:text-xl font-DMsans  cursor-pointer ${review ? "font-bold text-primaryFontColor" : "text-secondaryFontColor font-normal"}`}
                 onClick={HandleReview}
               >
                 Reviews({data.reviews && data.reviews.length})

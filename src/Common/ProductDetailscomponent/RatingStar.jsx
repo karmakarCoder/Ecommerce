@@ -22,8 +22,10 @@ const RatingStar = ({ rating, data, ratingNumber }) => {
 
   return (
     <>
-      <div className="flex items-center gap-x-5 py-4">
-        <div className="text-yellow-400 text-xl flex items-center">{star}</div>
+      <div className="flex items-center gap-x-5 py-2 md:py-4">
+        <div className="text-yellow-400 text-md md:text-xl flex items-center">
+          {star}
+        </div>
 
         {ratingNumber ? ratingNumber : null}
       </div>

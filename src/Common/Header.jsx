@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import logo from "../assets/logo.png";
 import { Link, NavLink } from "react-router-dom";
 import { HiBars2 } from "react-icons/hi2";
@@ -10,6 +10,10 @@ import { FaBars } from "react-icons/fa";
 import { RxCross2 } from "react-icons/rx";
 import { HiLogout } from "react-icons/hi";
 import Search from "../Common/Search";
+import { useSelector } from "react-redux";
+import { MdOutlineImageNotSupported } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
+import { TbShoppingCartX } from "react-icons/tb";
 
 const Header = () => {
   // ======== all state =========
@@ -17,6 +21,8 @@ const Header = () => {
   const [openNav, setopenNav] = useState(false);
   const [openUser, setopenUser] = useState(false);
   const [openCart, setopenCart] = useState(false);
+  const Menuref = useRef();
+  const navigate = useNavigate();
   // ============================
 
   // handleNav
@@ -51,13 +57,41 @@ const Header = () => {
     setopencategory(false);
   };
 
+  // HandleCroseCart
+
+  const HandleCroseCart = () => {
+    setopenCart(false);
+  };
+
+  useEffect(() => {
+    window.addEventListener("click", (e) => {
+      if (!Menuref.current.contains(e.target)) {
+        setopenUser(false);
+        setopencategory(false);
+      }
+    });
+  }, []);
+
+  // Data fetch
+
+  const { cartitem, totalCartitem, totalAmount } = useSelector(
+    (state) => state.cart
+  );
+
+  const HandleViewCart = () => {
+    navigate("cart");
+    setopenCart(false);
+  };
+
   return (
     <>
       <div className="bg-white px-4">
         <div className="container">
           <div className="relative flex items-center py-8 justify-between px-4 lg:px-0">
             <div>
-              <img src={logo} alt={logo} />
+              <NavLink to={"/"}>
+                <img src={logo} alt={logo} />
+              </NavLink>
             </div>
             <div className="m-auto hidden sm:block">
               <ul
@@ -67,8 +101,12 @@ const Header = () => {
                 <li>
                   <NavLink
                     to={"/"}
-                    className={
-                      "text-sm font-DMsans font-normal text-secondaryFontColor hover:text-primaryFontColor hover:font-bold transition-all"
+                    className={({ isActive, isPending }) =>
+                      isPending
+                        ? "text-sm font-DMsans font-normal text-secondaryFontColor hover:text-primaryFontColor hover:font-bold transition-all"
+                        : isActive
+                          ? "font-bold"
+                          : ""
                     }
                   >
                     Home
@@ -86,8 +124,12 @@ const Header = () => {
                 <li>
                   <NavLink
                     to={"/shop"}
-                    className={
-                      "text-sm font-DMsans font-normal text-secondaryFontColor hover:text-primaryFontColor hover:font-bold transition-all"
+                    className={({ isActive, isPending }) =>
+                      isPending
+                        ? "text-sm font-DMsans font-normal text-secondaryFontColor hover:text-primaryFontColor hover:font-bold transition-all"
+                        : isActive
+                          ? "font-bold"
+                          : ""
                     }
                   >
                     Shop
@@ -133,9 +175,11 @@ const Header = () => {
               >
                 <li>
                   <NavLink
+                    to={"/"}
                     className={
                       "text-sm font-DMsans font-normal text-secondaryFontColor hover:text-primaryFontColor hover:font-bold transition-all"
                     }
+                    onClick={() => setopenNav(false)}
                   >
                     Home
                   </NavLink>
@@ -155,6 +199,7 @@ const Header = () => {
                     className={
                       "text-sm font-DMsans font-normal text-secondaryFontColor hover:text-primaryFontColor hover:font-bold transition-all"
                     }
+                    onClick={() => setopenNav(false)}
                   >
                     Shop
                   </NavLink>
@@ -192,7 +237,7 @@ const Header = () => {
         </div>
       </div>
       {/* ============== Bottom ============= */}
-      <div className="bg-[#F5F5F3] px-4">
+      <div className="bg-[#F5F5F3] px-4" ref={Menuref}>
         <div className="container">
           <div className="flex items-center justify-between py-6">
             <div className="relative">
@@ -251,21 +296,21 @@ const Header = () => {
             </div>
             <div className="flex items-center gap-x-3 lg:gap-x-10">
               <div className="relative">
-                <div
-                  className="flex items-center gap-x-1 md:gap-x-2 cursor-pointer"
-                  onClick={HandleUser}
-                >
-                  <span>
-                    <FaUser className="text-lg" />
-                  </span>
-                  <span>
-                    {openUser ? (
-                      <MdArrowDropUp className="text-base sm:text-xl" />
-                    ) : (
-                      <IoMdArrowDropdown className="text-base sm:text-xl" />
-                    )}
-                  </span>
+                <div onClick={HandleUser}>
+                  <div className="flex items-center gap-x-1 md:gap-x-2 cursor-pointer">
+                    <span>
+                      <FaUser className="text-lg" />
+                    </span>
+                    <span>
+                      {openUser ? (
+                        <MdArrowDropUp className="text-base sm:text-xl" />
+                      ) : (
+                        <IoMdArrowDropdown className="text-base sm:text-xl" />
+                      )}
+                    </span>
+                  </div>
                 </div>
+
                 {openUser ? (
                   <div className="bg-[#e2e2e2] absolute top-[54px] left-[-121px] z-30">
                     <ul className="flex flex-col items-center">
@@ -294,48 +339,96 @@ const Header = () => {
                   ) : (
                     <FaShoppingCart className="text-lg sm:text-xl" />
                   )}
+                  {cartitem.length > 0 && (
+                    <div className="flex items-center justify-center text-primaryFontColor font-DMsans text-sm font-semibold w-3 h-3 rounded-full bg-red-500 absolute top-[-4px] right-[-10px]"></div>
+                  )}
                 </span>
-                {openCart && (
-                  <div className="bg-white shadow-md w-[320px] sm:w-[360px] absolute top-[58px] right-0 z-50">
-                    <div className="bg-[#F5F5F3] flex items-center justify-between py-5 px-5">
-                      <div className="w-20 h-20 bg-[#979797]"></div>
-                      <div className="flex flex-col gap-y-3">
-                        <p className="font-DMsans font-bold text-sm text-primaryFontColor">
-                          Black Smart Watch
-                        </p>
-                        <p className="font-DMsans font-bold text-sm text-primaryFontColor">
-                          $44.00
-                        </p>
+                {openCart &&
+                  (cartitem.length > 0 ? (
+                    <div className="bg-white  shadow-md w-[320px] sm:w-[360px] absolute top-[58px] right-0 z-50">
+                      <div className="h-[370px] overflow-y-scroll scrollbar-thumb-[#929292] scrollbar-track-white scrollbar-thin">
+                        {cartitem?.map((item) => (
+                          <div className=" flex flex-col gap-y-[5px] ">
+                            <div className="bg-[#F5F5F3] flex items-center justify-between py-5 px-5">
+                              <div className="w-20 h-20 bg-[#bdbcbc]">
+                                <img
+                                  src={
+                                    item.thumbnail ? (
+                                      item.thumbnail
+                                    ) : (
+                                      <MdOutlineImageNotSupported />
+                                    )
+                                  }
+                                  alt={
+                                    item.thumbnail ? (
+                                      item.thumbnail
+                                    ) : (
+                                      <MdOutlineImageNotSupported />
+                                    )
+                                  }
+                                  className="h-full w-full object-cover"
+                                />
+                              </div>
+                              <div className="flex flex-col gap-y-3">
+                                <p className="font-DMsans font-bold text-sm text-primaryFontColor w-[178px] overflow-hidden whitespace-nowrap text-ellipsis">
+                                  {item.title ? item.title : "Title"}
+                                </p>
+                                <p className="font-DMsans font-bold text-sm text-primaryFontColor">
+                                  $
+                                  {Math.round(
+                                    item.price ? item.price : "$0.00"
+                                  )}
+                                </p>
+                              </div>
+                              <div
+                                className="text-xl cursor-pointer"
+                                onClick={() => setopenCart(false)}
+                              >
+                                <span>
+                                  <RxCross2 />
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
                       </div>
-                      <div
-                        className="text-xl cursor-pointer"
-                        onClick={() => setopenCart(false)}
+
+                      <div className="px-5 py-5">
+                        <div>
+                          <p className="text-base font-DMsans font-normal text-secondaryFontColor">
+                            Subtotal:{" "}
+                            <span className="font-bold text-primaryFontColor">
+                              $44.00
+                            </span>
+                          </p>
+                        </div>
+                        <div className="flex items-center justify-between pt-3">
+                          <button
+                            className="font-DMsans font-bold text-xs sm:text-sm text-primaryFontColor py-3 px-7 sm:px-10 border-2 border-primaryFontColor hover:bg-primaryFontColor hover:text-white transition-all"
+                            onClick={HandleViewCart}
+                          >
+                            View Cart
+                          </button>
+                          <button className="font-DMsans font-bold text-xs sm:text-sm text-primaryFontColor py-3 px-7 sm:px-10 border-2 border-primaryFontColor hover:bg-primaryFontColor hover:text-white transition-all">
+                            Checkout
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className=" flex items-center justify-center flex-col border-2 border-[#00000063] shadow-md absolute h-[300px] bg-[#e0dfdf] w-[250px] z-20 right-0 top-[58px]">
+                      <span
+                        className="absolute top-3 left-4 cursor-pointer"
+                        onClick={HandleCroseCart}
                       >
-                        <span>
-                          <RxCross2 />
-                        </span>
-                      </div>
+                        <RxCross2 className="text-2xl hover:scale-110 transition-all" />
+                      </span>
+                      <p className="opacity-80 text-primaryFontColor font-medium text-base font-DMsans capitalize">
+                        No product here
+                      </p>
+                      <TbShoppingCartX className="text-4xl text-primaryFontColor opacity-80" />
                     </div>
-                    <div className="px-5 py-5">
-                      <div>
-                        <p className="text-base font-DMsans font-normal text-secondaryFontColor">
-                          Subtotal:{" "}
-                          <span className="font-bold text-primaryFontColor">
-                            $44.00
-                          </span>
-                        </p>
-                      </div>
-                      <div className="flex items-center justify-between pt-3">
-                        <button className="font-DMsans font-bold text-xs sm:text-sm text-primaryFontColor py-3 px-7 sm:px-10 border-2 border-primaryFontColor hover:bg-primaryFontColor hover:text-white transition-all">
-                          View Cart
-                        </button>
-                        <button className="font-DMsans font-bold text-xs sm:text-sm text-primaryFontColor py-3 px-7 sm:px-10 border-2 border-primaryFontColor hover:bg-primaryFontColor hover:text-white transition-all">
-                          Checkout
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                )}
+                  ))}
               </div>
             </div>
           </div>

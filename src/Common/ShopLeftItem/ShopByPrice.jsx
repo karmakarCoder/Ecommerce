@@ -3,7 +3,7 @@ import React from "react";
 const ShopByPrice = ({ Price }) => {
   return (
     <>
-      <div className="pt-[53px]">
+      <div className="pt-[10px] md:pt-[53px]">
         <div className="container">
           <div>
             <h2 className="font-DMsans font-bold text-primaryFontColor text-lg md:text-xl">
@@ -18,7 +18,7 @@ const ShopByPrice = ({ Price }) => {
               >
                 <h2
                   key={item.id}
-                  className="my-7 text-sm md:text-base font-DMsans font-normal text-secondaryFontColor"
+                  className="my-4 md:my-7 text-sm md:text-base font-DMsans font-normal text-secondaryFontColor"
                 >
                   {item.Price}
                 </h2>

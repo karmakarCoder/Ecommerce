@@ -16,7 +16,7 @@ const ShopbyBrand = ({ brandData }) => {
       <div>
         <div className="container">
           <div
-            className="flex items-center justify-between cursor-pointer mb-8"
+            className="flex items-center justify-between cursor-pointer mb-3 md:mb-8"
             onClick={HandleBrand}
           >
             <h2 className="font-DMsans font-bold text-lg md:text-xl text-primaryFontColor">

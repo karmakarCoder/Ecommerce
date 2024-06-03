@@ -5,7 +5,7 @@ const Description = ({ data }) => {
   return (
     <>
       <div className="pt-10">
-        <p className="font-DMsans font-normal text-secondaryFontColor text-xl max-w-[900px]">
+        <p className="font-DMsans font-normal text-secondaryFontColor text-base md:text-xl max-w-[900px]">
           {data.description}
         </p>
       </div>

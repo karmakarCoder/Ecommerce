@@ -16,7 +16,7 @@ const ColorCategories = ({ className, title, colorData }) => {
       <div className={className}>
         <div className="container">
           <div onClick={HandleColor}>
-            <FLex className="items-center justify-between cursor-pointer mb-8">
+            <FLex className="items-center justify-between cursor-pointer mb-3 md:mb-8">
               <h2 className="text-lg md:text-xl font-DMsans font-bold text-primaryFontColor">
                 {title ? title : "!wrong"}
               </h2>

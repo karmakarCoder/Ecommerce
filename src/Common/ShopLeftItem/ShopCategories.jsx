@@ -23,7 +23,7 @@ const ShopCategories = ({ categoriesData, categoriesTitle }) => {
       <div className="w-full">
         <div className="container">
           <div>
-            <h2 className="text-lg md:text-xl font-DMsans font-bold text-primaryFontColor pb-9">
+            <h2 className="text-lg md:text-xl font-DMsans font-bold text-primaryFontColor pb-3 md:pb-9">
               {categoriesTitle ? categoriesTitle : null}
             </h2>
           </div>

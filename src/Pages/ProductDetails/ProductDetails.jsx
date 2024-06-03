@@ -30,8 +30,8 @@ const ProductDetails = () => {
 
   return (
     <>
-      <div className="container">
-        <div className="pb-10">
+      <div className="container  px-4 lg:px-0">
+        <div className="pb-10 pt-2">
           <BreadCrumb />
         </div>
 

@@ -1,15 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { HiMiniSquares2X2 } from "react-icons/hi2";
 import { MdArrowDropUp } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { Feature, pageShow } from "../../../Data/Data";
 import { FaList } from "react-icons/fa6";
 
-const ShopTop = ({ pageValue, onChangeLayout, layoutValue }) => {
+const ShopTop = ({ pageValue, onChangeLayout, layoutValue, ref }) => {
   const [feature, setfeature] = useState(false);
   const [show, setshow] = useState(false);
   const [featureItem, setfeatureItem] = useState(false);
   const [Showitem, setShowitem] = useState(false);
+  const shoptopRef = useRef();
 
   const HandleItem = (event) => {
     setfeatureItem(event.target.innerText);
@@ -31,9 +32,21 @@ const ShopTop = ({ pageValue, onChangeLayout, layoutValue }) => {
     setshow(false);
   };
 
+  useEffect(() => {
+    window.addEventListener("click", (e) => {
+      if (!shoptopRef.current.contains(e.target)) {
+        setshow(false);
+        setfeature(false);
+      }
+    });
+  }, []);
+
   return (
     <>
-      <div className="pb-[60px] pt-10 md:pt-0 flex flex-col sm:flex-row gap-y-4 sm:gap-y-0 items-start sm:items-center justify-between gap-x-4">
+      <div
+        className="pt-10 md:pt-0 flex flex-col sm:flex-row gap-y-4 sm:gap-y-0 items-start sm:items-center justify-between gap-x-4"
+        ref={shoptopRef}
+      >
         <div>
           <span
             className="hidden sm:block cursor-pointer text-xl"
@@ -49,7 +62,7 @@ const ShopTop = ({ pageValue, onChangeLayout, layoutValue }) => {
                 Sort by:
               </p>
             </div>
-            <div className="relative py-1 px-5 border-2 border-[#F0F0F0] w-[200px] md:w-[188px] lg:w-[239px]">
+            <div className="relative py-1 px-5 border-2 border-[#F0F0F0] w-[160px] md:w-[188px] lg:w-[239px]">
               <div
                 className="flex items-center justify-between cursor-pointer"
                 onClick={HandleFeature}
@@ -87,7 +100,7 @@ const ShopTop = ({ pageValue, onChangeLayout, layoutValue }) => {
               Show
             </h4>
             <div>
-              <div className="relative py-1 px-4 border-2 border-[#F0F0F0] w-[130px] md:w-[120px] lg:w-[140px]">
+              <div className="relative py-1 px-4 border-2 border-[#F0F0F0] w-[100px] md:w-[120px] lg:w-[140px]">
                 <div
                   className="flex items-center justify-between cursor-pointer"
                   onClick={HandleShow}

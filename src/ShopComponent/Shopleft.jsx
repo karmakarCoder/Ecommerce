@@ -21,7 +21,7 @@ const Shopleft = ({ className }) => {
         />
         <div>
           <ColorCategories
-            className={"pt-12 pb-12"}
+            className={"py-2 md:py-3"}
             colorData={colorCategoriesData ? colorCategoriesData : []}
             title={"Shop by Color"}
           />

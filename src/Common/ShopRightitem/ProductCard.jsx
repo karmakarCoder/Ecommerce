@@ -19,7 +19,7 @@ const Card = ({
   return (
     <>
       <div
-        className={`cursor-pointer h-[302px]   ${
+        className={`cursor-pointer h-[232px] md:h-[302px] ${
           layout ? "bg-[#f1f1f1] pr-3" : null
         }  ${className}`}
       >
@@ -29,28 +29,30 @@ const Card = ({
           <img
             src={img ? img : productImg}
             alt={img}
-            className={`h-[220px] sm:h-[220px]   ${
-              layout ? "w-[255px] md:w-[200px] lg:w-[330px]" : "w-full"
+            className={`h-[158px] md:h-[220px] object-cover   ${
+              layout
+                ? "w-[255px] md:w-[200px] lg:w-[330px] object-cover"
+                : "w-full object-cover"
             }`}
           />
 
           {/* =================Overlay================= */}
 
-          <div className="py-6 px-7 flex flex-col items-center md:items-end absolute -bottom-40 left-0 bg-white w-full gap-y-5 group-hover:bottom-0 transition-all">
-            <div className="flex items-center gap-x-2 sm:gap-x-4">
-              <h5 className="text-[#767676] font-DMsans hover:text-[#262626] sm:hover:font-bold transition-all text-sm md:text-base">
+          <div className="py-4 md:py-6 px-7 flex flex-col items-center md:items-end absolute -bottom-40 left-0 bg-white w-full gap-y-2 md:gap-y-5 group-hover:bottom-0 transition-all">
+            <div className="flex items-center gap-x-1 sm:gap-x-4">
+              <h5 className="text-[#767676] font-DMsans hover:text-[#262626] sm:hover:font-bold transition-all text-xs md:text-base">
                 Add to List
               </h5>
               <FaHeart />
             </div>
-            <div className="flex items-center gap-x-4 md:gap-x-6">
-              <h5 className="text-[#767676] font-normal hover:text-[#262626] sm:hover:font-bold transition-all text-sm md:text-base ">
+            <div className="flex items-center gap-x-2 md:gap-x-6">
+              <h5 className="text-[#767676] font-normal hover:text-[#262626] sm:hover:font-bold transition-all text-xs md:text-base ">
                 Compare
               </h5>
               <TbReload />
             </div>
-            <div className="flex items-center gap-x-[7px] sm:gap-x-4">
-              <h5 className="text-[#767676] font-normal hover:text-[#262626] sm:hover:font-bold transition-all text-sm md:text-base">
+            <div className="flex items-center gap-x-[5px] sm:gap-x-4">
+              <h5 className="text-[#767676] font-normal hover:text-[#262626] sm:hover:font-bold transition-all text-xs md:text-base">
                 Add to Cart
               </h5>
               <FaShoppingCart />
@@ -68,7 +70,9 @@ const Card = ({
                 : "lg:flex-row lg:items-center md:pt-6 gap-y-0"
             }`}
           >
-            <h3 className="text-ellipsis whitespace-nowrap overflow-hidden text-primaryFontColor font-DMsans font-semibold text-sm sm:text-base md:text-xl">
+            <h3
+              className={`text-ellipsis whitespace-nowrap  overflow-hidden text-primaryFontColor font-DMsans font-semibold text-sm sm:text-base md:text-xl ${layout ? "w-[300px]" : "w-[210px]"}`}
+            >
               {productTitle ? productTitle : "Basic Crew Neck Tee"}
             </h3>
             {layout ? (
