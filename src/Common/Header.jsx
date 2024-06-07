@@ -340,7 +340,7 @@ const Header = () => {
                     <FaShoppingCart className="text-lg sm:text-xl" />
                   )}
                   {cartitem.length > 0 && (
-                    <div className="flex items-center justify-center text-primaryFontColor font-DMsans text-sm font-semibold w-3 h-3 rounded-full bg-red-500 absolute top-[-4px] right-[-10px]"></div>
+                    <div className="flex items-center justify-center text-primaryFontColor font-DMsans text-sm font-semibold w-3 h-3 border-2 border-white rounded-full bg-red-500 absolute top-[-4px] right-[-8px]"></div>
                   )}
                 </span>
                 {openCart &&

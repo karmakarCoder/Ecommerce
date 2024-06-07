@@ -7,6 +7,8 @@ import Shop from "./Pages/Shop/Shop";
 import ProductDetails from "./Pages/ProductDetails/ProductDetails";
 import Registration from "./Pages/Registration/Registration";
 import Cart from "./Pages/Cart/Cart";
+import Checkout from "./Pages/Checkout/Checkout";
+
 // ==============================
 import RootLayout from "./Common/RootLayout/RootLayout";
 import {
@@ -27,6 +29,7 @@ const router = createBrowserRouter(
       ></Route>
       <Route path="/registration" element={<Registration />}></Route>
       <Route path="/cart" element={<Cart />}></Route>
+      <Route path="/checkout" element={<Checkout />}></Route>
     </Route>
   )
 );

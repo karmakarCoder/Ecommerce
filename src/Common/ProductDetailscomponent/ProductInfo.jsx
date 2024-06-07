@@ -134,7 +134,7 @@ const ProductInfo = ({ data, status, addtoCart }) => {
                     />
                   </div>
                   {sizeOpen && (
-                    <div className="absolute top-[47px] left-0 w-[139px] bg-[#f0f0f0]">
+                    <div className="absolute top-[47px] left-0 w-[139px] bg-[#f0f0f0] z-40">
                       {size?.map((item, index) => (
                         <p
                           key={index}
