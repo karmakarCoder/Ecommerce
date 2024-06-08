@@ -19,6 +19,7 @@ const ShopBottom = () => {
 
   useEffect(() => {
     dispatch(fetchProduct("https://dummyjson.com/product"));
+
     const getData = async () => {
       const data = await axios.get("https://dummyjson.com/product");
       setallProducts(data.data.products);
@@ -61,39 +62,35 @@ const ShopBottom = () => {
                 {allProducts
                   ?.slice(page * showPage - showPage, page * showPage)
                   .map((productItem) => (
-                    <Link
+                    <ProductCard
+                      productID={productItem.id}
                       key={productItem.id}
-                      to={`/product-details/${productItem.id}`}
-                    >
-                      <ProductCard
-                        key={productItem.id}
-                        layout={gridLayout}
-                        className={` ${
-                          gridLayout
-                            ? "w-[100%] flex flex-row h-full gap-x-3 items-center"
-                            : "w-[155px] sm:w-[285px] md:w-[228px] lg:w-[285px]"
-                        }`}
-                        productTitle={productItem.title}
-                        productDes={productItem.description}
-                        img={productItem.thumbnail}
-                        badge={
-                          productItem.discountPercentage ? (
-                            <Button
-                              className={
-                                "py-[4px] md:py-[7px] px-3 md:px-8 text-[10px] md:text-base"
-                              }
-                            >
-                              {productItem.stock === 0
-                                ? "Stock out"
-                                : "-" + " $ " + productItem.discountPercentage}
-                            </Button>
-                          ) : null
-                        }
-                        price={`$${Math.floor(productItem.price - productItem.discountPercentage)}`}
-                        rating={productItem.rating}
-                        discountPrice={productItem.price}
-                      />
-                    </Link>
+                      layout={gridLayout}
+                      className={` ${
+                        gridLayout
+                          ? "w-[100%] flex flex-row h-full gap-x-3 items-center"
+                          : "w-[155px] sm:w-[285px] md:w-[228px] lg:w-[285px]"
+                      }`}
+                      productTitle={productItem.title}
+                      productDes={productItem.description}
+                      img={productItem.thumbnail}
+                      badge={
+                        productItem.discountPercentage ? (
+                          <Button
+                            className={
+                              "py-[4px] md:py-[7px] px-3 md:px-8 text-[10px] md:text-base"
+                            }
+                          >
+                            {productItem.stock === 0
+                              ? "Stock out"
+                              : "-" + " $ " + productItem.discountPercentage}
+                          </Button>
+                        ) : null
+                      }
+                      price={`$${Math.floor(productItem.price - productItem.discountPercentage)}`}
+                      rating={productItem.rating}
+                      discountPrice={productItem.price}
+                    />
                   ))}
               </Flex>
             </div>

@@ -1,11 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Card from "../../Common/Card";
-import { newProductData } from "../../../Data/Data";
 import Slider from "react-slick";
 import Button from "../../Common/Button";
 import { GrFormNext, GrFormPrevious } from "react-icons/gr";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchProduct } from "../../Redux/Slice.js";
 
 const NewArrival = () => {
+  const dispatch = useDispatch();
+  const { data, status } = useSelector((state) => state.product);
+
+  useEffect(() => {
+    dispatch(fetchProduct("https://dummyjson.com/products"));
+  }, []);
+
+  useEffect(() => {
+    if (status === "IDLE") {
+      setproductData(data.products);
+    }
+  }, [data, status]);
+
   const settings = {
     dots: false,
     infinite: true,
@@ -118,7 +132,7 @@ const NewArrival = () => {
     );
   }
 
-  const [productData, setproductData] = useState(newProductData);
+  const [productData, setproductData] = useState([]);
   return (
     <>
       <div className="py-20 md:py-32 px-4 lg:px-0">
@@ -130,26 +144,27 @@ const NewArrival = () => {
           </div>
 
           <Slider {...settings}>
-            {productData.map((item) => {
+            {productData?.slice(6, productData.length).map((item) => {
               return (
                 <Card
+                  productId={item.id}
                   key={item.id}
                   badge={
-                    item.discount ? (
+                    item.discountPercentage > 0 ? (
                       <Button
                         className={
                           "py-[4px] px-3 sm:py-[6px] sm:px-5 text-xs sm:text-base"
                         }
                       >
-                        {item.discountStatus
-                          ? item.discountStatus
+                        {Math.floor(item.discountPercentage) + "%"
+                          ? Math.floor(item.discountPercentage) + "%"
                           : "Stock out"}
                       </Button>
                     ) : null
                   }
-                  img={item.img}
+                  img={item.thumbnail}
                   productTitle={item.title}
-                  price={item.price}
+                  price={"$" + Math.round(item.price - item.discountPercentage)}
                   colorVariant={item.colorVariant ? item.colorVariant : null}
                 />
               );

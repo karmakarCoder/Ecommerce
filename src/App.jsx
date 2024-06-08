@@ -8,7 +8,7 @@ import ProductDetails from "./Pages/ProductDetails/ProductDetails";
 import Registration from "./Pages/Registration/Registration";
 import Cart from "./Pages/Cart/Cart";
 import Checkout from "./Pages/Checkout/Checkout";
-
+import Contact from "./Pages/Contact/Contact";
 // ==============================
 import RootLayout from "./Common/RootLayout/RootLayout";
 import {
@@ -17,6 +17,7 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from "react-router-dom";
+import Wishlist from "./Pages/Wishlist/Wishlist";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -30,6 +31,8 @@ const router = createBrowserRouter(
       <Route path="/registration" element={<Registration />}></Route>
       <Route path="/cart" element={<Cart />}></Route>
       <Route path="/checkout" element={<Checkout />}></Route>
+      <Route path="/contact" element={<Contact />}></Route>
+      <Route path="/wishlist" element={<Wishlist />}></Route>
     </Route>
   )
 );

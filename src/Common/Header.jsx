@@ -68,6 +68,7 @@ const Header = () => {
       if (!Menuref.current.contains(e.target)) {
         setopenUser(false);
         setopencategory(false);
+        setopenCart(false);
       }
     });
   }, []);
@@ -114,11 +115,16 @@ const Header = () => {
                 </li>
                 <li>
                   <NavLink
-                    className={
-                      "text-sm font-DMsans font-normal text-secondaryFontColor hover:text-primaryFontColor hover:font-bold transition-all"
+                    to={"/wishlist"}
+                    className={({ isActive, isPending }) =>
+                      isPending
+                        ? "text-sm font-DMsans font-normal text-secondaryFontColor transition-all"
+                        : isActive
+                          ? "font-bold text-primaryFontColor"
+                          : "hover:text-primaryFontColor hover:font-bold"
                     }
                   >
-                    Journal
+                    Wishlist
                   </NavLink>
                 </li>
                 <li>
@@ -129,7 +135,7 @@ const Header = () => {
                         ? "text-sm font-DMsans font-normal text-secondaryFontColor hover:text-primaryFontColor hover:font-bold transition-all"
                         : isActive
                           ? "font-bold"
-                          : ""
+                          : "hover:text-primaryFontColor hover:font-bold"
                     }
                   >
                     Shop
@@ -146,8 +152,13 @@ const Header = () => {
                 </li>
                 <li>
                   <NavLink
-                    className={
-                      "text-sm font-DMsans font-normal text-secondaryFontColor hover:text-primaryFontColor hover:font-bold transition-all"
+                    to={"/contact"}
+                    className={({ isActive, isPending }) =>
+                      isPending
+                        ? "text-sm font-DMsans font-normal text-secondaryFontColor transition-all"
+                        : isActive
+                          ? "font-bold text-primaryFontColor"
+                          : "hover:text-primaryFontColor hover:font-bold"
                     }
                   >
                     Contacts
@@ -186,11 +197,12 @@ const Header = () => {
                 </li>
                 <li>
                   <NavLink
+                    to={"/wishlist"}
                     className={
                       "text-sm font-DMsans font-normal text-secondaryFontColor hover:text-primaryFontColor hover:font-bold transition-all"
                     }
                   >
-                    Journal
+                    Wishlist
                   </NavLink>
                 </li>
                 <li>
@@ -333,16 +345,20 @@ const Header = () => {
               </div>
 
               <div className="relative">
-                <span className="cursor-pointer" onClick={HandleCart}>
-                  {openCart ? (
-                    <FaCartArrowDown className="text-lg sm:text-xl" />
-                  ) : (
-                    <FaShoppingCart className="text-lg sm:text-xl" />
-                  )}
-                  {cartitem.length > 0 && (
-                    <div className="flex items-center justify-center text-primaryFontColor font-DMsans text-sm font-semibold w-3 h-3 border-2 border-white rounded-full bg-red-500 absolute top-[-4px] right-[-8px]"></div>
-                  )}
-                </span>
+                <div onClick={HandleCart} className="cursor-pointer z-50">
+                  <span>
+                    {openCart ? (
+                      <FaCartArrowDown className="text-lg sm:text-xl" />
+                    ) : (
+                      <FaShoppingCart className="text-lg sm:text-xl" />
+                    )}
+
+                    {cartitem.length > 0 && (
+                      <div className="flex items-center justify-center text-primaryFontColor font-DMsans text-sm font-semibold w-3 h-3 border-2 border-white rounded-full bg-red-500 absolute top-[-4px] right-[-8px]"></div>
+                    )}
+                  </span>
+                </div>
+
                 {openCart &&
                   (cartitem.length > 0 ? (
                     <div className="bg-white  shadow-md w-[320px] sm:w-[360px] absolute top-[58px] right-0 z-50">
@@ -396,9 +412,9 @@ const Header = () => {
                       <div className="px-5 py-5">
                         <div>
                           <p className="text-base font-DMsans font-normal text-secondaryFontColor">
-                            Subtotal:{" "}
+                            Subtotal:
                             <span className="font-bold text-primaryFontColor">
-                              $44.00
+                              ${totalAmount}
                             </span>
                           </p>
                         </div>

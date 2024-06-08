@@ -1,9 +1,23 @@
-import { React, useState } from "react";
+import { React, useEffect, useState } from "react";
 import Card from "../../Common/Card";
-import { bestSellerData } from "../../../Data/Data";
 import Slider from "react-slick";
 import Button from "../../Common/Button";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchProduct } from "../../Redux/Slice";
 const BestSeller = () => {
+  const dispatch = useDispatch();
+  const { data, status } = useSelector((state) => state.product);
+
+  useEffect(() => {
+    dispatch(fetchProduct("https://dummyjson.com/products"));
+  }, []);
+
+  useEffect(() => {
+    if (status === "IDLE") {
+      setproductData(data.products);
+    }
+  }, [data, status]);
+
   const settings = {
     dots: false,
     infinite: true,
@@ -56,7 +70,7 @@ const BestSeller = () => {
     ],
   };
 
-  const [productData, setproductData] = useState(bestSellerData);
+  const [productData, setproductData] = useState([]);
 
   return (
     <>
@@ -69,22 +83,25 @@ const BestSeller = () => {
           </div>
 
           <Slider {...settings}>
-            {productData.map((item) => {
+            {productData?.map((item) => {
               return (
                 <Card
+                  productId={item.id}
                   key={item.id}
                   badge={
-                    item.discount ? (
+                    item.discountPercentage ? (
                       <Button className={"py-[6px] px-5"}>
-                        {item.discountStatus
-                          ? item.discountStatus
+                        {Math.floor(item.discountPercentage) + "%"
+                          ? Math.floor(item.discountPercentage) + "%"
                           : "Stock out"}
                       </Button>
                     ) : null
                   }
-                  img={item.img}
+                  img={item.thumbnail}
                   productTitle={item.title}
-                  price={item.price}
+                  price={
+                    "$" + `${Math.round(item.price - item.discountPercentage)}`
+                  }
                   colorVariant={item.colorVariant ? item.colorVariant : null}
                 />
               );
