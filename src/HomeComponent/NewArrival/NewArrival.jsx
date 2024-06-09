@@ -5,7 +5,7 @@ import Button from "../../Common/Button";
 import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProduct } from "../../Redux/Slice.js";
-
+import { addtoCart } from "../../Redux/AddToCartSlice";
 const NewArrival = () => {
   const dispatch = useDispatch();
   const { data, status } = useSelector((state) => state.product);
@@ -132,6 +132,11 @@ const NewArrival = () => {
     );
   }
 
+  // add to cart functionality
+  const HandleCartAdd = (item) => {
+    dispatch(addtoCart(item));
+  };
+
   const [productData, setproductData] = useState([]);
   return (
     <>
@@ -147,6 +152,7 @@ const NewArrival = () => {
             {productData?.slice(6, productData.length).map((item) => {
               return (
                 <Card
+                  onCartAdd={() => HandleCartAdd(item)}
                   productId={item.id}
                   key={item.id}
                   badge={

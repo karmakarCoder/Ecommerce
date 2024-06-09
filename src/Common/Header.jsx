@@ -10,11 +10,11 @@ import { FaBars } from "react-icons/fa";
 import { RxCross2 } from "react-icons/rx";
 import { HiLogout } from "react-icons/hi";
 import Search from "../Common/Search";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { MdOutlineImageNotSupported } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { TbShoppingCartX } from "react-icons/tb";
-
+import { removeCart } from "../Redux/AddToCartSlice";
 const Header = () => {
   // ======== all state =========
   const [opencategory, setopencategory] = useState(false);
@@ -23,7 +23,9 @@ const Header = () => {
   const [openCart, setopenCart] = useState(false);
   const Menuref = useRef();
   const navigate = useNavigate();
+
   // ============================
+  const dispatch = useDispatch();
 
   // handleNav
   const handleNav = () => {
@@ -68,7 +70,6 @@ const Header = () => {
       if (!Menuref.current.contains(e.target)) {
         setopenUser(false);
         setopencategory(false);
-        setopenCart(false);
       }
     });
   }, []);
@@ -82,6 +83,12 @@ const Header = () => {
   const HandleViewCart = () => {
     navigate("cart");
     setopenCart(false);
+  };
+
+  // HandleCart
+
+  const HandleAddToCart = (item) => {
+    dispatch(removeCart(item));
   };
 
   return (
@@ -398,7 +405,7 @@ const Header = () => {
                               </div>
                               <div
                                 className="text-xl cursor-pointer"
-                                onClick={() => setopenCart(false)}
+                                onClick={() => HandleAddToCart(item)}
                               >
                                 <span>
                                   <RxCross2 />
@@ -414,7 +421,7 @@ const Header = () => {
                           <p className="text-base font-DMsans font-normal text-secondaryFontColor">
                             Subtotal:
                             <span className="font-bold text-primaryFontColor">
-                              ${totalAmount}
+                              ${cartitem && totalAmount}
                             </span>
                           </p>
                         </div>

@@ -14,6 +14,7 @@ const Card = ({
   discountPrice,
   rating,
   productId,
+  onCartAdd,
 }) => {
   return (
     <>
@@ -43,7 +44,10 @@ const Card = ({
               </h5>
               <TbReload />
             </div>
-            <div className="flex items-center gap-x-[7px] sm:gap-x-4">
+            <div
+              className="flex items-center gap-x-[7px] sm:gap-x-4"
+              onClick={onCartAdd}
+            >
               <h5 className="text-[#767676] font-normal hover:text-[#262626] sm:hover:font-bold transition-all text-sm md:text-base">
                 Add to Cart
               </h5>

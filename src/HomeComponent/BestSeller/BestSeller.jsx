@@ -4,6 +4,7 @@ import Slider from "react-slick";
 import Button from "../../Common/Button";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProduct } from "../../Redux/Slice";
+import { addtoCart } from "../../Redux/AddToCartSlice";
 const BestSeller = () => {
   const dispatch = useDispatch();
   const { data, status } = useSelector((state) => state.product);
@@ -70,6 +71,12 @@ const BestSeller = () => {
     ],
   };
 
+  // HandleCartAdd
+
+  const HandleCartAdd = (item) => {
+    dispatch(addtoCart(item));
+  };
+
   const [productData, setproductData] = useState([]);
 
   return (
@@ -86,6 +93,7 @@ const BestSeller = () => {
             {productData?.map((item) => {
               return (
                 <Card
+                  onCartAdd={() => HandleCartAdd(item)}
                   productId={item.id}
                   key={item.id}
                   badge={

@@ -4,11 +4,10 @@ import Slider from "react-slick";
 import Button from "../../Common/Button";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProduct } from "../../Redux/Slice";
-
+import { addtoCart } from "../../Redux/AddToCartSlice";
 const SpecialOffer = () => {
   const dispatch = useDispatch();
   const { data, status } = useSelector((state) => state.product);
-  console.log(data);
 
   useEffect(() => {
     dispatch(fetchProduct("https://dummyjson.com/products"));
@@ -72,6 +71,11 @@ const SpecialOffer = () => {
     ],
   };
 
+  // add to cart functionality
+  const HandleCartAdd = (item) => {
+    dispatch(addtoCart(item));
+  };
+
   const [productData, setproductData] = useState([]);
   return (
     <>
@@ -87,6 +91,7 @@ const SpecialOffer = () => {
             {productData?.slice(12, productData.length).map((item) => {
               return (
                 <Card
+                  onCartAdd={() => HandleCartAdd(item)}
                   productId={item.id}
                   key={item.id}
                   badge={

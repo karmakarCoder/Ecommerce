@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import BreadCrumb from "../../Common/BreadCrumb/BreadCrumb";
-import { checkEmail } from "../../../utils/Utils";
+import { checkEmail, checkMessageLimit } from "../../../utils/Utils";
 import { MdErrorOutline } from "react-icons/md";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../../Firebase/Firebase";
@@ -20,6 +20,7 @@ const Contact = () => {
     EmailError: "",
     EmailValidate: "",
     MessageError: "",
+    MessageWordLimit: "",
   });
 
   // HandlePost
@@ -49,6 +50,12 @@ const Contact = () => {
         MessageError: "Type your message",
         EmailValidate: "",
       });
+    } else if (!checkMessageLimit(Message)) {
+      setcontactInfoError({
+        ...contactInfoError,
+        MessageError: "",
+        MessageWordLimit: "Character limit 50",
+      });
     } else {
       setcontactInfoError({
         ...contactInfoError,
@@ -56,6 +63,7 @@ const Contact = () => {
         EmailValidate: "",
         NameError: "",
         EmailError: "",
+        MessageWordLimit: "",
       });
       setloading(true);
       addDoc(collection(db, "contactInfo"), contactInfo)
@@ -181,11 +189,18 @@ const Contact = () => {
                     onChange={HandleInput}
                     value={contactInfo.Message}
                   />
-                  {contactInfoError.MessageError && (
+                  {contactInfoError.MessageError ? (
                     <p className="text-sm font-DMsans font-medium text-red-700 flex items-center gap-x-1 pt-1">
-                      <MdErrorOutline className="text-md" />{" "}
+                      <MdErrorOutline className="text-md" />
                       {contactInfoError.MessageError}
                     </p>
+                  ) : (
+                    contactInfoError.MessageWordLimit && (
+                      <p className="text-sm font-DMsans font-medium text-red-700 flex items-center gap-x-1 pt-1">
+                        <MdErrorOutline className="text-md" />
+                        {contactInfoError.MessageWordLimit}
+                      </p>
+                    )
                   )}
                 </div>
                 <div className="pt-7" onClick={HandlePost}>

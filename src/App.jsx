@@ -9,6 +9,7 @@ import Registration from "./Pages/Registration/Registration";
 import Cart from "./Pages/Cart/Cart";
 import Checkout from "./Pages/Checkout/Checkout";
 import Contact from "./Pages/Contact/Contact";
+import Login from "./Pages/Login/Login";
 // ==============================
 import RootLayout from "./Common/RootLayout/RootLayout";
 import {
@@ -33,6 +34,7 @@ const router = createBrowserRouter(
       <Route path="/checkout" element={<Checkout />}></Route>
       <Route path="/contact" element={<Contact />}></Route>
       <Route path="/wishlist" element={<Wishlist />}></Route>
+      <Route path="/login" element={<Login />}></Route>
     </Route>
   )
 );

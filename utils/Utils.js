@@ -4,5 +4,15 @@ function checkEmail(email = "roodro134143@gmail.com") {
   let isEmailvalidate = regexPettern.test(email.toLocaleLowerCase());
   return isEmailvalidate;
 }
+function passwordCheck(password) {
+  const passwordPettern =
+    /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+  let passwordValid = passwordPettern.test(password);
+  return passwordValid;
+}
 
-export { checkEmail };
+function checkMessageLimit(message) {
+  return message.length > 50 ? false : true;
+}
+
+export { checkEmail, checkMessageLimit, passwordCheck };

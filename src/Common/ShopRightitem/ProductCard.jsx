@@ -20,23 +20,8 @@ const Card = ({
   productDes,
   layout,
   productID,
+  onCartAdd,
 }) => {
-  const dispatch = useDispatch();
-  const [eachData, seteachData] = useState({});
-
-  const { data, status } = useSelector((state) => state.product);
-  console.log(data);
-
-  useEffect(() => {
-    if (status === "IDLE") {
-      seteachData(data);
-    }
-  }, [data, status]);
-
-  const HandleCart = () => {
-    dispath(addtoCart(eachData));
-  };
-
   return (
     <>
       <div
@@ -75,7 +60,7 @@ const Card = ({
             </div>
             <div
               className="flex items-center gap-x-[5px] sm:gap-x-4"
-              onClick={HandleCart}
+              onClick={onCartAdd}
             >
               <h5 className="text-[#767676] font-normal hover:text-[#262626] sm:hover:font-bold transition-all text-xs md:text-base">
                 Add to Cart

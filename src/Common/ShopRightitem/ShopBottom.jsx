@@ -4,12 +4,12 @@ import Flex from "../Flex";
 import Button from "../Button";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { shopRightPageContext } from "../../ShopComponent/ShopRight";
-import { Link } from "react-router-dom";
 import ProductLoading from "../ProductLoading/ProductLoading";
 import Error from "../Error";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProduct } from "../../Redux/Slice";
 import axios from "axios";
+import { addtoCart } from "../../Redux/AddToCartSlice";
 const ShopBottom = () => {
   const [allProducts, setallProducts] = useState([]);
   const [page, setpage] = useState(1);
@@ -28,6 +28,10 @@ const ShopBottom = () => {
   }, []);
 
   const { data, status } = useSelector((state) => state.product);
+
+  const HandleAddToCart = (item) => {
+    dispatch(addtoCart(item));
+  };
 
   // useEffect(() => {
   //   if (status === "IDLE") {
@@ -63,6 +67,7 @@ const ShopBottom = () => {
                   ?.slice(page * showPage - showPage, page * showPage)
                   .map((productItem) => (
                     <ProductCard
+                      onCartAdd={() => HandleAddToCart(productItem)}
                       productID={productItem.id}
                       key={productItem.id}
                       layout={gridLayout}

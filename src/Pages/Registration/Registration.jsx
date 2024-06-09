@@ -5,8 +5,10 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { toast, Bounce } from "react-toastify";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../../Firebase/Firebase";
+import { Link, useNavigate } from "react-router-dom";
 
 const Registration = () => {
+  const navigate = useNavigate();
   const [loading, setloading] = useState(false);
   const [userInfo, setuserInfo] = useState({
     FirstName: "",
@@ -229,6 +231,7 @@ const Registration = () => {
         })
         .finally(() => {
           setloading(false);
+          navigate("/login");
           setuserInfo({
             FirstName: "",
             LastName: "",
@@ -533,6 +536,9 @@ const Registration = () => {
                 No
               </p>
             </div>
+          </div>
+          <div className="text-sm font-DMsans font-normal text-primaryFontColor underline pt-4">
+            <Link to={"/login"}>Already login?</Link>
           </div>
           <div className="mt-7" onClick={HandleSignup}>
             <button
