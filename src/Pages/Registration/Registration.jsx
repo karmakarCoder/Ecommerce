@@ -1,11 +1,22 @@
 import React, { useState } from "react";
 import RegistrationTop from "../../RegistrationComponent/RegistrationTop";
 import Input from "../../RegistrationComponent/Input";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { toast, Bounce } from "react-toastify";
+import { successMessage } from "../../../utils/Utils";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+} from "firebase/auth";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../../Firebase/Firebase";
 import { Link, useNavigate } from "react-router-dom";
+// Bangladeshi division & district array of list
+import {
+  allDivision,
+  allDistict,
+  divisionalDataOf,
+  DivisonName,
+} from "@bangladeshi/bangladesh-address";
 
 const Registration = () => {
   const navigate = useNavigate();
@@ -27,7 +38,6 @@ const Registration = () => {
     subscribeyes: false,
     subscribeno: false,
   });
-
   const [userInfoError, setuserInfoError] = useState({
     FirstNameError: "",
     TelephoneError: "",
@@ -187,30 +197,24 @@ const Registration = () => {
       setloading(true);
       createUserWithEmailAndPassword(auth, userInfo.Email, userInfo.Password)
         .then(() => {
-          toast(
-            <p className="font-DMsans text-yellow-500 font-semibold text-base flex items-center gap-x-3">
-              {userInfo.FirstName}{" "}
-              <span className="font-normal text-black text-sm">
-                sign up complete
-              </span>
-            </p>,
-            {
-              position: "top-right",
-              autoClose: 5000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "light",
-              transition: Bounce,
-            }
+          successMessage(
+            `${userInfo.FirstName} Sign up`,
+            "top-right",
+            "light",
+            2000
           );
         })
         .then(() => {
           addDoc(collection(db, "users"), userInfo)
             .then((user) => {
-              console.log(user);
+              sendEmailVerification(auth.currentUser).then(() => {
+                successMessage(
+                  `${userInfo.FirstName} Email sent`,
+                  "top-center",
+                  "dark",
+                  1500
+                );
+              });
             })
             .catch((err) => {
               console.log(err);
@@ -386,7 +390,9 @@ const Registration = () => {
                   inputValue={userInfo.PostCode}
                   onChangeInput={HandleInput}
                 />
+
                 <div className="flex justify-between basis-full">
+                  {/* Division */}
                   <div className="flex basis-2/4 flex-col">
                     <h2 className="font-DMsans font-bold text-primaryFontColor text-base pb-[10px]">
                       Division
@@ -398,12 +404,10 @@ const Registration = () => {
                       onChange={HandleInput}
                       value={userInfo.division}
                     >
-                      <option value="">Please select</option>
-                      <option value="Dhaka">Dhaka</option>
-                      <option value="Tangail">Tangail</option>
-                      <option value="Chittagong">Chittagong</option>
-                      <option value="Cumilla">Cumilla</option>
-                      <option value="Rajsahi">Rajsahi</option>
+                      <option>Please select</option>
+                      {allDivision()?.map((item) => (
+                        <option name="division">{item}</option>
+                      ))}
                     </select>
                     {userInfoError.divisionError && (
                       <p className="text-red-600 font-DMsans text-base font-normal">
@@ -411,6 +415,7 @@ const Registration = () => {
                       </p>
                     )}
                   </div>
+                  {/* District */}
                   <div className="flex basis-2/4 flex-col">
                     <h2 className="font-DMsans font-bold text-primaryFontColor text-base pb-[10px]">
                       District
@@ -420,14 +425,11 @@ const Registration = () => {
                       id="District"
                       className="w-[90%] border-b-2 pb-4"
                       onChange={HandleInput}
-                      value={userInfo.District}
                     >
                       <option value="">Please select</option>
-                      <option value="Dhaka">Dhaka</option>
-                      <option value="Tangail">Tangail</option>
-                      <option value="Chittagong">Chittagong</option>
-                      <option value="Cumilla">Cumilla</option>
-                      <option value="Rajsahi">Rajsahi</option>
+                      {allDistict()?.map((item) => (
+                        <option value={userInfo.District}>{item}</option>
+                      ))}
                     </select>
                   </div>
                 </div>
@@ -537,9 +539,11 @@ const Registration = () => {
               </p>
             </div>
           </div>
+          {/* already login ? */}
           <div className="text-sm font-DMsans font-normal text-primaryFontColor underline pt-4">
             <Link to={"/login"}>Already login?</Link>
           </div>
+          {/* Sign up */}
           <div className="mt-7" onClick={HandleSignup}>
             <button
               id="signUpButton"

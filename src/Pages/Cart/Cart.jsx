@@ -11,6 +11,7 @@ import {
   getTotal,
 } from "../../Redux/AddToCartSlice";
 import { TbShoppingCartOff } from "react-icons/tb";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -178,11 +179,13 @@ const Cart = () => {
                 </div>
               </div>
               <div className="flex items-end justify-end mt-7">
-                <div className="cursor-pointer text-primaryBgColor font-DMsans font-bold text-sm py-4 px-6 bg-primaryFontColor">
-                  <button className="text-primaryBgColor font-DMsans font-bold text-sm bg-primaryFontColor">
-                    Proceed to Checkout
-                  </button>
-                </div>
+                <Link to={"/login"}>
+                  <div className="cursor-pointer text-primaryBgColor font-DMsans font-bold text-sm py-4 px-6 bg-primaryFontColor">
+                    <button className="text-primaryBgColor font-DMsans font-bold text-sm bg-primaryFontColor">
+                      Proceed to Checkout
+                    </button>
+                  </div>
+                </Link>
               </div>
             </div>
           </div>

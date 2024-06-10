@@ -1,17 +1,26 @@
 import React, { useState } from "react";
 import BreadCrumb from "../../Common/BreadCrumb/BreadCrumb";
-import { checkEmail, passwordCheck } from "../../../utils/Utils";
+import {
+  checkEmail,
+  passwordCheck,
+  successMessage,
+} from "../../../utils/Utils";
 import { RiErrorWarningFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 const Login = () => {
+  const navigate = useNavigate();
+  const auth = getAuth();
   const [passwordShow, setpasswordShow] = useState(false);
+  // input value store
   const [loginData, setloginData] = useState({
     Email: "",
     Password: "",
   });
 
+  // input Error value store
   const [loginDataError, setloginDataError] = useState({
     EmailError: "",
     EmailCheck: "",
@@ -20,9 +29,10 @@ const Login = () => {
     PasswordValidate: "",
   });
 
+  // HandleLogin Button
   const HandleLogIn = () => {
     const { Email, Password } = loginData;
-    if (Email === "") {
+    if (!Email) {
       setloginDataError({
         ...loginDataError,
         EmailError: "Enter your email",
@@ -33,7 +43,7 @@ const Login = () => {
         EmailCheck: "Email is not valid",
         EmailError: "",
       });
-    } else if (Password === "") {
+    } else if (!Password) {
       setloginDataError({
         ...loginDataError,
         PasswordError: "Enter your password",
@@ -54,15 +64,25 @@ const Login = () => {
           "Password is not valid & The password must be a combination of lowercase letters, uppercase letters, numbers and special characters",
       });
     } else {
+      signInWithEmailAndPassword(auth, Email, Password)
+        .then((user) => {
+          console.log(user);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      successMessage("Login done");
       setloginDataError({
         ...loginDataError,
         passwordLength: "",
         PasswordValidate: "",
         EmailError: "",
       });
+      navigate("/checkout");
     }
   };
 
+  // HandleInput
   const HandleInput = (event) => {
     setloginData({
       ...loginData,
@@ -70,6 +90,7 @@ const Login = () => {
     });
   };
 
+  // password show & unshow Handle
   const Handleshow = () => {
     setpasswordShow(!passwordShow);
   };
