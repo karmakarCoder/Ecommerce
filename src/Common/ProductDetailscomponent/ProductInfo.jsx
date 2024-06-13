@@ -6,7 +6,7 @@ import { FiMinus } from "react-icons/fi";
 import Review_Description from "./Review_Description";
 import Loading from "./Loading";
 
-const ProductInfo = ({ data, status, addtoCart }) => {
+const ProductInfo = ({ data, status, addtoCart, HandleWishList }) => {
   const [sizeOpen, setsizeOpen] = useState(false);
   const [sizeValue, setsizeValue] = useState();
   const [featureOPen, setfeatureOPen] = useState(false);
@@ -184,7 +184,10 @@ const ProductInfo = ({ data, status, addtoCart }) => {
           </div>
           {/* Wish List , Add to Cart btn */}
           <div className="flex items-center justify-center md:justify-start gap-x-5 py-7">
-            <button className="w-[120px] md:w-[200px] text-xs md:text-sm font-DMsans font-bold px-[10px] md:px-[40px] py-[15px] md:py-[20px] border-2 border-primaryFontColor text-primaryFontColor relative after:absolute after:top-0 after:left-0 after:w-full after:h-full after:bg-primaryFontColor after:-z-10 after:text-primaryBgColor after:duration-200 after:origin-top after:scale-y-0 after:transition-transform hover:after:scale-y-100 hover:after:origin-bottom hover:text-primaryBgColor">
+            <button
+              className="w-[120px] md:w-[200px] text-xs md:text-sm font-DMsans font-bold px-[10px] md:px-[40px] py-[15px] md:py-[20px] border-2 border-primaryFontColor text-primaryFontColor relative after:absolute after:top-0 after:left-0 after:w-full after:h-full after:bg-primaryFontColor after:-z-10 after:text-primaryBgColor after:duration-200 after:origin-top after:scale-y-0 after:transition-transform hover:after:scale-y-100 hover:after:origin-bottom hover:text-primaryBgColor"
+              onClick={HandleWishList}
+            >
               Add to Wish List
             </button>
             <button

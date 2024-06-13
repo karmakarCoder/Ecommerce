@@ -6,11 +6,14 @@ import { useParams } from "react-router-dom";
 import ProductImg from "../../Common/ProductDetailscomponent/ProductImg";
 import ProductInfo from "../../Common/ProductDetailscomponent/ProductInfo";
 import { addtoCart } from "../../Redux/AddToCartSlice";
+import { addToWishList } from "../../Redux/AddtoWishSlice";
+import { useNavigate } from "react-router-dom";
 
 const ProductDetails = () => {
   const dispatch = useDispatch();
   const [EachProductData, setEachProductData] = useState({});
   const { productID } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(fetchProduct(`https://dummyjson.com/product/${productID}`));
@@ -28,6 +31,11 @@ const ProductDetails = () => {
     dispatch(addtoCart(EachProductData));
   };
 
+  const HandleaddToWish = () => {
+    navigate("/wishlist");
+    dispatch(addToWishList(EachProductData));
+  };
+
   return (
     <>
       <div className="container  px-4 lg:px-0">
@@ -43,6 +51,7 @@ const ProductDetails = () => {
             data={EachProductData}
             status={status}
             addtoCart={HandleCart}
+            HandleWishList={HandleaddToWish}
           />
         </div>
       </div>

@@ -11,16 +11,13 @@ import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../../Firebase/Firebase";
 import { Link, useNavigate } from "react-router-dom";
 // Bangladeshi division & district array of list
-import {
-  allDivision,
-  allDistict,
-  divisionalDataOf,
-  DivisonName,
-} from "@bangladeshi/bangladesh-address";
+import { allDivision, allDistict } from "@bangladeshi/bangladesh-address";
 
 const Registration = () => {
   const navigate = useNavigate();
   const [loading, setloading] = useState(false);
+
+  // store input value
   const [userInfo, setuserInfo] = useState({
     FirstName: "",
     LastName: "",
@@ -38,6 +35,7 @@ const Registration = () => {
     subscribeyes: false,
     subscribeno: false,
   });
+  // store input error
   const [userInfoError, setuserInfoError] = useState({
     FirstNameError: "",
     TelephoneError: "",
@@ -50,6 +48,7 @@ const Registration = () => {
     agreementError: false,
   });
 
+  // Handle sign up button
   const HandleSignup = () => {
     const {
       FirstName,
@@ -257,6 +256,7 @@ const Registration = () => {
     }
   };
 
+  // HandleInput field
   const HandleInput = (e) => {
     setuserInfo({
       ...userInfo,

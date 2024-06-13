@@ -10,6 +10,7 @@ import Cart from "./Pages/Cart/Cart";
 import Checkout from "./Pages/Checkout/Checkout";
 import Contact from "./Pages/Contact/Contact";
 import Login from "./Pages/Login/Login";
+import Wishlist from "./Pages/Wishlist/Wishlist";
 // ==============================
 import RootLayout from "./Common/RootLayout/RootLayout";
 import {
@@ -18,7 +19,6 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from "react-router-dom";
-import Wishlist from "./Pages/Wishlist/Wishlist";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
