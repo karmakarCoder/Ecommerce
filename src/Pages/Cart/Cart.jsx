@@ -4,6 +4,8 @@ import { RxCross2 } from "react-icons/rx";
 import { GoPlus } from "react-icons/go";
 import { FiMinus } from "react-icons/fi";
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { errorMessage } from "../../../utils/Utils";
 import {
   removeCart,
   productIncreament,
@@ -11,9 +13,9 @@ import {
   getTotal,
 } from "../../Redux/AddToCartSlice";
 import { TbShoppingCartOff } from "react-icons/tb";
-import { Link } from "react-router-dom";
 
 const Cart = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { cartitem, totalAmount, totalCartitem } = useSelector(
     (state) => state.cart
@@ -38,6 +40,14 @@ const Cart = () => {
 
   const HandleDecreament = (item) => {
     dispatch(productDecreament(item));
+  };
+
+  const HandleProcced = () => {
+    if (cartitem.length > 0) {
+      navigate("/login");
+    } else {
+      errorMessage("Your cart is empty!", "top-right", "dark", 2000);
+    }
   };
 
   return (
@@ -179,13 +189,13 @@ const Cart = () => {
                 </div>
               </div>
               <div className="flex items-end justify-end mt-7">
-                <Link to={"/login"}>
+                <div onClick={HandleProcced}>
                   <div className="cursor-pointer text-primaryBgColor font-DMsans font-bold text-sm py-4 px-6 bg-primaryFontColor">
                     <button className="text-primaryBgColor font-DMsans font-bold text-sm bg-primaryFontColor">
                       Proceed to Checkout
                     </button>
                   </div>
-                </Link>
+                </div>
               </div>
             </div>
           </div>

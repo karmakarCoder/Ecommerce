@@ -87,7 +87,7 @@ const Header = () => {
 
   // HandleCart
 
-  const HandleAddToCart = (item) => {
+  const HandleRemoveToCart = (item) => {
     dispatch(removeCart(item));
   };
 
@@ -177,7 +177,9 @@ const Header = () => {
               className="block sm:hidden cursor-pointer text-xl z-50"
               onClick={handleNav}
             >
-              <span>{openNav ? <RxCross2 /> : <FaBars />}</span>
+              <span className="cursor-pointer">
+                {openNav ? <RxCross2 /> : <FaBars />}
+              </span>
             </div>
             {/* =========== Mobile view menu ==================== */}
             <div
@@ -405,7 +407,7 @@ const Header = () => {
                               </div>
                               <div
                                 className="text-xl cursor-pointer"
-                                onClick={() => HandleAddToCart(item)}
+                                onClick={() => HandleRemoveToCart(item)}
                               >
                                 <span>
                                   <RxCross2 />
@@ -421,7 +423,7 @@ const Header = () => {
                           <p className="text-base font-DMsans font-normal text-secondaryFontColor">
                             Subtotal:
                             <span className="font-bold text-primaryFontColor">
-                              ${cartitem && totalAmount}
+                              ${totalAmount}
                             </span>
                           </p>
                         </div>
