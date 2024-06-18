@@ -8,7 +8,7 @@ import Flex from "../../Common/Flex";
 const Ads1 = () => {
   return (
     <>
-      <div className="py-32 px-4 lg:px-0">
+      <div className="py-12 lg:py-32 px-4 lg:px-0">
         <div className="container">
           <Flex className="flex-col md:flex-row items-center gap-x-10 gap-y-10">
             <div className="relative">

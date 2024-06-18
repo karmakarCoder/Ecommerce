@@ -81,7 +81,7 @@ const BestSeller = () => {
 
   return (
     <>
-      <div className="py-20 md:py-32 px-4 lg:px-0">
+      <div className="py-10 lg:py-32 px-4 lg:px-0">
         <div className="container">
           <div>
             <h1 className="pb-12 text-primaryFontColor font-DMsans font-bold text-[30px] sm:text-[38px]">

@@ -18,20 +18,22 @@ const Card = ({
 }) => {
   return (
     <>
-      <div className={`cursor-pointer w-[93%] h-[368px] ${className}`}>
+      <div
+        className={`cursor-pointer w-[93%] h-[237px] md:h-[368px] ${className}`}
+      >
         <div className="group relative overflow-hidden">
           <div className="absolute top-5 left-5">{badge}</div>
           <Link to={`/product-details/${productId}`}>
             <img
               src={img ? img : productImg}
               alt={img}
-              className="h-[220px] sm:h-[220px] md:h-full object-fill"
+              className="h-[187px] sm:h-[220px] md:h-full object-fill"
             />
           </Link>
 
           {/* =================Overlay================= */}
 
-          <div className="py-6 px-7 flex flex-col items-center md:items-end absolute -bottom-36 left-0 bg-white w-full gap-y-5 group-hover:bottom-0 transition-all">
+          <div className="py-6 px-7 flex flex-col items-center md:items-end absolute -bottom-36 left-0 bg-white w-full gap-y-2 md:gap-5 group-hover:bottom-0 transition-all">
             <div className="flex items-center gap-x-2 sm:gap-x-4">
               <h5 className="text-[#767676] font-DMsans hover:text-[#262626] sm:hover:font-bold transition-all text-sm md:text-base">
                 Add to List
