@@ -269,18 +269,18 @@ const Registration = () => {
 
   return (
     <>
-      <div className="py-28">
+      <div className="py-14 lg:py-28 px-4 lg:px-0">
         <div className="container">
           <RegistrationTop />
 
           {/* Personal Details */}
-          <div className="py-14 border-y-2 mt-28">
-            <h2 className="font-DMsans font-bold text-primaryFontColor text-[39px] pb-10">
+          <div className="py-14 border-y-2 mt-14 lg:mt-28">
+            <h2 className="font-DMsans font-bold text-primaryFontColor text-[24px] md:text-[39px] pb-5 lg:pb-10">
               Your Personal Details
             </h2>
             <form action="#" onSubmit={(e) => e.preventDefault()}>
               <div className="flex items-center justify-between flex-wrap">
-                <div className="basis-2/4">
+                <div className="w-full md:basis-2/4">
                   <Input
                     inputTitle={"First Name"}
                     placeHolder={"First Name"}
@@ -292,7 +292,7 @@ const Registration = () => {
                     className={`${userInfoError.FirstNameError && "border-red-700"}`}
                   />
                   {userInfoError.FirstNameError && (
-                    <p className="text-red-600 font-DMsans text-base font-normal">
+                    <p className="text-red-600 font-DMsans text-xs md:text-base font-normal">
                       {userInfoError.FirstNameError}
                     </p>
                   )}
@@ -317,7 +317,7 @@ const Registration = () => {
                   inputValue={userInfo.Email}
                   onChangeInput={HandleInput}
                 />
-                <div className="basis-2/4">
+                <div className="w-full md:basis-2/4">
                   <Input
                     inputTitle={"Telephone"}
                     placeHolder={"Your telephone number"}
