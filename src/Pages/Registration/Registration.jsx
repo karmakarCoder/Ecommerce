@@ -12,10 +12,14 @@ import { db } from "../../../Firebase/Firebase";
 import { Link, useNavigate } from "react-router-dom";
 // Bangladeshi division & district array of list
 import { allDivision, allDistict } from "@bangladeshi/bangladesh-address";
+// ===============================================
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 
 const Registration = () => {
   const navigate = useNavigate();
   const [loading, setloading] = useState(false);
+  const [show, setshow] = useState(false);
+  const [show2, setshow2] = useState(false);
 
   // store input value
   const [userInfo, setuserInfo] = useState({
@@ -264,6 +268,15 @@ const Registration = () => {
     });
   };
 
+  // HandleShowPassword
+  const HandleShowPassword = () => {
+    setshow(!show);
+  };
+
+  const HandleShowPassword2 = () => {
+    setshow2(!show2);
+  };
+
   // Firebae
   const auth = getAuth();
 
@@ -339,13 +352,13 @@ const Registration = () => {
           </div>
 
           {/* New Customer */}
-          <div className="py-14 border-y-2 mt-28">
-            <h2 className="font-DMsans font-bold text-primaryFontColor text-[39px] pb-10">
+          <div className="py-2 lg:py-14 border-0 lg:border-y-2 mt-6 lg:mt-28">
+            <h2 className="font-DMsans font-bold text-primaryFontColor text-2xl lg:text-[39px] pb-4 lg:pb-10">
               New Customer
             </h2>
             <form action="#" onSubmit={(e) => e.preventDefault()}>
               <div className="flex items-center justify-between flex-wrap">
-                <div className="basis-2/4">
+                <div className="w-full md:basis-2/4">
                   <Input
                     inputTitle={"Address 1"}
                     placeHolder={"Address 1"}
@@ -391,16 +404,16 @@ const Registration = () => {
                   onChangeInput={HandleInput}
                 />
 
-                <div className="flex justify-between basis-full">
+                <div className="flex justify-between w-full md:basis-full">
                   {/* Division */}
-                  <div className="flex basis-2/4 flex-col">
-                    <h2 className="font-DMsans font-bold text-primaryFontColor text-base pb-[10px]">
+                  <div className="flex w-full md:basis-2/4 flex-col">
+                    <h2 className="font-DMsans font-bold text-primaryFontColor text-xs md:text-base pb-[5px] md:pb-[10px]">
                       Division
                     </h2>
                     <select
                       name="division"
                       id="division"
-                      className={`w-[90%] pb-4 border-b-2 ${userInfoError.divisionError && "border-red-700"}`}
+                      className={`w-[90%] text-xs md:text-base pb-2 md:pb-4 border-b-2 ${userInfoError.divisionError && "border-red-700"}`}
                       onChange={HandleInput}
                       value={userInfo.division}
                     >
@@ -416,14 +429,14 @@ const Registration = () => {
                     )}
                   </div>
                   {/* District */}
-                  <div className="flex basis-2/4 flex-col">
-                    <h2 className="font-DMsans font-bold text-primaryFontColor text-base pb-[10px]">
+                  <div className="flex w-full md:basis-2/4 flex-col">
+                    <h2 className="font-DMsans font-bold text-primaryFontColor text-xs md:text-base pb-[5px] md:pb-[10px]">
                       District
                     </h2>
                     <select
                       name="District"
                       id="District"
-                      className="w-[90%] border-b-2 pb-4"
+                      className="w-[90%] border-b-2 pb-2 md:pb-4 text-xs md:text-base"
                       onChange={HandleInput}
                     >
                       <option value="">Please select</option>
@@ -439,30 +452,37 @@ const Registration = () => {
 
           {/* password */}
 
-          <div className="py-14 border-y-2 mt-28">
-            <h2 className="font-DMsans font-bold text-primaryFontColor text-[39px] pb-10">
+          <div className="py-2 lg:py-14 border-0 md:border-y-2 mt-6 lg:mt-28">
+            <h2 className="font-DMsans font-bold text-primaryFontColor text-[24px] md:text-[39px] pb-5 md:pb-10">
               Your Password
             </h2>
             <form action="#" onSubmit={(e) => e.preventDefault()}>
               <div className="flex items-center justify-between flex-wrap">
-                <div className="basis-2/4">
-                  <Input
-                    className={`${userInfoError.PasswordError && "border-red-700"}`}
-                    inputTitle={"Password"}
-                    placeHolder={"Password"}
-                    inputType={"password"}
-                    inputName={"Password"}
-                    inputId={"Password"}
-                    inputValue={userInfo.Password}
-                    onChangeInput={HandleInput}
-                  />
+                <div className="w-full md:basis-2/4">
+                  <p className="text-xs md:text-base font-DMsans font-bold text-primaryFontColor pb-2">
+                    Password
+                  </p>
+                  <div className="relative w-[90%]">
+                    <input
+                      className={`${userInfoError.PasswordError && "border-red-700"} placeholder:md:text-sm placeholder:text-xs placeholder:font-DMsans placeholder:text-secondaryFontColor placeholder:font-normal border-b-2 pb-4 w-full  focus:border-yellow-400 `}
+                      title={"Password"}
+                      placeholder={"Password"}
+                      type={`${show ? "text" : "password"}`}
+                      name={"Password"}
+                      id={"Password"}
+                      value={userInfo.Password}
+                      onChange={HandleInput}
+                    />
+                    <div
+                      className="absolute top-[50%] z-50 -translate-y-[50%] right-4 cursor-pointer text-xl"
+                      onClick={HandleShowPassword}
+                    >
+                      {show ? <FaRegEye /> : <FaRegEyeSlash />}
+                    </div>
+                  </div>
                   {userInfoError.PasswordError ? (
                     <p className="text-red-600 font-DMsans text-base font-normal">
                       {userInfoError.PasswordError}
-                    </p>
-                  ) : userInfoError.PasswordMatchError ? (
-                    <p className="text-red-600 font-DMsans text-base font-normal">
-                      {userInfoError.PasswordMatchError}
                     </p>
                   ) : (
                     userInfoError.PasswordLengthError && (
@@ -472,21 +492,38 @@ const Registration = () => {
                     )
                   )}
                 </div>
-                <div className="basis-2/4">
-                  <Input
-                    className={`${userInfoError.RepeatPasswordError && "border-red-700"}`}
-                    inputTitle={"Repeat Password"}
-                    placeHolder={"Repeat Password"}
-                    inputType={"password"}
-                    inputName={"RepeatPassword"}
-                    inputId={"RepeatPassword"}
-                    inputValue={userInfo.RepeatPassword}
-                    onChangeInput={HandleInput}
-                  />
-                  {userInfoError.RepeatPasswordError && (
+                <div className="w-full md:basis-2/4 pt-6 md:pt-0">
+                  <p className="text-xs md:text-base font-DMsans font-bold text-primaryFontColor pb-2">
+                    Repeat password
+                  </p>
+                  <div className="relative w-[90%]">
+                    <input
+                      className={`${userInfoError.RepeatPasswordError && "border-red-700"} placeholder:md:text-sm placeholder:text-xs placeholder:font-DMsans placeholder:text-secondaryFontColor placeholder:font-normal border-b-2 pb-4 w-full  focus:border-yellow-400 `}
+                      title={"RepeatPassword"}
+                      placeholder={"Repeat password"}
+                      type={`${show2 ? "text" : "password"}`}
+                      name={"RepeatPassword"}
+                      id={"RepeatPassword"}
+                      value={userInfo.RepeatPassword}
+                      onChange={HandleInput}
+                    />
+                    <div
+                      className="absolute top-[50%] z-50 -translate-y-[50%] right-4 cursor-pointer text-xl"
+                      onClick={HandleShowPassword2}
+                    >
+                      {show2 ? <FaRegEye /> : <FaRegEyeSlash />}
+                    </div>
+                  </div>
+                  {userInfoError.RepeatPasswordError ? (
                     <p className="text-red-600 font-DMsans text-base font-normal">
                       {userInfoError.RepeatPasswordError}
                     </p>
+                  ) : (
+                    userInfoError.PasswordMatchError && (
+                      <p className="text-red-600 font-DMsans text-base font-normal">
+                        {userInfoError.PasswordMatchError}
+                      </p>
+                    )
                   )}
                 </div>
               </div>
@@ -503,17 +540,17 @@ const Registration = () => {
               value={userInfo.agreement}
               className={`${userInfoError.agreementError && "border-red-600"}`}
             />
-            <p className="font-DMsans font-normal text-sm text-secondaryFontColor">
+            <p className="font-DMsans font-normal text-xs md:text-sm text-secondaryFontColor">
               I have read and agree to the Privacy Policy
             </p>
             {userInfoError.agreementError && (
-              <p className="text-red-600 font-DMsans text-base font-normal">
+              <p className="text-red-600 font-DMsans text-sm md:text-base font-normal">
                 {userInfoError.agreementError}
               </p>
             )}
           </div>
           <div className="flex items-center gap-x-4 mt-6">
-            <p className="font-DMsans font-normal text-sm text-secondaryFontColor">
+            <p className="font-DMsans font-normal text-xs md:text-sm text-secondaryFontColor">
               Subscribe Newsletter
             </p>
             <div className="flex items-center gap-x-4">
@@ -540,14 +577,14 @@ const Registration = () => {
             </div>
           </div>
           {/* already login ? */}
-          <div className="text-sm font-DMsans font-normal text-primaryFontColor underline pt-4">
+          <div className="text-xs md:text-sm font-DMsans font-normal text-primaryFontColor underline pt-4">
             <Link to={"/login"}>Already login?</Link>
           </div>
           {/* Sign up */}
           <div className="mt-7" onClick={HandleSignup}>
             <button
               id="signUpButton"
-              className="flex items-center gap-x-2 py-4 px-20 bg-primaryFontColor text-primaryBgColor font-DMsans font-bold text-sm"
+              className="flex items-center gap-x-2 py-2 md:py-4 px-10 md:px-20 bg-primaryFontColor text-primaryBgColor font-DMsans font-bold text-xs md:text-sm"
             >
               {loading ? (
                 <svg viewBox="25 25 50 50">
