@@ -14,7 +14,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { MdOutlineImageNotSupported } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { TbShoppingCartX } from "react-icons/tb";
-import { removeCart } from "../Redux/AddToCartSlice";
+import { removeCart, getTotal } from "../Redux/AddToCartSlice";
 const Header = () => {
   // ======== all state =========
   const [opencategory, setopencategory] = useState(false);
@@ -80,6 +80,8 @@ const Header = () => {
     (state) => state.cart
   );
 
+  console.log(totalAmount);
+
   const HandleViewCart = () => {
     navigate("cart");
     setopenCart(false);
@@ -90,6 +92,10 @@ const Header = () => {
   const HandleRemoveToCart = (item) => {
     dispatch(removeCart(item));
   };
+
+  useEffect(() => {
+    dispatch(getTotal());
+  }, [dispatch, totalAmount, cartitem, totalCartitem]);
 
   return (
     <>
