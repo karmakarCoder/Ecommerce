@@ -101,7 +101,6 @@ const cartSlice = createSlice({
         }
       );
 
-      console.log(totalPriceAmount);
       state.totalCartitem = totalPriceAmount.totalItem;
       state.totalAmount = totalPriceAmount.totalamount;
     },

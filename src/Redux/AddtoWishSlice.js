@@ -8,7 +8,9 @@ const ListStatus = {
 };
 
 const initialState = {
-  wishListData: [],
+  wishListData: localStorage.getItem("wishListData")
+    ? JSON.parse(localStorage.getItem("wishListData"))
+    : [],
   status: ListStatus.IDLE,
 };
 

@@ -1,4 +1,4 @@
-import { React } from "react";
+import { React, useEffect, useState } from "react";
 import BreadCrumb from "../../Common/BreadCrumb/BreadCrumb";
 import { FaHeart } from "react-icons/fa";
 import { RxCross2 } from "react-icons/rx";
@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 
 const Wishlist = () => {
   const { wishListData } = useSelector((state) => state.wisList);
+  console.log(wishListData);
 
   return (
     <>
@@ -61,51 +62,49 @@ const Wishlist = () => {
 
             <div>
               <div className="h-[500px] overflow-y-scroll scrollbar-thumb-red scrollbar-track-black scrollbar-thin">
-                {wishListData?.map((item) => (
-                  <div className="flex items-center justify-between border-2">
-                    <div className="py-7 pl-5 flex items-center w-[35%]">
-                      <div className="mr-7 text-xl cursor-pointer hover:scale-110 transition-all active:text-yellow-400">
-                        <RxCross2 />
-                      </div>
-                      <div className="w-[100px] h-[100px] rounded-md">
-                        <img
-                          src="../../assets/product5.png"
-                          alt=""
-                          className="w-full h-full object-cover shadow-md"
-                        />
-                      </div>
+                <div className="flex items-center justify-between border-2">
+                  <div className="py-7 pl-5 flex items-center w-[35%]">
+                    <div className="mr-7 text-xl cursor-pointer hover:scale-110 transition-all active:text-yellow-400">
+                      <RxCross2 />
+                    </div>
+                    <div className="w-[100px] h-[100px] rounded-md">
+                      <img
+                        src="../../assets/product5.png"
+                        alt=""
+                        className="w-full h-full object-cover shadow-md"
+                      />
+                    </div>
 
-                      <p className="pl-5 text-base font-DMsans font-bold text-primaryFontColor w-[60%] whitespace-nowrap text-ellipsis overflow-hidden">
-                        Product name
-                      </p>
-                    </div>
-                    <div className="w-[15%] text-primaryFontColor font-DMsans font-bold text-xl">
-                      <p>$</p>
-                    </div>
-                    {/* ========= */}
-                    <div className="flex items-center w-[15%]">
-                      <div className="flex items-center gap-x-[41px]">
-                        <div className="w-[100px] md:w-[120px] py-[7px] px-5 border-2 flex items-center justify-between">
-                          <span className="text-secondaryFontColor text-md md:text-xl cursor-pointer">
-                            <FiMinus />
-                          </span>
-                          <p className="text-xs md:text-base font-normal text-secondaryFontColor font-DMsans">
-                            1
-                          </p>
-                          <span className="text-secondaryFontColor text-md md:text-xl cursor-pointer">
-                            <GoPlus />
-                          </span>
-                        </div>
+                    <p className="pl-5 text-base font-DMsans font-bold text-primaryFontColor w-[60%] whitespace-nowrap text-ellipsis overflow-hidden">
+                      Product name
+                    </p>
+                  </div>
+                  <div className="w-[15%] text-primaryFontColor font-DMsans font-bold text-xl">
+                    <p>$</p>
+                  </div>
+                  {/* ========= */}
+                  <div className="flex items-center w-[15%]">
+                    <div className="flex items-center gap-x-[41px]">
+                      <div className="w-[100px] md:w-[120px] py-[7px] px-5 border-2 flex items-center justify-between">
+                        <span className="text-secondaryFontColor text-md md:text-xl cursor-pointer">
+                          <FiMinus />
+                        </span>
+                        <p className="text-xs md:text-base font-normal text-secondaryFontColor font-DMsans">
+                          1
+                        </p>
+                        <span className="text-secondaryFontColor text-md md:text-xl cursor-pointer">
+                          <GoPlus />
+                        </span>
                       </div>
-                    </div>
-                    <div className="w-[10%] text-primaryFontColor font-DMsans font-bold text-xl">
-                      <p>$</p>
-                    </div>
-                    <div className="w-[15%] text-primaryFontColor font-DMsans font-bold text-xl">
-                      <p>$</p>
                     </div>
                   </div>
-                ))}
+                  <div className="w-[10%] text-primaryFontColor font-DMsans font-bold text-xl">
+                    <p>$</p>
+                  </div>
+                  <div className="w-[15%] text-primaryFontColor font-DMsans font-bold text-xl">
+                    <p>$</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

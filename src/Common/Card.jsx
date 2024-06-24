@@ -15,6 +15,7 @@ const Card = ({
   rating,
   productId,
   onCartAdd,
+  onWishAdd,
 }) => {
   return (
     <>
@@ -34,7 +35,10 @@ const Card = ({
           {/* =================Overlay================= */}
 
           <div className="py-6 px-7 flex flex-col items-center md:items-end absolute -bottom-36 left-0 bg-white w-full gap-y-2 md:gap-5 group-hover:bottom-0 transition-all">
-            <div className="flex items-center gap-x-2 sm:gap-x-4">
+            <div
+              className="flex items-center gap-x-2 sm:gap-x-4"
+              onClick={onWishAdd}
+            >
               <h5 className="text-[#767676] font-DMsans hover:text-[#262626] sm:hover:font-bold transition-all text-sm md:text-base">
                 Add to List
               </h5>

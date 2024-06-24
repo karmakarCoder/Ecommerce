@@ -5,6 +5,7 @@ import Button from "../../Common/Button";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProduct } from "../../Redux/Slice";
 import { addtoCart } from "../../Redux/AddToCartSlice";
+import { addToWishList } from "../../Redux/AddtoWishSlice";
 const BestSeller = () => {
   const dispatch = useDispatch();
   const { data, status } = useSelector((state) => state.product);
@@ -77,6 +78,10 @@ const BestSeller = () => {
     dispatch(addtoCart(item));
   };
 
+  const HandleWish = (item) => {
+    dispatch(addToWishList(item));
+  };
+
   const [productData, setproductData] = useState([]);
 
   return (
@@ -94,6 +99,7 @@ const BestSeller = () => {
               return (
                 <Card
                   onCartAdd={() => HandleCartAdd(item)}
+                  onWishAdd={() => HandleWish(item)}
                   productId={item.id}
                   key={item.id}
                   badge={
