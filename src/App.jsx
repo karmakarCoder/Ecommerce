@@ -11,6 +11,7 @@ import Checkout from "./Pages/Checkout/Checkout";
 import Contact from "./Pages/Contact/Contact";
 import Login from "./Pages/Login/Login";
 import Wishlist from "./Pages/Wishlist/Wishlist";
+import About from "./Pages/About/About";
 // ==============================
 import RootLayout from "./Common/RootLayout/RootLayout";
 import {
@@ -35,6 +36,7 @@ const router = createBrowserRouter(
       <Route path="/contact" element={<Contact />}></Route>
       <Route path="/wishlist" element={<Wishlist />}></Route>
       <Route path="/login" element={<Login />}></Route>
+      <Route path="/about" element={<About />}></Route>
     </Route>
   )
 );
