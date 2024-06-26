@@ -26,7 +26,7 @@ const Cart = () => {
   }, [dispatch, cartitem]);
 
   // Product cart remove functionality
-  const HandleRemove = () => {
+  const HandleRemove = (item) => {
     dispatch(removeCart(item));
   };
 
@@ -52,41 +52,43 @@ const Cart = () => {
 
   return (
     <>
-      <div className="py-28">
+      <div className="py-28 px-4 lg:px-0">
         <div className="container">
           <div>
             <div className="pb-12">
-              <h1 className="font-DMsans font-bold text-5xl text-primaryFontColor">
+              <h1 className="font-DMsans font-bold text-3xl lg:text-5xl text-primaryFontColor">
                 Cart
               </h1>
               <div className="pt-2">
                 <Breadcrumb />
               </div>
             </div>
-            <div className="flex">
-              <div className="w-[35%] text-base font-DMsans font-bold text-primaryFontColor">
+            <div className="flex w-full">
+              <div className="w-[35%] text-xs lg:text-base font-DMsans font-bold text-primaryFontColor">
                 <div>
-                  <h4 className="bg-[#F5F5F3] py-8 pl-5">Product</h4>
+                  <h4 className="bg-[#F5F5F3] py-4 lg:py-8 pl-2 lg:pl-5">
+                    Product
+                  </h4>
                 </div>
               </div>
 
               {/* ========= */}
-              <div className="w-[25%] text-base font-DMsans font-bold text-primaryFontColor">
+              <div className="w-[25%] text-xs lg:text-base font-DMsans font-bold text-primaryFontColor">
                 <div>
-                  <h4 className="bg-[#F5F5F3] py-8">Price</h4>
+                  <h4 className="bg-[#F5F5F3] py-4 lg:py-8">Price</h4>
                 </div>
               </div>
 
-              <div className="w-[25%] text-base font-DMsans font-bold text-primaryFontColor">
+              <div className="w-[25%] text-xs lg:text-base font-DMsans font-bold text-primaryFontColor">
                 <div>
-                  <h4 className="bg-[#F5F5F3] py-8">Quantity</h4>
+                  <h4 className="bg-[#F5F5F3] py-4 lg:py-8">Quantity</h4>
                 </div>
               </div>
 
               {/* ============== */}
-              <div className="w-[15%] text-base font-DMsans font-bold text-primaryFontColor">
+              <div className="w-[15%] text-xs lg:text-base font-DMsans font-bold text-primaryFontColor">
                 <div>
-                  <h4 className="bg-[#F5F5F3] py-8">Quantity</h4>
+                  <h4 className="bg-[#F5F5F3] py-4 lg:py-8">Quantity</h4>
                 </div>
               </div>
             </div>
@@ -100,12 +102,12 @@ const Cart = () => {
                   >
                     <div className="py-7 pl-5 flex items-center  w-[35%]">
                       <div
-                        className="mr-7 text-xl cursor-pointer hover:scale-110 transition-all active:text-yellow-400"
+                        className="mr-3 lg:mr-7 text-xl cursor-pointer hover:scale-110 transition-all active:text-yellow-400"
                         onClick={() => HandleRemove(item)}
                       >
                         <RxCross2 />
                       </div>
-                      <div className="w-[100px] h-[100px] rounded-md">
+                      <div className="w-[50px] lg:w-[100px] lg:h-[100px] h-[50px] rounded-md">
                         <img
                           src={item.thumbnail}
                           alt={item.thumbnail}
@@ -113,7 +115,7 @@ const Cart = () => {
                         />
                       </div>
 
-                      <p className="pl-5 text-base font-DMsans font-bold text-primaryFontColor w-[60%] whitespace-nowrap text-ellipsis overflow-hidden">
+                      <p className="pl-2 text-base font-DMsans font-bold text-primaryFontColor w-[60%] whitespace-nowrap text-ellipsis overflow-hidden">
                         {item.title ? item.title : "Product name"}
                       </p>
                     </div>
