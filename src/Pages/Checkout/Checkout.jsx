@@ -178,7 +178,7 @@ const Checkout = () => {
   };
   return (
     <>
-      <div className="relative py-28">
+      <div className="relative py-10 lg:py-28 px-4 lg:px-0">
         {Loading && (
           <div className="fixed top-0 left-0 h-screen w-full bg-[#ffffff18] transition-all backdrop-blur-sm z-40">
             <div className="absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%]">
@@ -199,13 +199,13 @@ const Checkout = () => {
 
         <div className="container">
           <div>
-            <h1 className="text-5xl font-DMsans font-bold text-primaryFontColor pb-2">
+            <h1 className="text-3xl lg:text-5xl font-DMsans font-bold text-primaryFontColor pb-2">
               Checkout
             </h1>
             <Breadcrumb />
           </div>
 
-          <p className="text-base font-DMsans font-normal text-secondaryFontColor pt-11">
+          <p className="text-xs lg:text-base font-DMsans font-normal text-secondaryFontColor pt-5 lg:pt-11">
             Have a coupon?{" "}
             <span className="text-primaryFontColor cursor-pointer">
               Click here to enter your code
@@ -213,12 +213,12 @@ const Checkout = () => {
           </p>
 
           <div className="pt-14 max-w-[700px]">
-            <h4 className="text-[39px] font-DMsans font-bold text-primaryFontColor pb-9">
+            <h4 className="lg:text-[39px] text-[28px] font-DMsans font-bold text-primaryFontColor pb-9">
               Billing Details
             </h4>
             {/* form */}
             <form action="#" onSubmit={(e) => e.preventDefault()}>
-              <div className="flex items-center gap-x-9">
+              <div className="flex flex-col md:flex-row gap-y-4 md:gap-y-0 items-center gap-x-9">
                 <div className="flex flex-col w-full">
                   <span className="text-base font-DMsans font-bold text-primaryFontColor">
                     First Name *
@@ -433,7 +433,7 @@ const Checkout = () => {
           </div>
           {/* Additional Information */}
           <div className="pt-24 max-w-[700px]">
-            <h3 className="text-[38px] font-DMsans font-bold text-primaryFontColor pb-6">
+            <h3 className="lg:text-[38px] text-[26px] font-DMsans font-bold text-primaryFontColor pb-6">
               Additional Information
             </h3>
             <div className="w-full">
@@ -453,8 +453,8 @@ const Checkout = () => {
           </div>
 
           {/* Order details */}
-          <div className="pt-24">
-            <h3 className="text-[38px] font-DMsans font-bold text-primaryFontColor pb-11">
+          <div className="lg:pt-24 pt-10">
+            <h3 className="lg:text-[38px] text-[26px] font-DMsans font-bold text-primaryFontColor pb-11">
               Your Order
             </h3>
             <div className="max-w-[600px] border-2">
