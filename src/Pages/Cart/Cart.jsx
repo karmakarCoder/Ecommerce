@@ -33,6 +33,7 @@ const Cart = () => {
   // product quantity increament functionality
 
   const Handleincreament = (item) => {
+    console.log(item);
     dispatch(productIncreament(item));
   };
 
@@ -52,7 +53,7 @@ const Cart = () => {
 
   return (
     <>
-      <div className="py-28 px-4 lg:px-0">
+      <div className="pt-10 pb-0 lg:py-28 px-4 lg:px-0">
         <div className="container">
           <div>
             <div className="pb-12">
@@ -88,19 +89,19 @@ const Cart = () => {
               {/* ============== */}
               <div className="w-[15%] text-xs lg:text-base font-DMsans font-bold text-primaryFontColor">
                 <div>
-                  <h4 className="bg-[#F5F5F3] py-4 lg:py-8">Quantity</h4>
+                  <h4 className="bg-[#F5F5F3] py-4 lg:py-8">Total</h4>
                 </div>
               </div>
             </div>
             {/* =============== */}
             {cartitem.length > 0 ? (
-              <div className="h-[500px] overflow-y-scroll scrollbar-thumb-red scrollbar-track-black scrollbar-thin">
+              <div className="h-[250px] lg:h-[500px] overflow-y-scroll scrollbar-thumb-red scrollbar-track-black scrollbar-thin">
                 {cartitem?.map((item, index) => (
                   <div
                     className="flex items-center justify-between border-2"
                     key={index}
                   >
-                    <div className="py-7 pl-5 flex items-center  w-[35%]">
+                    <div className="py-4 lg:py-7 pl-2 lg:pl-5 flex items-center  w-[35%]">
                       <div
                         className="mr-3 lg:mr-7 text-xl cursor-pointer hover:scale-110 transition-all active:text-yellow-400"
                         onClick={() => HandleRemove(item)}
@@ -115,15 +116,15 @@ const Cart = () => {
                         />
                       </div>
 
-                      <p className="pl-2 text-base font-DMsans font-bold text-primaryFontColor w-[60%] whitespace-nowrap text-ellipsis overflow-hidden">
+                      <p className="pl-2 text-xs md:text-base font-DMsans font-bold text-primaryFontColor w-[90%] lg:w-[60%] whitespace-nowrap text-ellipsis overflow-hidden">
                         {item.title ? item.title : "Product name"}
                       </p>
                     </div>
-                    <div className="w-[25%] text-primaryFontColor font-DMsans font-bold text-xl">
+                    <div className="w-[15%] lg:w-[25%] text-primaryFontColor font-DMsans font-bold text-md lg:text-xl">
                       <p>${Math.round(item.price ? item.price : "$0.00")}</p>
                     </div>
                     {/* ========= */}
-                    <div className="flex items-center w-[25%]">
+                    <div className="flex items-center w-[35%] md:w-[28%] lg:w-[25%]">
                       <div className="flex items-center gap-x-[41px]">
                         <div className="w-[100px] md:w-[120px] py-[7px] px-5 border-2 flex items-center justify-between">
                           <span
@@ -144,46 +145,46 @@ const Cart = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="w-[15%] text-primaryFontColor font-DMsans font-bold text-xl">
+                    <div className="w-[15%] text-primaryFontColor font-DMsans font-bold text-md lg:text-xl">
                       <p>${Math.round(item.Quantity * item.price)}</p>
                     </div>
                   </div>
                 ))}
               </div>
             ) : (
-              <div className="h-[400px] bg-[#ececec75] border-2 relative">
+              <div className="h-[200px] lg:h-[400px] bg-[#ececec75] border-2 relative">
                 <div className="flex flex-col items-center  absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%]">
-                  <h4 className="font-DMsans font-semibold text-xl capitalize text-primaryFontColor opacity-75">
+                  <h4 className="font-DMsans font-semibold text-md lg:text-xl capitalize text-primaryFontColor opacity-75">
                     No product here
                   </h4>
                   <span>
-                    <TbShoppingCartOff className="text-6xl text-primaryFontColor opacity-75" />
+                    <TbShoppingCartOff className="text-4xl lg:text-6xl text-primaryFontColor opacity-75" />
                   </span>
                 </div>
               </div>
             )}
           </div>
           <div className="py-14 flex flex-col">
-            <div className="basis-5/12">
+            <div className="basis-8/12 lg:basis-5/12">
               <div className="flex justify-end">
-                <div className="basis-5/12">
-                  <h4 className="flex justify-end text-primaryFontColor font-DMsans font-bold text-xl pb-6 ">
+                <div className="basis-8/12 lg:basis-5/12">
+                  <h4 className="flex justify-end text-primaryFontColor font-DMsans font-bold text-md lg:text-xl pb-6 ">
                     Cart totals
                   </h4>
                   <div className="">
                     <div className="flex">
-                      <div className=" basis-6/12 border-2 py-[14px] pl-4 text-base font-DMsans font-bold text-primaryFontColor">
+                      <div className=" basis-6/12 border-2 py-[14px] pl-4 text-sm lg:text-base font-DMsans font-bold text-primaryFontColor">
                         Subtotal
                       </div>
-                      <div className="  basis-6/12 border-2 py-[14px] pl-4 text-base font-DMsans font-bold text-primaryFontColor">
+                      <div className="  basis-6/12 border-2 py-[14px] pl-4 text-sm lg:text-base font-DMsans font-bold text-primaryFontColor">
                         ${totalAmount}
                       </div>
                     </div>
                     <div className="flex">
-                      <div className=" basis-6/12 border-2 py-[14px] p-4 text-base font-DMsans font-bold text-primaryFontColor">
+                      <div className=" basis-6/12 border-2 py-[14px] p-4 text-sm lg:text-base font-DMsans font-bold text-primaryFontColor">
                         Total
                       </div>
-                      <div className="  basis-6/12 border-2 py-[14px] pl-4 text-base font-DMsans font-bold text-primaryFontColor">
+                      <div className="  basis-6/12 border-2 py-[14px] pl-4 text-xm lg:text-base font-DMsans font-bold text-primaryFontColor">
                         ${totalAmount}
                       </div>
                     </div>
@@ -192,8 +193,8 @@ const Cart = () => {
               </div>
               <div className="flex items-end justify-end mt-7">
                 <div onClick={HandleProcced}>
-                  <div className="cursor-pointer text-primaryBgColor font-DMsans font-bold text-sm py-4 px-6 bg-primaryFontColor">
-                    <button className="text-primaryBgColor font-DMsans font-bold text-sm bg-primaryFontColor">
+                  <div className="cursor-pointer text-primaryBgColor font-DMsans font-bold text-sm py-4 px-4 lg:px-6 bg-primaryFontColor">
+                    <button className="text-primaryBgColor font-DMsans font-bold text-xs lg:text-sm bg-primaryFontColor">
                       Proceed to Checkout
                     </button>
                   </div>
