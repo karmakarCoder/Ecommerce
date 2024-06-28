@@ -5,12 +5,23 @@ import { GoPlus } from "react-icons/go";
 import { FiMinus } from "react-icons/fi";
 import Review_Description from "./Review_Description";
 import Loading from "./Loading";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  productIncreament,
+  productDecreament,
+} from "../../Redux/AddToCartSlice";
 
 const ProductInfo = ({ data, status, addtoCart, HandleWishList }) => {
   const [sizeOpen, setsizeOpen] = useState(false);
   const [sizeValue, setsizeValue] = useState();
   const [featureOPen, setfeatureOPen] = useState(false);
   const [shipingOPen, setshipingOPen] = useState(false);
+  const dispatch = useDispatch();
+  const { cartitem } = useSelector((state) => state.cart);
+
+  const HandleDecreament = (item) => {
+    console.log(item);
+  };
 
   const HandleSize = () => {
     setsizeOpen(!sizeOpen);
@@ -154,9 +165,13 @@ const ProductInfo = ({ data, status, addtoCart, HandleWishList }) => {
                   QUANTITY:
                 </h3>
                 <div className="w-[129px] md:w-[139px] py-[7px] px-5 border-2 flex items-center justify-between">
-                  <span className="text-secondaryFontColor text-md md:text-xl cursor-pointer">
+                  <span
+                    className="text-secondaryFontColor text-md md:text-xl cursor-pointer"
+                    onClick={() => HandleDecreament(item)}
+                  >
                     <FiMinus />
                   </span>
+
                   <p className="text-xs md:text-base font-normal text-secondaryFontColor font-DMsans">
                     1
                   </p>
