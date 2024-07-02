@@ -1,6 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import RatingStar from "./RatingStar";
 const Review = ({ data }) => {
+  const [dates, setdates] = useState("");
+  useEffect(() => {
+    function date() {
+      ` ${
+        data.reviews &&
+        data.reviews.map((item) => {
+          setdates(new Date(item && item.date).toLocaleDateString());
+        })
+      }`;
+    }
+    date();
+  }, [data]);
+
   return (
     <>
       <div className="pt-5 md:pt-10">
@@ -17,7 +30,7 @@ const Review = ({ data }) => {
                 <RatingStar rating={item.rating} />
               </div>
               <div className="text-xs md:text-base font-DMsans font-normal text-secondaryFontColor">
-                <p>{item.date}</p>
+                <p>{dates && dates}</p>
               </div>
             </div>
 

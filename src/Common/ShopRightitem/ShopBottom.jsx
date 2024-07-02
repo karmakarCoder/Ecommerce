@@ -29,15 +29,15 @@ const ShopBottom = () => {
 
   const { data, status } = useSelector((state) => state.product);
 
-  const HandleAddToCart = (item) => {
-    dispatch(addtoCart(item));
-  };
-
   // useEffect(() => {
   //   if (status === "IDLE") {
   //     // setallProducts(data.products);
   //   }
   // }, [data.products, status]);
+
+  const HandleAddToCart = (item) => {
+    dispatch(addtoCart(item));
+  };
 
   const HandlePagination = (pageNumber) => {
     if (

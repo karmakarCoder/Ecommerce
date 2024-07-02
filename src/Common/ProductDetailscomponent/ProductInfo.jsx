@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import RatingStar from "./RatingStar";
 import { MdOutlineArrowDropDown } from "react-icons/md";
 import { GoPlus } from "react-icons/go";
@@ -17,10 +17,15 @@ const ProductInfo = ({ data, status, addtoCart, HandleWishList }) => {
   const [featureOPen, setfeatureOPen] = useState(false);
   const [shipingOPen, setshipingOPen] = useState(false);
   const dispatch = useDispatch();
-  const { cartitem } = useSelector((state) => state.cart);
 
   const HandleDecreament = (item) => {
     console.log(item);
+    dispatch(productDecreament(item));
+  };
+
+  const HandleIncreament = (item) => {
+    console.log(item);
+    dispatch(productIncreament(item));
   };
 
   const HandleSize = () => {
@@ -167,15 +172,18 @@ const ProductInfo = ({ data, status, addtoCart, HandleWishList }) => {
                 <div className="w-[129px] md:w-[139px] py-[7px] px-5 border-2 flex items-center justify-between">
                   <span
                     className="text-secondaryFontColor text-md md:text-xl cursor-pointer"
-                    onClick={() => HandleDecreament(item)}
+                    onClick={() => HandleDecreament(data)}
                   >
                     <FiMinus />
                   </span>
 
                   <p className="text-xs md:text-base font-normal text-secondaryFontColor font-DMsans">
-                    1
+                    {data.Quantity ? data.Quantity : "1"}
                   </p>
-                  <span className="text-secondaryFontColor text-md md:text-xl cursor-pointer">
+                  <span
+                    className="text-secondaryFontColor text-md md:text-xl cursor-pointer"
+                    onClick={() => HandleIncreament(data)}
+                  >
                     <GoPlus />
                   </span>
                 </div>

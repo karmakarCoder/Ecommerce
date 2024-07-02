@@ -15,6 +15,8 @@ import { MdOutlineImageNotSupported } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { TbShoppingCartX } from "react-icons/tb";
 import { removeCart, getTotal } from "../Redux/AddToCartSlice";
+import { IoSearchSharp } from "react-icons/io5";
+
 const Header = () => {
   // ======== all state =========
   const [opencategory, setopencategory] = useState(false);
@@ -80,8 +82,6 @@ const Header = () => {
     (state) => state.cart
   );
 
-  console.log(totalAmount);
-
   const HandleViewCart = () => {
     navigate("cart");
     setopenCart(false);
@@ -96,6 +96,39 @@ const Header = () => {
   useEffect(() => {
     dispatch(getTotal());
   }, [dispatch, totalAmount, cartitem, totalCartitem]);
+
+  // HandleSearch
+
+  const { data, status } = useSelector((state) => state.product);
+
+  const [allproduct, setallproduct] = useState([]);
+  const [searchResult, setsearchResult] = useState([]);
+  const [searchValue, setsearchValue] = useState();
+
+  useEffect(() => {
+    if (status === "IDLE") {
+      setallproduct(data.products);
+    }
+  }, [data.products, status]);
+
+  const HandleSearch = (event) => {
+    const { value } = event.target;
+    setsearchValue(value);
+    if (searchValue) {
+      const searchResult = allproduct.filter((products) =>
+        products.title.toLowerCase().includes(searchValue.toLowerCase())
+      );
+      setsearchResult(searchResult);
+    } else {
+      setsearchResult([]);
+    }
+  };
+
+  const HandleSerach = (item) => {
+    setsearchValue("");
+    setsearchResult([]);
+    navigate(`/product-details/${item.id}`);
+  };
 
   return (
     <>
@@ -264,8 +297,32 @@ const Header = () => {
         </div>
       </div>
       {/* ============== Bottom ============= */}
+
       <div className="bg-[#F5F5F3] px-4" ref={Menuref}>
-        <div className="container">
+        <div
+          className={`bg-black w-full opacity-60 h-screen fixed top-0 left-0 z-30 ${searchResult.length > 0 ? "block" : "hidden"}`}
+        ></div>
+
+        <div className="container relative">
+          {searchResult.length > 0 && (
+            <div className="bg-[#ffffff70] backdrop-blur-xl w-full h-[200px] absolute top-[106px] left-0 z-50 rounded-xl shadow-lg overflow-hidden">
+              {searchResult?.map((product) => (
+                <div
+                  key={product.id}
+                  onClick={() => HandleSerach(product)}
+                  className="border-b-2 py-5 px-6 cursor-pointer hover:bg-[#ffffff46] transition-all"
+                >
+                  <h3 className="font-DMsans font-semibold text-xl flex items-center gap-x-3 text-primaryFontColor capitalize">
+                    <span className="text-primaryFontColor text-2xl">
+                      <IoSearchSharp />
+                    </span>{" "}
+                    {product && product.title}
+                  </h3>
+                </div>
+              ))}
+            </div>
+          )}
+
           <div className="flex items-center justify-between py-6">
             <div className="relative">
               <div
@@ -317,9 +374,9 @@ const Header = () => {
                 </div>
               )}
             </div>
-
+            {/* Search bar */}
             <div>
-              <Search />
+              <Search onSearch={HandleSearch} value={searchValue} />
             </div>
             <div className="flex items-center gap-x-3 lg:gap-x-10">
               <div className="relative">

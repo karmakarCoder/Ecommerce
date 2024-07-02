@@ -35,7 +35,13 @@ const About = () => {
             {[...Array(3)].map((_, index) => (
               <div key={index}>
                 <h3 className="lg:text-2xl text-lg font-DMsans font-bold text-primaryFontColor">
-                  Our Vision
+                  {index == 0
+                    ? "Our Vision"
+                    : index === 1
+                      ? "Our Story"
+                      : index === 2
+                        ? "Our Brands"
+                        : "Our Vision"}
                 </h3>
                 <p className="lg:text-base text-sm font-DMsans font-normal text-primaryFontColor pt-3">
                   Lorem Ipsum is simply dummy text of the printing and

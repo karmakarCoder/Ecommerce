@@ -33,7 +33,6 @@ const Cart = () => {
   // product quantity increament functionality
 
   const Handleincreament = (item) => {
-    console.log(item);
     dispatch(productIncreament(item));
   };
 
