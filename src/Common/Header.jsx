@@ -16,6 +16,7 @@ import { useNavigate } from "react-router-dom";
 import { TbShoppingCartX } from "react-icons/tb";
 import { removeCart, getTotal } from "../Redux/AddToCartSlice";
 import { IoSearchSharp } from "react-icons/io5";
+import { FaAngleRight } from "react-icons/fa";
 
 const Header = () => {
   // ======== all state =========
@@ -129,16 +130,6 @@ const Header = () => {
     setsearchResult([]);
     navigate(`/product-details/${item.id}`);
   };
-
-  const serachRef = useRef();
-
-  useEffect(() => {
-    window.addEventListener("click", (e) => {
-      if (serachRef.current.contains(e.target)) {
-        searchResult.length === 0;
-      }
-    });
-  }, []);
 
   return (
     <>
@@ -313,7 +304,7 @@ const Header = () => {
           className={`bg-black w-full opacity-60 h-screen fixed top-0 left-0 z-30 ${searchResult.length > 0 ? "block" : "hidden"}`}
         ></div>
 
-        <div className="container relative" ref={serachRef}>
+        <div className="container relative">
           {searchResult.length > 0 && (
             <div className="bg-[#ffffff70] backdrop-blur-xl w-full absolute top-[106px] left-0 z-50 rounded-xl shadow-lg overflow-hidden">
               {searchResult?.map((product) => (
@@ -351,33 +342,51 @@ const Header = () => {
                 <div className="absolute top-[60px] left-0 bg-primaryFontColor w-[263px] z-40">
                   <ul>
                     <li className="border-b-2 border-[#ffffff21] py-4">
-                      <Link className="text-sm font-DMsans font-normal text-[#ffffff88] pl-5 hover:text-white hover:pl-7 hover:font-bold transition-all">
-                        Accesories
+                      <Link className="text-sm flex items-center justify-between font-DMsans font-normal text-[#ffffff88] px-5 hover:text-white hover:pl-7 hover:font-bold transition-all">
+                        Accesories{" "}
+                        <span>
+                          <FaAngleRight />
+                        </span>
                       </Link>
                     </li>
                     <li className="border-b-2 border-[#ffffff21] py-4">
-                      <Link className="text-sm font-DMsans font-normal text-[#ffffff88] pl-5 hover:text-white hover:pl-7 hover:font-bold transition-all">
-                        Furniture
+                      <Link className="text-sm font-DMsans font-normal text-[#ffffff88] flex items-center justify-between px-5 hover:text-white hover:pl-7 hover:font-bold transition-all">
+                        Furniture{" "}
+                        <span>
+                          <FaAngleRight />
+                        </span>
                       </Link>
                     </li>
                     <li className="border-b-2 border-[#ffffff21] py-4">
-                      <Link className="text-sm font-DMsans font-normal text-[#ffffff88] pl-5 hover:text-white hover:pl-7 hover:font-bold transition-all">
-                        Electronics
+                      <Link className="text-sm font-DMsans font-normal text-[#ffffff88] flex items-center justify-between px-5 hover:text-white hover:pl-7 hover:font-bold transition-all">
+                        Electronics{" "}
+                        <span>
+                          <FaAngleRight />
+                        </span>
                       </Link>
                     </li>
                     <li className="border-b-2 border-[#ffffff21] py-4">
-                      <Link className="text-sm font-DMsans font-normal text-[#ffffff88] pl-5 hover:text-white hover:pl-7 hover:font-bold transition-all">
-                        Clothes
+                      <Link className="text-sm font-DMsans font-normal text-[#ffffff88] flex items-center justify-between px-5 hover:text-white hover:pl-7 hover:font-bold transition-all">
+                        Clothes{" "}
+                        <span>
+                          <FaAngleRight />
+                        </span>
                       </Link>
                     </li>
                     <li className="border-b-2 border-[#ffffff21] py-4">
-                      <Link className="text-sm font-DMsans font-normal text-[#ffffff88] pl-5 hover:text-white hover:pl-7 hover:font-bold transition-all">
-                        Bags
+                      <Link className="text-sm font-DMsans font-normal text-[#ffffff88] hover:text-white hover:pl-7 flex items-center justify-between px-5 hover:font-bold transition-all">
+                        Bags{" "}
+                        <span>
+                          <FaAngleRight />
+                        </span>
                       </Link>
                     </li>
                     <li className="py-4">
-                      <Link className="text-sm font-DMsans font-normal text-[#ffffff88] pl-5 hover:text-white hover:pl-7 hover:font-bold transition-all">
-                        Home appliances
+                      <Link className="text-sm font-DMsans font-normal text-[#ffffff88] hover:text-white flex items-center justify-between px-5 hover:pl-7 hover:font-bold transition-all">
+                        Home appliances{" "}
+                        <span>
+                          <FaAngleRight />
+                        </span>
                       </Link>
                     </li>
                   </ul>
