@@ -130,6 +130,16 @@ const Header = () => {
     navigate(`/product-details/${item.id}`);
   };
 
+  const serachRef = useRef();
+
+  useEffect(() => {
+    window.addEventListener("click", (e) => {
+      if (serachRef.current.contains(e.target)) {
+        searchResult.length === 0;
+      }
+    });
+  }, []);
+
   return (
     <>
       <div className="bg-white px-4">
@@ -213,7 +223,7 @@ const Header = () => {
               </ul>
             </div>
             <div
-              className="block sm:hidden cursor-pointer text-xl z-50"
+              className="block sm:hidden cursor-pointer text-xl z-[999]"
               onClick={handleNav}
             >
               <span className="cursor-pointer">
@@ -303,17 +313,17 @@ const Header = () => {
           className={`bg-black w-full opacity-60 h-screen fixed top-0 left-0 z-30 ${searchResult.length > 0 ? "block" : "hidden"}`}
         ></div>
 
-        <div className="container relative">
+        <div className="container relative" ref={serachRef}>
           {searchResult.length > 0 && (
-            <div className="bg-[#ffffff70] backdrop-blur-xl w-full h-[200px] absolute top-[106px] left-0 z-50 rounded-xl shadow-lg overflow-hidden">
+            <div className="bg-[#ffffff70] backdrop-blur-xl w-full absolute top-[106px] left-0 z-50 rounded-xl shadow-lg overflow-hidden">
               {searchResult?.map((product) => (
                 <div
                   key={product.id}
                   onClick={() => HandleSerach(product)}
-                  className="border-b-2 py-5 px-6 cursor-pointer hover:bg-[#ffffff46] transition-all"
+                  className="border-b-2 lg:py-5 py-3 px-6 cursor-pointer hover:bg-[#ffffff46] transition-all"
                 >
-                  <h3 className="font-DMsans font-semibold text-xl flex items-center gap-x-3 text-primaryFontColor capitalize">
-                    <span className="text-primaryFontColor text-2xl">
+                  <h3 className="font-DMsans font-semibold lg:text-xl text-md flex items-center gap-x-3 text-primaryFontColor capitalize">
+                    <span className="text-primaryFontColor lg:text-2xl text-xl">
                       <IoSearchSharp />
                     </span>{" "}
                     {product && product.title}
