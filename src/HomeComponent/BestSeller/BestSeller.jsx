@@ -94,33 +94,67 @@ const BestSeller = () => {
             </h1>
           </div>
 
-          <Slider {...settings}>
-            {productData?.map((item) => {
-              return (
-                <Card
-                  onCartAdd={() => HandleCartAdd(item)}
-                  onWishAdd={() => HandleWish(item)}
-                  productId={item.id}
-                  key={item.id}
-                  badge={
-                    item.discountPercentage ? (
-                      <Button className={"py-[6px] px-5"}>
-                        {Math.floor(item.discountPercentage) + "%"
-                          ? Math.floor(item.discountPercentage) + "%"
-                          : "Stock out"}
-                      </Button>
-                    ) : null
-                  }
-                  img={item.thumbnail}
-                  productTitle={item.title}
-                  price={
-                    "$" + `${Math.round(item.price - item.discountPercentage)}`
-                  }
-                  colorVariant={item.colorVariant ? item.colorVariant : null}
-                />
-              );
-            })}
-          </Slider>
+          {status === "LOADING" ? (
+            <div className="flex items-center justify-between">
+              <div className="w-[23%]">
+                <div className="w-full h-[340px] bg-[#d6d6d6] animate-pulse"></div>
+                <div className="flex items-center justify-between mt-2">
+                  <div className="w-[50%] h-[10px] bg-[#d6d6d6] rounded-md animate-pulse"></div>
+                  <div className="w-[30%] h-[10px] bg-[#d6d6d6] rounded-md animate-pulse"></div>
+                </div>
+              </div>
+              <div className="w-[23%]">
+                <div className="w-full h-[340px] bg-[#d6d6d6] animate-pulse"></div>
+                <div className="flex items-center justify-between mt-2">
+                  <div className="w-[50%] h-[10px] bg-[#d6d6d6] rounded-md animate-pulse"></div>
+                  <div className="w-[30%] h-[10px] bg-[#d6d6d6] rounded-md animate-pulse"></div>
+                </div>
+              </div>
+              <div className="w-[23%]">
+                <div className="w-full h-[340px] bg-[#d6d6d6] animate-pulse"></div>
+                <div className="flex items-center justify-between mt-2">
+                  <div className="w-[50%] h-[10px] bg-[#d6d6d6] rounded-md animate-pulse"></div>
+                  <div className="w-[30%] h-[10px] bg-[#d6d6d6] rounded-md animate-pulse"></div>
+                </div>
+              </div>
+              <div className="w-[23%]">
+                <div className="w-full h-[340px] bg-[#d6d6d6] animate-pulse"></div>
+                <div className="flex items-center justify-between mt-2">
+                  <div className="w-[50%] h-[10px] bg-[#d6d6d6] rounded-md animate-pulse"></div>
+                  <div className="w-[30%] h-[10px] bg-[#d6d6d6] rounded-md animate-pulse"></div>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <Slider {...settings}>
+              {productData?.map((item) => {
+                return (
+                  <Card
+                    onCartAdd={() => HandleCartAdd(item)}
+                    onWishAdd={() => HandleWish(item)}
+                    productId={item.id}
+                    key={item.id}
+                    badge={
+                      item.discountPercentage ? (
+                        <Button className={"py-[6px] px-5"}>
+                          {Math.floor(item.discountPercentage) + "%"
+                            ? Math.floor(item.discountPercentage) + "%"
+                            : "Stock out"}
+                        </Button>
+                      ) : null
+                    }
+                    img={item.thumbnail}
+                    productTitle={item.title}
+                    price={
+                      "$" +
+                      `${Math.round(item.price - item.discountPercentage)}`
+                    }
+                    colorVariant={item.colorVariant ? item.colorVariant : null}
+                  />
+                );
+              })}
+            </Slider>
+          )}
         </div>
       </div>
     </>

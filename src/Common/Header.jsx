@@ -323,7 +323,6 @@ const Header = () => {
               ))}
             </div>
           )}
-
           <div className="flex items-center justify-between py-6">
             <div className="relative">
               <div

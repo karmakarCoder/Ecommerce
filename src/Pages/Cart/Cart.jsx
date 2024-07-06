@@ -21,6 +21,8 @@ const Cart = () => {
     (state) => state.cart
   );
 
+  console.log(cartitem);
+
   useEffect(() => {
     dispatch(getTotal());
   }, [dispatch, cartitem]);
