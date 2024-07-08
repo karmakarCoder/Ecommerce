@@ -1,9 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IoMdArrowDropup, IoMdArrowDropdown } from "react-icons/io";
-import { Link } from "react-router-dom";
 
 const ShopbyBrand = ({ brandData }) => {
-  const [data, setdata] = useState(brandData);
   const [open, setopen] = useState(false);
 
   //   HandleBrand
@@ -32,13 +30,19 @@ const ShopbyBrand = ({ brandData }) => {
           </div>
           {open ? (
             <div>
-              {data?.map((item) => (
-                <div key={item.id} className="py-4 border-b-2 border-[#F0F0F0]">
-                  <Link className="text-sm md:text-base font-DMsans font-normal text-secondaryFontColor">
-                    {item.title}
-                  </Link>
-                </div>
-              ))}
+              {brandData?.map(
+                (item) =>
+                  item.title !== undefined && (
+                    <div
+                      key={item.id}
+                      className="py-4 border-b-2 border-[#F0F0F0] cursor-pointer"
+                    >
+                      <h5 className="text-sm md:text-base font-DMsans font-normal text-secondaryFontColor">
+                        {item.title}
+                      </h5>
+                    </div>
+                  )
+              )}
             </div>
           ) : null}
         </div>

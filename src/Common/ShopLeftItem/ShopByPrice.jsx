@@ -1,6 +1,7 @@
 import React from "react";
 
 const ShopByPrice = ({ Price }) => {
+  console.log(Price);
   return (
     <>
       <div className="pt-[10px] md:pt-[53px]">
@@ -20,7 +21,7 @@ const ShopByPrice = ({ Price }) => {
                   key={item.id}
                   className="my-4 md:my-7 text-sm md:text-base font-DMsans font-normal text-secondaryFontColor"
                 >
-                  {item.Price}
+                  {item.title}
                 </h2>
               </div>
             ))}

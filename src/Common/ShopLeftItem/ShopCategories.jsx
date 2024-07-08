@@ -38,7 +38,7 @@ const ShopCategories = ({ categoriesData, categoriesTitle }) => {
                   >
                     <h4
                       key={item.id}
-                      className="text-sm md:text-base font-DMsans font-normal text-secondaryFontColor py-5"
+                      className="capitalize text-sm md:text-base font-DMsans font-normal text-secondaryFontColor py-5"
                     >
                       {item.title}
                     </h4>
@@ -50,14 +50,17 @@ const ShopCategories = ({ categoriesData, categoriesTitle }) => {
                   </div>
                   <div className="bg-[#2020201a]">
                     {subcategories[index] &&
-                      item.subcategories.map((subitem) => (
-                        <h2
-                          key={subitem.id}
-                          className=" pl-2 text-sm md:text-base font-DMsans font-normal text-secondaryFontColor py-2 cursor-pointer border-b-2 border-white hover:text-red-700"
-                        >
-                          {subitem.title}
-                        </h2>
-                      ))}
+                      item.subcategories.map(
+                        (subitem) =>
+                          subitem !== item.title && (
+                            <h2
+                              key={subitem}
+                              className="capitalize pl-2 text-sm md:text-base font-DMsans font-normal text-secondaryFontColor py-2 cursor-pointer border-b-2 border-white hover:text-red-700"
+                            >
+                              {subitem ? subitem : "item"}
+                            </h2>
+                          )
+                      )}
                   </div>
                 </div>
               ) : (
