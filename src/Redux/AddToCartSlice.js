@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { toast, Bounce } from "react-toastify";
+import { toast, Bounce, Slide } from "react-toastify";
 
 const initialState = {
   cartitem: localStorage.getItem("cartitem")
@@ -23,14 +23,14 @@ const cartSlice = createSlice({
         localStorage.setItem("cartitem", JSON.stringify(state.cartitem));
         toast("Again Add", {
           position: "bottom-right",
-          autoClose: 5000,
-          hideProgressBar: false,
+          autoClose: 2000,
+          hideProgressBar: true,
           closeOnClick: true,
-          pauseOnHover: true,
+          pauseOnHover: false,
           draggable: true,
           progress: undefined,
           theme: "light",
-          transition: Bounce,
+          transition: Slide,
         });
       } else {
         const tempo = { ...action.payload, Quantity: 1 };
@@ -38,13 +38,13 @@ const cartSlice = createSlice({
         localStorage.setItem("cartitem", JSON.stringify(state.cartitem));
         toast("Add to cart done", {
           position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
+          autoClose: 1500,
+          hideProgressBar: true,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: "light",
+          theme: "dark",
           transition: Bounce,
         });
       }
@@ -58,13 +58,13 @@ const cartSlice = createSlice({
 
       toast("remove", {
         position: "bottom-right",
-        autoClose: 5000,
-        hideProgressBar: false,
+        autoClose: 1000,
+        hideProgressBar: true,
         closeOnClick: true,
-        pauseOnHover: true,
+        pauseOnHover: false,
         draggable: true,
         progress: undefined,
-        theme: "light",
+        theme: "dark",
         transition: Bounce,
       });
     },

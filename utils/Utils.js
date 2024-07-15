@@ -35,7 +35,7 @@ function successMessage(
   toast.success(title, {
     position: position,
     autoClose: delay,
-    hideProgressBar: false,
+    hideProgressBar: true,
     closeOnClick: true,
     pauseOnHover: false,
     draggable: true,
@@ -55,7 +55,7 @@ function errorMessage(
   toast.error(title, {
     position: position,
     autoClose: delay,
-    hideProgressBar: false,
+    hideProgressBar: true,
     closeOnClick: true,
     pauseOnHover: true,
     draggable: true,
