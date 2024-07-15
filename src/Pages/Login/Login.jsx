@@ -97,21 +97,21 @@ const Login = () => {
 
   return (
     <>
-      <div className="py-24">
+      <div className="py-24 px-4 lg:px-0">
         <div className="container">
-          <div className="pb-14">
-            <h1 className="text-[48px] font-DMsans font-bold text-primaryFontColor pb-2">
+          <div className="lg:pb-14 pb-8">
+            <h1 className="lg:text-[48px] text-3xl font-DMsans font-bold text-primaryFontColor pb-2">
               Login
             </h1>
             <BreadCrumb />
           </div>
 
           <div className="w-full pb-16">
-            <h2 className="text-[38px] font-DMsans font-bold text-primaryFontColor pb-9">
+            <h2 className="lg:text-[38px] text-[30px] font-DMsans font-bold text-primaryFontColor pb-9">
               Returning Customer
             </h2>
             <form action="#">
-              <div className="flex items-center gap-x-12">
+              <div className="flex items-center flex-col md:flex-row gap-y-10 md:gap-y-0 md:gap-x-12">
                 <div className="w-full">
                   <h3 className="text-base font-DMsans font-bold text-primaryFontColor">
                     Email address
@@ -139,7 +139,7 @@ const Login = () => {
                 </div>
                 <div className="w-full ">
                   <h3 className="text-base font-DMsans font-bold text-primaryFontColor">
-                    Email address
+                    Password
                   </h3>
                   <div></div>
                   <div className="relative">
@@ -182,23 +182,23 @@ const Login = () => {
             </form>
 
             <div className="mt-7" onClick={HandleLogIn}>
-              <button className="py-4 px-16 text-sm font-DMsans z-50 font-bold text-primaryFontColor border-2 border-primaryFontColor relative after:absolute after:top-0 after:left-0 after:w-full after:h-full after:bg-primaryFontColor after:-z-50 after:origin-right after:transition-transform after:duration-200 after:scale-x-0 hover:after:scale-x-100 hover:text-white active:scale-95">
+              <button className="lg:py-4 py-3 px-10 lg:x-16 text-sm font-DMsans z-50 font-bold text-primaryFontColor border-2 border-primaryFontColor relative after:absolute after:top-0 after:left-0 after:w-full after:h-full after:bg-primaryFontColor after:-z-50 after:origin-right after:transition-transform after:duration-200 after:scale-x-0 hover:after:scale-x-100 hover:text-white active:scale-95">
                 Log in
               </button>
             </div>
           </div>
 
           <div className="pt-14 border-t-2">
-            <h2 className="text-[38px] font-DMsans font-bold text-primaryFontColor">
+            <h2 className="lg:text-[38px] text-[30px] font-DMsans font-bold text-primaryFontColor">
               New Customer
             </h2>
-            <p className="text-base font-DMsans font-normal text-secondaryFontColor pt-9 pb-7 max-w-[600px]">
+            <p className="text-sm lg:text-base font-DMsans font-normal text-secondaryFontColor pt-5 lg:pt-9 pb-4 lg:pb-7 max-w-[600px]">
               Lorem Ipsum is simply dummy text of the printing and typesetting
               industry. Lorem Ipsum has been the industry's standard dummy text
               ever since the.
             </p>
             <Link to={"/registration"}>
-              <button className="text-sm font-DMsans font-bold text-primaryBgColor py-4 px-16 bg-primaryFontColor">
+              <button className="text-sm font-DMsans font-bold text-primaryBgColor py-3 px-8 lg:py-4 lg:px-16 bg-primaryFontColor">
                 Continue
               </button>
             </Link>
