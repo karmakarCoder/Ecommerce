@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { IoMdArrowDropup, IoMdArrowDropdown } from "react-icons/io";
 
 const ShopbyBrand = ({ brandData }) => {

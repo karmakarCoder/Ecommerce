@@ -61,7 +61,6 @@ const Shopleft = ({ className }) => {
       categoriesSet.add(product.price);
     }
   });
-  console.log(priceArr);
 
   return (
     <>

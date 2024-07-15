@@ -1,7 +1,6 @@
 import React from "react";
 
 const ShopByPrice = ({ Price }) => {
-  console.log(Price);
   return (
     <>
       <div className="pt-[10px] md:pt-[53px]">
