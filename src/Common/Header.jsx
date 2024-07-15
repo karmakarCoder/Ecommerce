@@ -131,6 +131,11 @@ const Header = () => {
     navigate(`/product-details/${item.id}`);
   };
 
+  const HandleCheckoutNavigate = () => {
+    navigate("checkout");
+    setopenCart(false);
+  };
+
   return (
     <>
       <div className="bg-white px-4">
@@ -515,7 +520,10 @@ const Header = () => {
                           >
                             View Cart
                           </button>
-                          <button className="font-DMsans font-bold text-xs sm:text-sm text-primaryFontColor py-3 px-7 sm:px-10 border-2 border-primaryFontColor hover:bg-primaryFontColor hover:text-white transition-all">
+                          <button
+                            className="font-DMsans font-bold text-xs sm:text-sm text-primaryFontColor py-3 px-7 sm:px-10 border-2 border-primaryFontColor hover:bg-primaryFontColor hover:text-white transition-all"
+                            onClick={HandleCheckoutNavigate}
+                          >
                             Checkout
                           </button>
                         </div>
