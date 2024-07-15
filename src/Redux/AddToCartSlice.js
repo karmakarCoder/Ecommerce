@@ -23,7 +23,7 @@ const cartSlice = createSlice({
         localStorage.setItem("cartitem", JSON.stringify(state.cartitem));
         toast("Again Add", {
           position: "bottom-right",
-          autoClose: 2000,
+          autoClose: 400,
           hideProgressBar: true,
           closeOnClick: true,
           pauseOnHover: false,
@@ -38,7 +38,7 @@ const cartSlice = createSlice({
         localStorage.setItem("cartitem", JSON.stringify(state.cartitem));
         toast("Add to cart done", {
           position: "top-right",
-          autoClose: 1500,
+          autoClose: 400,
           hideProgressBar: true,
           closeOnClick: true,
           pauseOnHover: true,
@@ -58,7 +58,7 @@ const cartSlice = createSlice({
 
       toast("remove", {
         position: "bottom-right",
-        autoClose: 1000,
+        autoClose: 300,
         hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: false,
