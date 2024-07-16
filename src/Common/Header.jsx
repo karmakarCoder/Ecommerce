@@ -195,8 +195,13 @@ const Header = () => {
                 </li>
                 <li>
                   <NavLink
-                    className={
-                      "text-sm font-DMsans font-normal text-secondaryFontColor hover:text-primaryFontColor hover:font-bold transition-all"
+                    to={"/about"}
+                    className={({ isActive, isPending }) =>
+                      isPending
+                        ? "text-sm font-DMsans font-normal text-secondaryFontColor hover:text-primaryFontColor hover:font-bold transition-all"
+                        : isActive
+                          ? "font-bold"
+                          : "hover:text-primaryFontColor hover:font-bold"
                     }
                   >
                     About
@@ -255,6 +260,7 @@ const Header = () => {
                     className={
                       "text-sm font-DMsans font-normal text-secondaryFontColor hover:text-primaryFontColor hover:font-bold transition-all"
                     }
+                    onClick={() => setopenNav(false)}
                   >
                     Wishlist
                   </NavLink>
@@ -272,9 +278,11 @@ const Header = () => {
                 </li>
                 <li>
                   <NavLink
+                    to={"/about"}
                     className={
                       "text-sm font-DMsans font-normal text-secondaryFontColor hover:text-primaryFontColor hover:font-bold transition-all"
                     }
+                    onClick={() => setopenNav(false)}
                   >
                     About
                   </NavLink>
@@ -284,13 +292,14 @@ const Header = () => {
                     className={
                       "text-sm font-DMsans font-normal text-secondaryFontColor hover:text-primaryFontColor hover:font-bold transition-all"
                     }
+                    onClick={() => setopenNav(false)}
                   >
                     Contacts
                   </NavLink>
                 </li>
               </ul>
               <div className="pl-6 pt-12">
-                <img src={logo} alt={logo} />
+                <img src={logo} alt={logo} onClick={() => setopenNav(false)} />
               </div>
             </div>
 
