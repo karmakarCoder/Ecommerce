@@ -1,21 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { RiArrowDropDownFill } from "react-icons/ri";
 import { RiArrowDropUpFill } from "react-icons/ri";
 import { FcDislike } from "react-icons/fc";
 
 const ShopCategories = ({ categoriesData, categoriesTitle }) => {
+  console.log(categoriesData);
+
   // ======= all state ========
   const [subcategories, setsubcategories] = useState(
     categoriesData.map(() => false)
   );
+
   // =========================
 
   // HandleSubCategory
 
+  // const HandleSubCategory = (id) => {
+  //   setsubcategories((previous) => {
+  //     previous.map((value, index) => (id === index ? !value : false));
+  //   });
+  // };
   const HandleSubCategory = (id) => {
-    setsubcategories((previous) =>
-      previous.map((value, index) => (id === index ? !value : false))
-    );
+    console.log(id);
   };
 
   return (
@@ -23,7 +29,7 @@ const ShopCategories = ({ categoriesData, categoriesTitle }) => {
       <div className="w-full">
         <div className="container">
           <div>
-            <h2 className="text-lg md:text-xl font-DMsans font-bold text-primaryFontColor pb-3 md:pb-9">
+            <h2 className="pb-3 text-lg font-bold md:text-xl font-DMsans text-primaryFontColor md:pb-9">
               {categoriesTitle ? categoriesTitle : null}
             </h2>
           </div>
@@ -38,14 +44,14 @@ const ShopCategories = ({ categoriesData, categoriesTitle }) => {
                   >
                     <h4
                       key={item.id}
-                      className="capitalize text-sm md:text-base font-DMsans font-normal text-secondaryFontColor py-5"
+                      className="py-5 text-sm font-normal capitalize md:text-base font-DMsans text-secondaryFontColor"
                     >
                       {item.title}
                     </h4>
                     {subcategories[index] ? (
-                      <RiArrowDropUpFill className="text-secondaryFontColor transition-all text-3xl" />
+                      <RiArrowDropUpFill className="text-3xl transition-all text-secondaryFontColor" />
                     ) : (
-                      <RiArrowDropDownFill className="text-secondaryFontColor transition-all text-3xl" />
+                      <RiArrowDropDownFill className="text-3xl transition-all text-secondaryFontColor" />
                     )}
                   </div>
                   <div className="bg-[#2020201a]">
@@ -55,7 +61,7 @@ const ShopCategories = ({ categoriesData, categoriesTitle }) => {
                           subitem !== item.title && (
                             <h2
                               key={subitem}
-                              className="capitalize pl-2 text-sm md:text-base font-DMsans font-normal text-secondaryFontColor py-2 cursor-pointer border-b-2 border-white hover:text-red-700"
+                              className="py-2 pl-2 text-sm font-normal capitalize border-b-2 border-white cursor-pointer md:text-base font-DMsans text-secondaryFontColor hover:text-red-700"
                             >
                               {subitem ? subitem : "item"}
                             </h2>
@@ -70,7 +76,7 @@ const ShopCategories = ({ categoriesData, categoriesTitle }) => {
                 >
                   <h4
                     key={item.id}
-                    className="text-base font-DMsans font-normal text-secondaryFontColor py-5"
+                    className="py-5 text-base font-normal font-DMsans text-secondaryFontColor"
                   >
                     {item.title}
                   </h4>

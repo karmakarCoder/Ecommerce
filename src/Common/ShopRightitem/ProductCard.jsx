@@ -1,12 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import productImg from "../../assets/product8.png";
 import { FaHeart, FaShoppingCart } from "react-icons/fa";
 import { TbReload } from "react-icons/tb";
 import { FaStar } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { fetchProduct } from "../../Redux/Slice";
-import { addtoCart } from "../../Redux/AddToCartSlice";
 
 const Card = ({
   className,

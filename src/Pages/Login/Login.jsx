@@ -2,15 +2,25 @@ import React, { useState } from "react";
 import BreadCrumb from "../../Common/BreadCrumb/BreadCrumb";
 import {
   checkEmail,
+  errorMessage,
   passwordCheck,
   successMessage,
 } from "../../../utils/Utils";
 import { RiErrorWarningFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  GoogleAuthProvider,
+} from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import googleLogo from "../../assets/google.png";
+import { getDatabase, ref, set } from "firebase/database";
 const Login = () => {
+  const db = getDatabase();
+  const provider = new GoogleAuthProvider();
   const navigate = useNavigate();
   const auth = getAuth();
   const [passwordShow, setpasswordShow] = useState(false);
@@ -66,19 +76,20 @@ const Login = () => {
     } else {
       signInWithEmailAndPassword(auth, Email, Password)
         .then((user) => {
-          console.log(user);
+          successMessage("Login done");
+          navigate("/checkout");
         })
         .catch((err) => {
-          console.log(err);
+          errorMessage("Invalid user", "top-right", "dark", 1000);
+        })
+        .finally(() => {
+          setloginDataError({
+            ...loginDataError,
+            passwordLength: "",
+            PasswordValidate: "",
+            EmailError: "",
+          });
         });
-      successMessage("Login done");
-      setloginDataError({
-        ...loginDataError,
-        passwordLength: "",
-        PasswordValidate: "",
-        EmailError: "",
-      });
-      navigate("/checkout");
     }
   };
 
@@ -93,6 +104,35 @@ const Login = () => {
   // password show & unshow Handle
   const Handleshow = () => {
     setpasswordShow(!passwordShow);
+  };
+
+  // Login with google
+
+  const loginWithGoogle = () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        const user = result.user;
+        const { localId, email, displayName, photoUrl, emailVerified } =
+          user?.reloadUserInfo;
+
+        localStorage.setItem("current", JSON.stringify(auth.currentUser));
+        set(ref(db, "users/" + localId), {
+          userId: localId,
+          username: displayName,
+          email: email,
+          profile_picture: photoUrl,
+          emailverify: emailVerified,
+        }).then(() => {
+          successMessage("Successfully Log in");
+          navigate("/");
+        });
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        console.log(errorCode);
+      });
   };
 
   return (
@@ -141,7 +181,7 @@ const Login = () => {
                   <h3 className="text-base font-DMsans font-bold text-primaryFontColor">
                     Password
                   </h3>
-                  <div></div>
+
                   <div className="relative">
                     <input
                       type={passwordShow ? "text" : "password"}
@@ -184,6 +224,16 @@ const Login = () => {
             <div className="mt-7" onClick={HandleLogIn}>
               <button className="lg:py-4 py-3 px-10 lg:x-16 text-sm font-DMsans z-50 font-bold text-primaryFontColor border-2 border-primaryFontColor relative after:absolute after:top-0 after:left-0 after:w-full after:h-full after:bg-primaryFontColor after:-z-50 after:origin-right after:transition-transform after:duration-200 after:scale-x-0 hover:after:scale-x-100 hover:text-white active:scale-95">
                 Log in
+              </button>
+            </div>
+            {/* Continue with google */}
+            <div className="mt-6">
+              <button
+                onClick={loginWithGoogle}
+                className="bg-primaryFontColor flex items-center gap-x-1 py-2 px-5 text-primaryBgColor font-DMsans font-medium text-base"
+              >
+                Continue with google{" "}
+                <img src={googleLogo} alt={googleLogo} className="w-5" />
               </button>
             </div>
           </div>

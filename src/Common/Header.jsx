@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import logo from "../assets/logo.png";
-import { Link, NavLink } from "react-router-dom";
+import { Link, Navigate, NavLink, useNavigate } from "react-router-dom";
 import { HiBars2 } from "react-icons/hi2";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { MdArrowDropUp } from "react-icons/md";
@@ -11,13 +11,13 @@ import { RxCross2 } from "react-icons/rx";
 import { HiLogout } from "react-icons/hi";
 import Search from "../Common/Search";
 import { useSelector, useDispatch } from "react-redux";
-import { MdOutlineImageNotSupported } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
 import { TbShoppingCartX } from "react-icons/tb";
 import { removeCart, getTotal } from "../Redux/AddToCartSlice";
 import { IoSearchSharp } from "react-icons/io5";
 import { FaAngleRight } from "react-icons/fa";
-
+import { getAuth, signOut } from "firebase/auth";
+import { successMessage } from "../../utils/Utils";
+import Login from "../Pages/Login/Login";
 const Header = () => {
   // ======== all state =========
   const [opencategory, setopencategory] = useState(false);
@@ -26,6 +26,7 @@ const Header = () => {
   const [openCart, setopenCart] = useState(false);
   const Menuref = useRef();
   const navigate = useNavigate();
+  const auth = getAuth();
 
   // ============================
   const dispatch = useDispatch();
@@ -134,6 +135,25 @@ const Header = () => {
   const HandleCheckoutNavigate = () => {
     navigate("checkout");
     setopenCart(false);
+  };
+
+  // Log out
+
+  const HandleLogout = () => {
+    signOut(auth)
+      .then(() => {
+        JSON.stringify(localStorage.removeItem("current"));
+        if (auth.currentUser === null) {
+          <Login />;
+          successMessage("Sign out");
+          setopenUser(false);
+        } else {
+          alert("ok");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return (
@@ -431,18 +451,26 @@ const Header = () => {
                   <div className="bg-[#e2e2e2] absolute top-[54px] left-[-121px] z-30">
                     <ul className="flex flex-col items-center">
                       <li className="py-3 sm:py-4 px-10 sm:px-14 bg-primaryFontColor cursor-pointer hover:bg-[#333]">
-                        <Link className="whitespace-nowrap text-xs sm:text-sm font-DMsans font-bold text-white">
+                        <Link
+                          to={"/account"}
+                          className="whitespace-nowrap text-xs sm:text-sm font-DMsans font-bold text-white"
+                        >
                           My Account
                         </Link>
                       </li>
-                      <li className="py-3 sm:py-4 px-10 sm:px-14 cursor-pointer flex items-center gap-x-2">
-                        <Link className="text-xs sm:text-sm font-DMsans font-normal text-primaryFontColor">
-                          Log Out
-                        </Link>
-                        <span>
-                          <HiLogout className="text-lg sm:text-xl" />
-                        </span>
-                      </li>
+                      {auth.currentUser?.reloadUserInfo && (
+                        <li
+                          onClick={HandleLogout}
+                          className="py-3 sm:py-4 px-10 sm:px-14 cursor-pointer flex items-center gap-x-2"
+                        >
+                          <Link className="text-xs sm:text-sm font-DMsans font-normal text-primaryFontColor">
+                            Log Out
+                          </Link>
+                          <span>
+                            <HiLogout className="text-lg sm:text-xl" />
+                          </span>
+                        </li>
+                      )}
                     </ul>
                   </div>
                 ) : null}

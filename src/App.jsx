@@ -12,8 +12,11 @@ import Contact from "./Pages/Contact/Contact";
 import Login from "./Pages/Login/Login";
 import Wishlist from "./Pages/Wishlist/Wishlist";
 import About from "./Pages/About/About";
-// ==============================
+import IsLogin from "./PrivateRoutes/IsLogin";
+import IsNotLoginUser from "./PrivateRoutes/IsNotLoginUser";
+import Account from "./Pages/Account/Account";
 import RootLayout from "./Common/RootLayout/RootLayout";
+// ==============================
 import {
   RouterProvider,
   Route,
@@ -23,20 +26,27 @@ import {
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route element={<RootLayout />}>
-      <Route index element={<Home />}></Route>
-      <Route path="/shop" element={<Shop />}></Route>
-      <Route
-        path="/product-details/:productID"
-        element={<ProductDetails />}
-      ></Route>
-      <Route path="/registration" element={<Registration />}></Route>
-      <Route path="/cart" element={<Cart />}></Route>
-      <Route path="/checkout" element={<Checkout />}></Route>
-      <Route path="/contact" element={<Contact />}></Route>
-      <Route path="/wishlist" element={<Wishlist />}></Route>
-      <Route path="/login" element={<Login />}></Route>
-      <Route path="/about" element={<About />}></Route>
+    <Route>
+      <Route element={<IsLogin />}>
+        <Route element={<RootLayout />}>
+          <Route index element={<Home />}></Route>
+          <Route path="/shop" element={<Shop />}></Route>
+          <Route
+            path="/product-details/:productID"
+            element={<ProductDetails />}
+          ></Route>
+          <Route path="/cart" element={<Cart />}></Route>
+          <Route path="/checkout" element={<Checkout />}></Route>
+          <Route path="/contact" element={<Contact />}></Route>
+          <Route path="/wishlist" element={<Wishlist />}></Route>
+          <Route path="/about" element={<About />}></Route>
+          <Route path="/account" element={<Account />}></Route>
+        </Route>
+      </Route>
+      <Route element={<IsNotLoginUser />}>
+        <Route path="/registration" element={<Registration />}></Route>
+        <Route path="/login" element={<Login />}></Route>
+      </Route>
     </Route>
   )
 );

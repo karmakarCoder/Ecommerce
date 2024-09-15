@@ -19,18 +19,18 @@ const wishSlice = createSlice({
   initialState,
   reducers: {
     addToWishList: (state, action) => {
-      state.status = ListStatus.LOADING;
       state.wishListData = action.payload;
-      state.status = ListStatus.IDLE;
+      console.log(action.payload);
+      localStorage.setItem("wishListData", JSON.stringify(action.payload));
       toast("add", {
         position: "bottom-right",
-        autoClose: 5000,
-        hideProgressBar: false,
+        autoClose: 1000,
+        hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "light",
+        theme: "dark",
         transition: Bounce,
       });
     },

@@ -10,6 +10,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchProduct } from "../../Redux/Slice";
 import axios from "axios";
 import { addtoCart } from "../../Redux/AddToCartSlice";
+import { setporducts } from "../../Redux/Slice";
 const ShopBottom = () => {
   const [allProducts, setallProducts] = useState([]);
   const [page, setpage] = useState(1);

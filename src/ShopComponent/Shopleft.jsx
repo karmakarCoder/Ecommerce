@@ -49,6 +49,8 @@ const Shopleft = ({ className }) => {
     }
   });
 
+  console.log(Brandarr);
+
   // Price
   let priceArr = [];
   let priceCategorySet = new Set();
@@ -77,7 +79,7 @@ const Shopleft = ({ className }) => {
           />
         </div>
         <div>
-          <ShopbyBrand brandData={Brandarr ? Brandarr : []} />
+          <ShopbyBrand brandData={Brandarr ? Brandarr : ["loading"]} />
         </div>
         <div>
           <ShopByPrice Price={priceArr ? priceArr : []} />

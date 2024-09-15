@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IoMdArrowDropup, IoMdArrowDropdown } from "react-icons/io";
+import { useDispatch } from "react-redux";
+import { setporducts } from "../../Redux/Slice";
 
 const ShopbyBrand = ({ brandData }) => {
+  const dispatch = useDispatch();
   const [open, setopen] = useState(false);
+  const [brandName, setbrandName] = useState();
 
   //   HandleBrand
   const HandleBrand = () => {

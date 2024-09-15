@@ -4,7 +4,7 @@ import { RxCross2 } from "react-icons/rx";
 import { GoPlus } from "react-icons/go";
 import { FiMinus } from "react-icons/fi";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { errorMessage } from "../../../utils/Utils";
 import {
   removeCart,
@@ -20,8 +20,6 @@ const Cart = () => {
   const { cartitem, totalAmount, totalCartitem } = useSelector(
     (state) => state.cart
   );
-
-  console.log(cartitem);
 
   useEffect(() => {
     dispatch(getTotal());
@@ -45,7 +43,15 @@ const Cart = () => {
   };
 
   const HandleProcced = () => {
-    if (cartitem.length > 0) {
+    if (
+      cartitem.length > 0 &&
+      JSON.stringify(localStorage.getItem("current"))
+    ) {
+      navigate("/checkout");
+    } else if (
+      cartitem.length < 0 &&
+      !JSON.stringify(localStorage.getItem("current"))
+    ) {
       navigate("/login");
     } else {
       errorMessage("Your cart is empty!", "top-right", "dark", 2000);
