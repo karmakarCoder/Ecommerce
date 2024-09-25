@@ -14,6 +14,7 @@ import { useSelector } from "react-redux";
 
 const Shopleft = ({ className }) => {
   const [allproducts, setallproducts] = useState([]);
+
   const { data, status } = useSelector((state) => state.product);
 
   useEffect(() => {
@@ -36,20 +37,18 @@ const Shopleft = ({ className }) => {
     }
   });
 
-  // Brand Name
-  let Brandarr = [];
-  let BrandcategoriesSet = new Set();
-  allproducts?.map((product) => {
-    if (!BrandcategoriesSet.has(product.brand)) {
-      Brandarr.push({
-        id: product.id,
-        title: product.brand,
-      });
-      categoriesSet.add(product.brand);
-    }
-  });
-
-  console.log(Brandarr);
+  // // Brand Name
+  // let Brandarr = [];
+  // let BrandcategoriesSet = new Set();
+  // allproducts?.map((product) => {
+  //   if (!BrandcategoriesSet.has(product.brand)) {
+  //     Brandarr.push({
+  //       id: product.id,
+  //       title: product.brand,
+  //     });
+  //     categoriesSet.add(product.brand);
+  //   }
+  // });
 
   // Price
   let priceArr = [];
@@ -79,7 +78,7 @@ const Shopleft = ({ className }) => {
           />
         </div>
         <div>
-          <ShopbyBrand brandData={Brandarr ? Brandarr : ["loading"]} />
+          <ShopbyBrand />
         </div>
         <div>
           <ShopByPrice Price={priceArr ? priceArr : []} />

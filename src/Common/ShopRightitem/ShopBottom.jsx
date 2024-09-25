@@ -29,12 +29,7 @@ const ShopBottom = () => {
   }, []);
 
   const { data, status } = useSelector((state) => state.product);
-
-  // useEffect(() => {
-  //   if (status === "IDLE") {
-  //     // setallProducts(data.products);
-  //   }
-  // }, [data.products, status]);
+  const Fdata = useSelector((state) => state.product.filterData);
 
   const HandleAddToCart = (item) => {
     dispatch(addtoCart(item));
@@ -57,47 +52,78 @@ const ShopBottom = () => {
         ) : status === "ERROR" ? (
           <Error />
         ) : (
-          allProducts && (
+          data && (
             <div>
               <Flex
                 className={
                   "gap-x-4 flex-wrap justify-start  sm:justify-between mx-auto items-center gap-y-8"
                 }
               >
-                {allProducts
-                  ?.slice(page * showPage - showPage, page * showPage)
-                  .map((productItem) => (
-                    <ProductCard
-                      onCartAdd={() => HandleAddToCart(productItem)}
-                      productID={productItem.id}
-                      key={productItem.id}
-                      layout={gridLayout}
-                      className={` ${
-                        gridLayout
-                          ? "w-[100%] flex flex-row h-full gap-x-3 items-center"
-                          : "w-[155px] sm:w-[285px] md:w-[228px] lg:w-[285px]"
-                      }`}
-                      productTitle={productItem.title}
-                      productDes={productItem.description}
-                      img={productItem.thumbnail}
-                      badge={
-                        productItem.discountPercentage ? (
-                          <Button
-                            className={
-                              "py-[4px] md:py-[7px] px-3 md:px-8 text-[10px] md:text-base"
-                            }
-                          >
-                            {productItem.stock === 0
-                              ? "Stock out"
-                              : "-" + " $ " + productItem.discountPercentage}
-                          </Button>
-                        ) : null
-                      }
-                      price={`$${Math.floor(productItem.price - productItem.discountPercentage)}`}
-                      rating={productItem.rating}
-                      discountPrice={productItem.price}
-                    />
-                  ))}
+                {Fdata == false
+                  ? data.products?.map((productItem) => (
+                      <ProductCard
+                        onCartAdd={() => HandleAddToCart(productItem)}
+                        productID={productItem.id}
+                        key={productItem.id}
+                        layout={gridLayout}
+                        className={` ${
+                          gridLayout
+                            ? "w-[100%] flex flex-row h-full gap-x-3 items-center"
+                            : "w-[155px] sm:w-[285px] md:w-[228px] lg:w-[285px]"
+                        }`}
+                        productTitle={productItem.title}
+                        productDes={productItem.description}
+                        img={productItem.thumbnail}
+                        badge={
+                          productItem.discountPercentage ? (
+                            <Button
+                              className={
+                                "py-[4px] md:py-[7px] px-3 md:px-8 text-[10px] md:text-base"
+                              }
+                            >
+                              {productItem.stock === 0
+                                ? "Stock out"
+                                : "-" + " $ " + productItem.discountPercentage}
+                            </Button>
+                          ) : null
+                        }
+                        price={`$${Math.floor(productItem.price - productItem.discountPercentage)}`}
+                        rating={productItem.rating}
+                        discountPrice={productItem.price}
+                      />
+                    ))
+                  : Fdata?.map((productItem) => (
+                      <ProductCard
+                        onCartAdd={() => HandleAddToCart(productItem)}
+                        productID={productItem.id}
+                        key={productItem.id}
+                        layout={gridLayout}
+                        className={` ${
+                          gridLayout
+                            ? "w-[100%] flex flex-row h-full gap-x-3 items-center"
+                            : "w-[155px] sm:w-[285px] md:w-[228px] lg:w-[285px]"
+                        }`}
+                        productTitle={productItem.title}
+                        productDes={productItem.description}
+                        img={productItem.thumbnail}
+                        badge={
+                          productItem.discountPercentage ? (
+                            <Button
+                              className={
+                                "py-[4px] md:py-[7px] px-3 md:px-8 text-[10px] md:text-base"
+                              }
+                            >
+                              {productItem.stock === 0
+                                ? "Stock out"
+                                : "-" + " $ " + productItem.discountPercentage}
+                            </Button>
+                          ) : null
+                        }
+                        price={`$${Math.floor(productItem.price - productItem.discountPercentage)}`}
+                        rating={productItem.rating}
+                        discountPrice={productItem.price}
+                      />
+                    ))}
               </Flex>
             </div>
           )

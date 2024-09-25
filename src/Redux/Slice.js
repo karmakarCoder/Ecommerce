@@ -9,6 +9,7 @@ const apiStatus = {
 
 const initialState = {
   data: [],
+  filterData: [],
   status: apiStatus.IDLE,
 };
 
@@ -28,6 +29,11 @@ const productSlice = createSlice({
     setporducts: (state, action) => {
       state.data = action.payload;
     },
+
+    setFilterData: (state, action) => {
+      let products = action.payload;
+      state.filterData = products;
+    },
   },
   extraReducers: (builder) => {
     // Add reducers for additional action types here, and handle loading state as needed
@@ -45,5 +51,5 @@ const productSlice = createSlice({
   },
 });
 
-export const { setporducts } = productSlice.actions;
+export const { setporducts, setFilterData } = productSlice.actions;
 export default productSlice.reducer;

@@ -1,16 +1,33 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { IoMdArrowDropup, IoMdArrowDropdown } from "react-icons/io";
-import { useDispatch } from "react-redux";
-import { setporducts } from "../../Redux/Slice";
+import { useSelector, useDispatch } from "react-redux";
+import { setFilterData } from "../../Redux/Slice";
 
-const ShopbyBrand = ({ brandData }) => {
-  const dispatch = useDispatch();
+const ShopbyBrand = () => {
   const [open, setopen] = useState(false);
-  const [brandName, setbrandName] = useState();
+  const dispatch = useDispatch();
+
+  const { data, status } = useSelector((state) => state.product);
 
   //   HandleBrand
   const HandleBrand = () => {
     setopen(!open);
+  };
+
+  const categorisData = (data, category) => {
+    let newArry = data?.map((item) => {
+      return item[category];
+    });
+    return (newArry = [...new Set(newArry)]);
+  };
+
+  const getCategory = categorisData(data.products, "category");
+
+  const HandleBrandeName = (item) => {
+    const filterData = data.products.filter((el) => {
+      return el.category === item;
+    });
+    dispatch(setFilterData(filterData));
   };
 
   return (
@@ -34,15 +51,18 @@ const ShopbyBrand = ({ brandData }) => {
           </div>
           {open ? (
             <div>
-              {brandData?.map(
-                (item) =>
-                  item.title !== undefined && (
+              {getCategory?.map(
+                (item, index) =>
+                  item !== undefined && (
                     <div
-                      key={item.id}
+                      key={index}
                       className="py-4 border-b-2 border-[#F0F0F0] cursor-pointer"
                     >
-                      <h5 className="text-sm md:text-base font-DMsans font-normal text-secondaryFontColor">
-                        {item.title}
+                      <h5
+                        onClick={() => HandleBrandeName(item)}
+                        className="text-sm md:text-base font-DMsans font-normal text-secondaryFontColor"
+                      >
+                        {item}
                       </h5>
                     </div>
                   )

@@ -20,7 +20,7 @@ const ShopByPrice = ({ Price }) => {
                   key={item.id}
                   className="my-4 md:my-7 text-sm md:text-base font-DMsans font-normal text-secondaryFontColor"
                 >
-                  {item.title}
+                  {Math.round(item.title)}
                 </h2>
               </div>
             ))}

@@ -4,23 +4,18 @@ import { RiArrowDropUpFill } from "react-icons/ri";
 import { FcDislike } from "react-icons/fc";
 
 const ShopCategories = ({ categoriesData, categoriesTitle }) => {
-  console.log(categoriesData);
-
   // ======= all state ========
-  const [subcategories, setsubcategories] = useState(
-    categoriesData.map(() => false)
-  );
-
+  const [categories, setcategories] = useState(false);
   // =========================
 
   // HandleSubCategory
 
-  // const HandleSubCategory = (id) => {
-  //   setsubcategories((previous) => {
-  //     previous.map((value, index) => (id === index ? !value : false));
-  //   });
-  // };
   const HandleSubCategory = (id) => {
+    if (id) {
+      setcategories(true);
+    } else {
+      setcategories(false);
+    }
     console.log(id);
   };
 
@@ -39,7 +34,7 @@ const ShopCategories = ({ categoriesData, categoriesTitle }) => {
                 <div key={item.id}>
                   <div
                     key={item.id}
-                    className={`flex items-center justify-between cursor-pointer border-b-2 border-[#F0F0F0]`}
+                    className={`bg-red-700 flex items-center justify-between cursor-pointer border-b-2 border-[#F0F0F0]`}
                     onClick={() => HandleSubCategory(index)}
                   >
                     <h4
@@ -48,17 +43,18 @@ const ShopCategories = ({ categoriesData, categoriesTitle }) => {
                     >
                       {item.title}
                     </h4>
-                    {subcategories[index] ? (
+                    {item.subcategories[index] ? (
                       <RiArrowDropUpFill className="text-3xl transition-all text-secondaryFontColor" />
                     ) : (
                       <RiArrowDropDownFill className="text-3xl transition-all text-secondaryFontColor" />
                     )}
                   </div>
                   <div className="bg-[#2020201a]">
-                    {subcategories[index] &&
+                    {item.subcategories[index] &&
                       item.subcategories.map(
                         (subitem) =>
-                          subitem !== item.title && (
+                          subitem !== item.title &&
+                          categories === true && (
                             <h2
                               key={subitem}
                               className="py-2 pl-2 text-sm font-normal capitalize border-b-2 border-white cursor-pointer md:text-base font-DMsans text-secondaryFontColor hover:text-red-700"
