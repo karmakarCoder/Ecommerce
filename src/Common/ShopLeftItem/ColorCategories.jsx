@@ -33,11 +33,8 @@ const ColorCategories = ({ className, title, colorData }) => {
           <div>
             {colorData?.map((item) =>
               open ? (
-                <div>
-                  <Flex
-                    key={item.id}
-                    className="border-b-2 border-[#F0F0F0] py-4 items-center gap-x-2 "
-                  >
+                <div key={item.id}>
+                  <Flex className="border-b-2 border-[#F0F0F0] py-4 items-center gap-x-2 ">
                     <div
                       className="w-3 h-3 bg-black rounded-full "
                       style={{ background: `${item.colorCode}` }}

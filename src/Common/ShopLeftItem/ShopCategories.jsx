@@ -16,7 +16,6 @@ const ShopCategories = ({ categoriesData, categoriesTitle }) => {
     } else {
       setcategories(false);
     }
-    console.log(id);
   };
 
   return (
@@ -34,7 +33,7 @@ const ShopCategories = ({ categoriesData, categoriesTitle }) => {
                 <div key={item.id}>
                   <div
                     key={item.id}
-                    className={`bg-red-700 flex items-center justify-between cursor-pointer border-b-2 border-[#F0F0F0]`}
+                    className={`flex items-center justify-between cursor-pointer border-b-2 border-[#F0F0F0]`}
                     onClick={() => HandleSubCategory(index)}
                   >
                     <h4

@@ -82,8 +82,9 @@ const ShopTop = ({ pageValue, onChangeLayout, layoutValue, ref }) => {
               </div>
               {feature ? (
                 <div className="z-50 bg-[#F0F0F0] border-2 border-[#0000001f] w-full shadow-md absolute top-[40px] left-0 flex flex-col gap-y-1 rounded">
-                  {Feature.map((item) => (
+                  {Feature.map((item, index) => (
                     <div
+                      key={index}
                       className="cursor-pointer active:bg-[#d3ac7138] hover:bg-white text-primaryFontColor text-md pl-2 font-DMsans font-medium py-2 "
                       onClick={HandleItem}
                     >
